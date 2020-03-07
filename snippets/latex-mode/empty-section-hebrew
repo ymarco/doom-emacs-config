@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: empty-section-hebrew
+# key: אמפסק
+# group: hebrew latex
+# --
+‏\section{}
+$0

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: RequirePackage
+# key: req
+# --
+\RequirePackage{$1}$0

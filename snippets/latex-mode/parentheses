@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: parenthesis
+# key: pa
+# group: math
+# expand-env: ((yas-after-exit-snippet-hook #'prvt/TeX-fold-current-line))
+# --
+\pa{`%`$1}$0

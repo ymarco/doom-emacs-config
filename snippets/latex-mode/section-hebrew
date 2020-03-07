@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: section-hebrew
+# key: סקש
+# group: hebrew latex
+# --
+`(prvt/snippets-newline-if-needed 2)`‏\section{`%`${1:סקשן}}
+$0

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: theorem-hebrew
+# uuid: theorem-hebrew
+# key: משפ
+# group: hebrew latex
+# condition: (doom-snippets-bolp)
+# --
+‏\begin{theorem}${1:[${2:name}]}
+`%`$0
+‏\end{theorem}

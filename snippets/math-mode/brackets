@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: brackets
+# key: bra
+# --
+\bra{`%`$1}$0

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: eqnarray
+# key: eqn
+# group: amsmath
+# --
+\begin{eqnarray}
+`%`$0
+\end{eqnarray}

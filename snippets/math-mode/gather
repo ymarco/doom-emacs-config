@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: gather
+# key: gat
+# group: amsmath
+# --
+\begin{gather}
+`%`$0
+\end{gather}

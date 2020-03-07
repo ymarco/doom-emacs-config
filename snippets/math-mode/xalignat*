@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: xalignat*
+# key: xal*
+# group: amsmath
+# --
+\begin{xalignat*}
+`%`$0
+\end{xalignat*}

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: subscript-braces
+# group: math                 
+# --
+`(when % (concat "{" % "}"))`^${1:$(when (> (length yas-text) 1) "{")}${1:sup}${1:$(when (> (length yas-text) 1) "}")}$0

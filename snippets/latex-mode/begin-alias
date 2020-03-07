@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: begin-alias
+# key: beg
+# type: command
+# --
+(%expand :name "begin")

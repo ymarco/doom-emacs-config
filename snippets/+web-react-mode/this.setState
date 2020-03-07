@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: this.setState
+# key: sets
+# --
+this.setState({$0`(when % (format ": %s" %))`})

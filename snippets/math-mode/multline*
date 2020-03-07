@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: multline*
+# key: mul*
+# group: amsmath
+# --
+\begin{multline*}
+`%`$0
+\end{multline*}

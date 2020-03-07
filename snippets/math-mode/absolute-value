@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: absolute-value
+# key: abs
+# group: math
+# expand-env: ((yas-after-exit-snippet-hook #'prvt/TeX-fold-current-line))
+# --
+\abs{`%`$1}$0

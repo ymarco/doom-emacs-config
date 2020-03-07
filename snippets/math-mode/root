@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: sqrt[]{}
+# key: root
+# group: math
+# --
+\sqrt[$1]{`%`$2}$0

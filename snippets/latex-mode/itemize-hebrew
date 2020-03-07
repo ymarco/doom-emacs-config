@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: itemize-hebrew
+# uuid: itemize-hebrew
+# key: איי
+# expand-env: ((yas-after-exit-snippet-hook #'prvt/TeX-fold-current-line))
+# group: hebrew latex            
+# --
+‏`(prvt/snippets-newline-if-needed)`\begin{itemize}
+`(doom-snippets-text "\\item " t)`$0
+‏\end{itemize}

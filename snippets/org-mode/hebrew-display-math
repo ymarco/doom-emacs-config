@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: hebrew-display-math
+# uuid: hebrew-display-math
+# group: hebrew latex
+# --
+`(prvt/snippets-newline-if-needed 2)`‎\\[ `(!%!)`$0 \\]

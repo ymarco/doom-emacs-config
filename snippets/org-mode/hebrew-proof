@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: proof-hebrew
+# uuid: proof-hebrew
+# key: הוכ
+# group: hebrew latex
+# condition: (doom-snippets-bolp)
+# --
+#+BEGIN_PROOF
+`%`$0
+#+END_PROOF

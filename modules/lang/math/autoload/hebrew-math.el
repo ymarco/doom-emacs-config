@@ -1,11 +1,10 @@
 ;;; lang/math/autoload/hebrew-math.el -*- lexical-binding: t; -*-
-;;;###if (featurep! +hebrew-math)
-
+;;;###if (featurep! +hebrew)
 
 (defun hebrew-math-backwards-till-math ()
   "Go backwards until reaching a math env"
   (interactive)
-  (while (not (or (texmathp)
+  (while (not (or (funcall math-mathp-fn)
                   (= (point) (point-min))))
     ;; only searching for \ beause all math commands start with a \ (well not
     ;; tex dollars but I don't use them.)
@@ -19,11 +18,11 @@
 (defun hebrew-math-forward-exit-math ()
   "Go forward until exiting a math env"
   (interactive)
-  (while (and (texmathp)
+  (while (and (funcall math-mathp-fn)
               (/= (point) (point-max)))
     (forward-char)))
 
-(defun hebrew-math-forward-exit-math ()
+(defun hebrew-math-forward-exit-math-regular ()
   "Call `hebrew-math-forward-exit-math', and go back to Hebrew input method."
   (interactive)
   (hebrew-math-forward-exit-math)
@@ -35,8 +34,8 @@
 If already in math mode, exit it and go back to Hebrew."
   (interactive)
   (hebrew-set-regular-input-method)
-  (if (texmathp)
-      (hebrew-math-forward-exit-math)
+  (if (funcall math-mathp-fn)
+      (hebrew-math-forward-exit-math-regular)
     (doom-snippets-expand :name "hebrew-math")))
 
 (defun hebrew-math-display-math-mode ()
@@ -65,5 +64,8 @@ If already in math mode, exit it and go back to Hebrew."
 
 ;;;###autoload
 (define-minor-mode hebrew-math-mode
-  "Minor mode for LaTeX-like math writing in Hebrew buffres."
-  :keymap hebrew-math-mode-map)
+  "Minor mode for LaTeX-like math writing in Hebrew buffers."
+  :keymap hebrew-math-mode-map
+  (math-mode hebrew-math-mode)
+  (when (require 'hebrew-mode nil t)
+    (hebrew-mode hebrew-math-mode)))

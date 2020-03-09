@@ -51,6 +51,7 @@
        window-select     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
        zen
+       hydra
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
@@ -66,7 +67,7 @@
 
        :emacs
        (dired            ; making dired pretty [functional]
-        ;; +ranger         ; bringing the goodness of ranger to dired
+        ;;+ranger         ; bringing the goodness of ranger to dired
         +icons)         ; colorful icons for dired-mode
 
        ibuffer

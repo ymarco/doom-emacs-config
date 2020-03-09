@@ -70,18 +70,7 @@
  pdflang={%L},
  colorlinks=true}
 ")
-
-  (pushnew! org-latex-packages-alist
-            ;; Babel for Hebrew in pdflatex exports
-            ;; REVIEW should snippet-flag be `t' here?
-            '("AUTO" "babel" nil ("pdflatex"))
-            ;; Polyglossia for Hebrew in (xe|lua)latex exports
-            '("AUTO" "polyglossia" nil ("xelatex" "lualatex"))
-            ;; Theorem envs. TODO add newtheorems from my preamble
-            '("" "amsthm")
-            ;; Import sketches from standalone documents
-            '("" "standalone"))
-
   ;; 'New paragraph' indent is ugly
-  (setq org-format-latex-header
-        (concat org-format-latex-header "\setlength{\parindent}{0pt}")))
+  ;; (setq org-format-latex-header
+  ;;       (concat org-format-latex-header "\setlength{\parindent}{0pt}"))
+  )

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: lemma-hebrew
+# uuid: lemma-hebrew
+# key: למה
+# group: hebrew latex
+# condition: (doom-snippets-bolp)
+# --
+#OPTION: ${1:[${2:name}]}
+#+begin_lemma
+`%`$0
+#+end_lemma

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: definition-alias
+# uuid: definition-alias
+# key: הגד
+# group: hebrew latex
+# condition: (doom-snippets-bolp)
+# --
+#OPTION ${1:[${2:name}]}
+#+begin_definition
+‏`%`$0
+#+end_definition

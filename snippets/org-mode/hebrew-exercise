@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: exercise-hebrew
+# uuid: exercise-hebrew
+# key: תרג
+# group: hebrew latex
+# condition: (doom-snippets-bolp)
+# --
+#+BEGIN_EXERCISE
+`%`$0
+#+END_EXERCISE

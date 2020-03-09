@@ -10,7 +10,7 @@
   (let ((math-mode-map (make-sparse-keymap)))
     (map! :map math-mode-map
           ;; backspace alias, the best thing ever
-          :i "M-h"  (λ!! #'insert "\\")
+          :i "M-h"  (λ! (insert "\\"))
           ;; ^{} _{} aliases
           :iv "C-_" (λ! (doom-snippets-expand :name "subscript-braces"))
           :iv "C-^" (λ! (doom-snippets-expand :name "superscript-braces"))

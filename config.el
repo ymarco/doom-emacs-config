@@ -53,8 +53,7 @@
  doom-variable-pitch-font (font-spec :family "Source Sans Pro")
  ;; Just testing fonts
  ;; doom-font (font-spec :family "Source Code Pro" :size 18)
- ;; LSP performance boost, hopefully
- read-process-output-max (* 1024 1024))
+ )
 
 ;; Don't replace the current window when splitting
 (setq
@@ -65,8 +64,6 @@
 
 (add-hook 'org-brain-vis-current-title-append-functions #'org-brain-entry-tags-string) ;; Show tags in org-brain
 (add-hook! 'conf-xdefaults-mode-hook (rainbow-mode 1))
-
-
 
 (defconst prvt/raw-git-packages-dir
   (eval-when-compile
@@ -81,11 +78,6 @@
 (defun prvt/file-search-package-doc ()
   (interactive)
   (doom-project-find-file prvt/raw-git-packages-dir))
-(defun prvt/text-search-package-doc ()
-  (interactive)
-  (counsel-rg
-   "" prvt/raw-git-packages-dir "-t org -t md"
-   "rg: "))
 
 (defun prvt/find-file-in-general-config ()
   "Find file in xdg-home directory"
@@ -149,7 +141,9 @@ with parameter N, insert up to N newlines."
 
 
 (use-package! nov
-  :mode ("\\.epub\\'" . nov-mode))
+  :mode ("\\.epub\\'" . nov-mode)
+  :init
+  (setq nov-save-place-file doom-etc-dir))
 
 (load! "latex-config") ;; this also loads cdlatex
 (load! "hebrew-latex-config")

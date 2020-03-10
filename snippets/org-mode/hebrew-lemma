@@ -1,11 +1,10 @@
 # -*- mode: snippet -*-
-# name: lemma-hebrew
-# uuid: lemma-hebrew
+# name: hebrew-lemma
 # key: למה
 # group: hebrew latex
 # condition: (doom-snippets-bolp)
 # --
-#OPTION: ${1:[${2:name}]}
-#+begin_lemma
+${1:#+ATTR_LaTeX: :options [${2:name}]}
+#+BEGIN_lemma
 `%`$0
-#+end_lemma
+#+END_lemma

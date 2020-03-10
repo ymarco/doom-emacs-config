@@ -1,11 +1,10 @@
 # -*- mode: snippet -*-
-# name: theorem-hebrew
-# uuid: theorem-hebrew
+# name: hebrew-theorem
 # key: משפ
 # group: hebrew latex
 # condition: (doom-snippets-bolp)
 # --
-#OPTION: ${1:[${2:name}]}
-#+BEGIN_THEOREM
+${1:#+ATTR_LaTeX: :options [${2:name}]}
+#+BEGIN_theorem
 `%`$0
-#+END_THEOREM
+#+END_theorem

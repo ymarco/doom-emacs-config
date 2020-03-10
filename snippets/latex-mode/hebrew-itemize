@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
-# name: itemize-hebrew
-# uuid: itemize-hebrew
+# name: hebrew-itemize
 # key: איי
 # expand-env: ((yas-after-exit-snippet-hook #'prvt/TeX-fold-current-line))
 # group: hebrew latex            

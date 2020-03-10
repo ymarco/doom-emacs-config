@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
-# name: theorem-hebrew
-# uuid: theorem-hebrew
+# name: hebrew-theorem
 # key: משפ
 # group: hebrew latex
 # condition: (doom-snippets-bolp)

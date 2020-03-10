@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
-# name: corollary-hebrew
-# uuid: corollary-hebrew
+# name: hebrew-corollary
 # key: מסק
 # group: hebrew latex
 # condition: (doom-snippets-bolp)

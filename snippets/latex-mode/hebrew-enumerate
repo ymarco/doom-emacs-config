@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
-# name: enumerate-hebrew
-# uuid: enumerate-hebrew
+# name: hebrew-enumerate
 # key: אנמ
 # condition: (doom-snippets-bolp)
 # expand-env: ((yas-after-exit-snippet-hook #'prvt/TeX-fold-current-line))

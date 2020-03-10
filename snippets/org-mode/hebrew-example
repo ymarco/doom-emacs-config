@@ -1,9 +1,9 @@
 # -*- mode: snippet -*-
-# name: hebrew-exercise
-# key: תרג
+# name: hebrew-example
+# key: דוג
 # group: hebrew latex
 # condition: (doom-snippets-bolp)
 # --
-#+BEGIN_exercise
+#+BEGIN_example
 `%`$0
-#+END_exercise
+#+END_example

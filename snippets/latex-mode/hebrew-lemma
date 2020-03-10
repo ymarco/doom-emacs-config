@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
-# name: lemma-hebrew
-# uuid: lemma-hebrew
+# name: hebrew-lemma
 # key: למה
 # group: hebrew latex
 # condition: (doom-snippets-bolp)

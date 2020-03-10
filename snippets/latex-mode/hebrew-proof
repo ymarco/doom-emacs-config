@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
-# name: proof-hebrew
-# uuid: proof-hebrew
+# name: hebrew-proof
 # key: הוכ
 # group: hebrew latex
 # condition: (doom-snippets-bolp)

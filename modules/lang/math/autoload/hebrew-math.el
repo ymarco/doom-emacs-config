@@ -12,12 +12,12 @@
 
 (defun hebrew-math-backwards-till-math-regular ()
   "Call `hebrew-math-backwards-till-math', and go back to normal (English) input method."
+  (interactive)
   (hebrew-math-backwards-till-math)
   (hebrew-set-hebrew-input-method))
 
 (defun hebrew-math-forward-exit-math ()
   "Go forward until exiting a math env"
-  (interactive)
   (while (and (funcall math-mathp-fn)
               (/= (point) (point-max)))
     (forward-char)))

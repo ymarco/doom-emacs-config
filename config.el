@@ -26,7 +26,7 @@
  doom-snippets-enable-short-helpers   t
  ;; I don't need it to tell me its UTF-8
  doom-modeline-buffer-encoding nil
- ;; The unsaved icon made me jump and save the buffer on every stop
+ ;; The unsaved icon made me notice and save the buffer on every stop
  doom-modeline-buffer-state-icon nil
  ;; Nested snippet expansion
  yas-triggers-in-field                nil
@@ -40,7 +40,7 @@
  treemacs-width 27
  ;; Leave my comments alone
  +evil-want-o/O-to-continue-comments  nil
- +zen-text-scale 1                        ;; Don't scale text on zen
+ +zen-text-scale 1                        ; Don't scale text on zen
  ;; Wait for a bit longer before prompting me, lsp
  lsp-idle-delay 0.5
  lsp-ui-sideline-delay 0.5
@@ -52,23 +52,23 @@
  ;; just in the perfect size for ubuntu-mono!
  doom-variable-pitch-font (font-spec :family "Source Sans Pro")
  ;; Just testing fonts
- ;; doom-font (font-spec :family "Source Code Pro" :size 18)
- )
+ ;;doom-font (font-spec :family "Source Code Pro" :size 18)
+ projectile-project-search-path '("~/projects")
+ abbrev-file-name (concat doom-private-dir "abbrevs.el"))
 
 ;; Don't replace the current window when splitting
 (setq
  evil-split-window-below  t
  evil-vsplit-window-right t)
 
-(add-hook! 'python-mode-hook (modify-syntax-entry ?_ "w")) ;; Underscore is a word in python
-
-(add-hook 'org-brain-vis-current-title-append-functions #'org-brain-entry-tags-string) ;; Show tags in org-brain
+(add-hook 'org-brain-vis-current-title-append-functions #'org-brain-entry-tags-string) ; Show tags in org-brain
+;; Colorify colors in X config mode
 (add-hook! 'conf-xdefaults-mode-hook (rainbow-mode 1))
 
 (defconst prvt/raw-git-packages-dir
   (eval-when-compile
     (concat doom-local-dir "straight/repos"))
-  "Directory for raw git packages, as cloned by straight.el.")
+  "Directory for raw git packages, as cloned by straight.")
 
 (defconst prvt/home-dir
   (eval-when-compile (getenv "HOME"))
@@ -96,7 +96,7 @@ with parameter N, insert up to N newlines."
           (nl-count-minus (save-excursion (skip-chars-backward "\n" max-point))))
      (make-string (+ n nl-count-minus) ?\n))))
 
-(set-eshell-alias! ;; haven't been using these much tbh
+(set-eshell-alias! ; haven't been using these much tbh
  ;; "config" "/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
  "python" "python3 $*"
  "sai" "sudo apt install $*"
@@ -107,7 +107,7 @@ with parameter N, insert up to N newlines."
 ;; I like abbrevs, at least in org mode:
 (add-hook 'org-mode-hook #'abbrev-mode)
 ;; ALWAYS expand abbrevs
-(add-hook 'evil-insert-state-exit-hook #'expand-abbrev)
+(setq evil-want-abbrev-expand-on-insert-exit t)
 
 ;; That ultra-bold annoys me, and bold is annoying when theres too much of it.
 ;; Semi-bold is a lot prettier (when supported).
@@ -143,14 +143,7 @@ with parameter N, insert up to N newlines."
 (use-package! nov
   :mode ("\\.epub\\'" . nov-mode)
   :init
-  (setq nov-save-place-file doom-etc-dir))
-
-(load! "latex-config") ;; this also loads cdlatex
-(load! "hebrew-latex-config")
-(load! "dvorak-config")
-(load! "org-setup")
-(load! "imenu-list-config")
-(load! "general-keys")
+  (setq nov-save-place-file (concat doom-etc-dir "nov-places")))
 
 (after! rainbow-mode
   (defadvice! +rainbow-priority-over-hl-line (color &optional match)
@@ -168,6 +161,21 @@ with parameter N, insert up to N newlines."
        `((:foreground ,(if (> 0.5 (rainbow-x-color-luminance color))
                            "white" "black"))
          (:background ,color))))))
+
+;; Shut up ispell
+(advice-add #'ispell-init-process :around #'doom-shut-up-a)
+
+(after! evil
+  (map! :map org-mode-map
+   :mn "RET" #'+org/dwim-at-point ))
+
+
+(load! "latex-config") ; this also loads cdlatex-config
+(load! "hebrew-latex-config")
+(load! "dvorak-config")
+(load! "org-setup")
+(load! "imenu-list-config")
+(load! "general-keys")
 
 
 (let ((elapsed (float-time (time-subtract (current-time) t0))))

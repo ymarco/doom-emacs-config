@@ -8,10 +8,14 @@
 When set to non-nil, this adds a few hooks/advices to fold stuff.")
 
 (setq
- TeX-electric-sub-and-superscript nil ;; dont auto-insert braces on _^
- TeX-save-query nil ;; just save, dont ask me
- preview-auto-cache-preamble t ;; just cache, dont ask me
- font-latex-fontify-script nil) ;; don't raise/lower super/subscripts
+ ;; Dont auto-insert braces on _^
+ TeX-electric-sub-and-superscript nil
+ ;; Just save, dont ask me
+ TeX-save-query nil
+ ;; Just cache, dont ask me
+ preview-auto-cache-preamble t
+ ;; Don't raise/lower super/subscripts
+ font-latex-fontify-script nil)
 
 
 
@@ -32,7 +36,7 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
         ("𝔽" ("FF"))))
 
 (load! "fontification")
-(appendq! font-latex-match-math-command-keywords ;; just adding my own macros as keywords
+(appendq! font-latex-match-math-command-keywords ; just adding my own macros as keywords
           '(("oner")
             ("half")
             ("pa")
@@ -71,15 +75,16 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
     `(TeX-fold-folded-face :inherit font-lock-builtin-face)))
 
 (add-hook! 'TeX-mode-hook :append
-           ;; (hl-todo-mode) ;; FIXME
-           (setq preview-scale 1.8 ;; bigger compiled math cause it's beautiful
-                 company-idle-delay nil)) ;; auto-complete is annoying here
+           ;; (hl-todo-mode) ; FIXME
+           (setq preview-scale 1.8 ; bigger compiled math cause it's beautiful
+                 company-idle-delay nil)) ; auto-complete is annoying here
 
 (defadvice! prvt/TeX-fold-line-a (&rest _)
   "Auto-fold LaTeX macros after functions that typically insert them."
   :after #'cdlatex-math-symbol
   (progn
     (TeX-fold-region (line-beginning-position) (line-end-position))))
+
 
 (after! tex
   (map!

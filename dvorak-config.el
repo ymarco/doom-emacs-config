@@ -9,5 +9,5 @@
                                      "  ;:qQjJkKxXbBmMwWvVzZ        "
                                      "                              ")))
   (quail-set-keyboard-layout "dvorak"))
-(setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)) ;; dvorak home row
-(setq aw-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)) ;; dvorak home row
+(setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)) ; dvorak home row
+(setq aw-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)) ; dvorak home row

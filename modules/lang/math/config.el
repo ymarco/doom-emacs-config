@@ -4,5 +4,3 @@
 (set-yas-minor-mode! 'math-mode)
 (when  (featurep! +hebrew)
   (set-yas-minor-mode! 'hebrew-math-mode))
-;; ???
-(add-hook! (latex-mode org-mode) #'math-mode)

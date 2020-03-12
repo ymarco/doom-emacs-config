@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: #+HTML_HEAD
+# key: #hh
+# --
+#+HTML_HEAD: $0

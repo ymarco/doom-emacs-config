@@ -1,0 +1,64 @@
+#+TITLE:   lang/math
+#+DATE:    March 12, 2020
+#+SINCE:   -1.0
+#+STARTUP: inlineimages nofold
+
+* Table of Contents :TOC_3:noexport:
+- [[#description][Description]]
+  - [[#maintainers][Maintainers]]
+  - [[#module-flags][Module Flags]]
+  - [[#plugins][Plugins]]
+  - [[#hacks][Hacks]]
+- [[#prerequisites][Prerequisites]]
+- [[#features][Features]]
+  - [[#hebrew][=+hebrew=]]
+- [[#configuration][Configuration]]
+- [[#troubleshooting][Troubleshooting]]
+
+* Description
+Opinionated, unified math for org and LaTeX.
+
+Sick of having duplicate snippets and keybinds for math writing in org and
+LaTeX? This is for you! Activate with ~M-x +math-mode~
+
++ Math snippets
+
+** Maintainers
++ [[https://github.com/yoavm448][yoavm448]] (Author)
+
+** Module Flags
++ =+hebrew= defines special keybinds and snippets useful for writing math when the
+  user is on a Hebrew input method most of the time.
+
+** Plugins
+None.
+
+** Hacks
+~+hebrew-math-mode~ also enables ~+math-mode~, and also ~hebrew-mode~ if there's such
+command.
+
+* Prerequisites
+=C-_= and =C-^= keybinds need =doom-snippets=, given by =:editor snippets=, and also
+need their special snippets =subscript-braces= and =superscript-braces=.
+
+* Features
+| Keybind         | description                                              |
+|-----------------+----------------------------------------------------------|
+| =M-h=             | Backslash alias; presing =M-h= is the same as pressing =\=   |
+| =C-_=             | Subscript with brases {}, using =subscript-braces= snippet |
+| =C-^=             | Same but superscirpt and with =superscript-braces= snippet |
+| =<localleader> p= | Preview math                                             |
+
+** =+hebrew=
+| Keybind | description                                                         |
+|---------+---------------------------------------------------------------------|
+| =M-m=     | Create math block and disable Hebrew. If already inside math, exit. |
+| =M-m=     | Backtrack to the last math, and disable Hebrew.                     |
+| =M-r=     | Create equation block, disable Hebrew.                              |
+| =M-R=     | Create align block, disable Hebrew.                                 |
+
+* Configuration
+Not much to configure, very opinionated
+
+* Troubleshooting
+# Common issues and their solution, or places to look for help.

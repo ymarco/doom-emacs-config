@@ -8,6 +8,10 @@
                          nil)
   "Function to check if point is inside a math env")
 
+(defun +texmathp ()
+  "TODO widen bufer then texmathp"
+  ())
+
 (defvar +math-mode-map
   (let ((+math-mode-map (make-sparse-keymap)))
     (map! :map +math-mode-map

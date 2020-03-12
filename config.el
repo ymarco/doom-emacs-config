@@ -1,9 +1,9 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
 ;; measure time!
-
 (setq t0 (current-time))
 
+;;; Misc package options
 (setq
  ;; User config, used for templates mostly
  user-full-name "Yoav Marco"
@@ -70,9 +70,10 @@
     (concat doom-local-dir "straight/repos"))
   "Directory for raw git packages, as cloned by straight.")
 
-(defconst prvt/home-dir
-  (eval-when-compile (getenv "HOME"))
-  "User home directory")
+
+;; No more 'Starting new Ispell process aspell with default dictionary...done'
+(advice-add #'ispell-init-process :around #'doom-shut-up-a)
+
 
 ;; TODO make this work just with md/org files
 (defun prvt/file-search-package-doc ()
@@ -96,37 +97,22 @@ with parameter N, insert up to N newlines."
           (nl-count-minus (save-excursion (skip-chars-backward "\n" max-point))))
      (make-string (+ n nl-count-minus) ?\n))))
 
-(set-eshell-alias! ; haven't been using these much tbh
- ;; "config" "/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
- "python" "python3 $*"
- "sai" "sudo apt install $*"
- "s" "sudo $*"
- "config" (format "git --git-dir=%s/.dotfiles/ --work-tree=%s $*"
-                  prvt/home-dir prvt/home-dir))
-
 ;; I like abbrevs, at least in org mode:
 (add-hook 'org-mode-hook #'abbrev-mode)
 ;; ALWAYS expand abbrevs
 (setq evil-want-abbrev-expand-on-insert-exit t)
 
-;; That ultra-bold annoys me, and bold is annoying when theres too much of it.
-;; Semi-bold is a lot prettier (when supported).
-(custom-set-faces!
-  '(outline-1 :weight bold :height 1.11)
-  '(outline-2 :weight semi-bold :height 1.1)
-  '(outline-3 :weight semi-bold :height 1.07)
-  '(outline-4 :weight semi-bold :height 1.06)
-  '(outline-5 :weight semi-bold :height 1.04)
-  '(outline-6 :weight semi-bold :height 1.02)
-  '(outline-8 :weight semi-bold)
-  '(outline-9 :weight semi-bold))
+
+;; I don't know what breaks it but sometimes RET gets bounded to some other
+;; stuff
+(after! evil
+  (map! :map org-mode-map
+   :mn "RET" #'+org/dwim-at-point ))
+
 
 ;; Doom auto-configures a mode for sxhkd, override it:
 (use-package! sxhkd-mode
   :mode "sxhkdrc\\'")
-
-(use-package! xelb
-  :commands xcb:connect)
 
 (use-package! pick-and-highlight
   :defer t
@@ -139,11 +125,25 @@ with parameter N, insert up to N newlines."
 
 (auto-image-file-mode)
 
-
 (use-package! nov
   :mode ("\\.epub\\'" . nov-mode)
   :init
   (setq nov-save-place-file (concat doom-etc-dir "nov-places")))
+
+
+;;; Asthetics
+
+;; That ultra-bold annoys me, and bold is annoying when theres too much of it.
+;; Semi-bold is a lot prettier (when supported).
+(custom-set-faces!
+  '(outline-1 :weight bold :height 1.11)
+  '(outline-2 :weight semi-bold :height 1.1)
+  '(outline-3 :weight semi-bold :height 1.07)
+  '(outline-4 :weight semi-bold :height 1.06)
+  '(outline-5 :weight semi-bold :height 1.04)
+  '(outline-6 :weight semi-bold :height 1.02)
+  '(outline-8 :weight semi-bold)
+  '(outline-9 :weight semi-bold))
 
 (after! rainbow-mode
   (defadvice! +rainbow-priority-over-hl-line (color &optional match)
@@ -162,14 +162,7 @@ with parameter N, insert up to N newlines."
                            "white" "black"))
          (:background ,color))))))
 
-;; Shut up ispell
-(advice-add #'ispell-init-process :around #'doom-shut-up-a)
-
-(after! evil
-  (map! :map org-mode-map
-   :mn "RET" #'+org/dwim-at-point ))
-
-
+;;; Load other configs
 (load! "latex-config") ; this also loads cdlatex-config
 (load! "hebrew-latex-config")
 (load! "dvorak-config")
@@ -178,6 +171,7 @@ with parameter N, insert up to N newlines."
 (load! "general-keys")
 
 
+;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))
   ;; I don't wanna encase this whole file in "(let ((t0 ...)))"
   ;; so I just setq t0 at the start and unbind it here.

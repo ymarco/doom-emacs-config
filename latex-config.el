@@ -3,6 +3,7 @@
 
 (load! "cdlatex-config")
 
+;;; Misc config
 (defvar +latex-use-TeX-fold t
   "Use TeX fold in TeX-mode.
 When set to non-nil, this adds a few hooks/advices to fold stuff.")
@@ -18,7 +19,7 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
  font-latex-fontify-script nil)
 
 
-
+;;; Asthetics
 (setq TeX-fold-math-spec-list
       '(;; missing symbols
         ("≤" ("le"))
@@ -76,14 +77,20 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
 
 (add-hook! 'TeX-mode-hook :append
            ;; (hl-todo-mode) ; FIXME
-           (setq preview-scale 1.8 ; bigger compiled math cause it's beautiful
-                 company-idle-delay nil)) ; auto-complete is annoying here
+           (setq preview-scale 1.8)) ; bigger compiled math cause it's beautiful
+
+;;; Folding
 
 (defadvice! prvt/TeX-fold-line-a (&rest _)
   "Auto-fold LaTeX macros after functions that typically insert them."
   :after #'cdlatex-math-symbol
   (progn
     (TeX-fold-region (line-beginning-position) (line-end-position))))
+
+;;; Keybinds
+
+(add-hook! 'TeX-mode-hook
+  (setq-local company-idle-delay nil)) ; auto-complete is annoying here
 
 
 (after! tex

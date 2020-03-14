@@ -91,16 +91,24 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
 
 ;;; Folding
 
-(defadvice! prvt/TeX-fold-line-a (&rest _)
+;; Fold after cdlatex and snippets.
+(defun +TeX-fold-line-ah (&rest _)
   "Auto-fold LaTeX macros after functions that typically insert them."
-  :after #'cdlatex-math-symbol
-  (progn
-    (TeX-fold-region (line-beginning-position) (line-end-position))))
+  (TeX-fold-region (line-beginning-position) (line-end-position)))
+
+(when +latex-use-TeX-fold
+  (advice-add #'cdlatex-math-symbol :after #'+TeX-fold-line-ah)
+  (advice-add #'cdlatex-math-modify :after #'+TeX-fold-line-ah)
+  ;; local after-snippet hook for folding
+  (add-hook! 'TeX-mode-hook
+    (add-hook 'yas-after-exit-snippet-hook #'+TeX-fold-line-ah nil t)))
+
 
 ;;; Keybinds
 
 (add-hook! 'TeX-mode-hook
-  (setq-local company-idle-delay nil)) ; auto-complete is annoying here
+           ;; auto-complete is annoying here
+           (setq-local company-idle-delay nil))
 
 
 (after! tex

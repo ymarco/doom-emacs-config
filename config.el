@@ -54,7 +54,8 @@
  abbrev-file-name (concat doom-private-dir "abbrevs.el"))
 
 
-(add-hook 'org-brain-vis-current-title-append-functions #'org-brain-entry-tags-string) ; Show tags in org-brain
+;; Show tags in org-brain
+(add-hook 'org-brain-vis-current-title-append-functions #'org-brain-entry-tags-string)
 ;; Colorify colors in X config mode
 (add-hook! 'conf-xdefaults-mode-hook (rainbow-mode 1))
 
@@ -80,8 +81,11 @@
 
 ;;;###autoload
 (defun prvt/snippets-newline-if-needed (&optional n)
-  "Insert a newline if not perceeded by a newline.
-with parameter N, insert up to N newlines."
+  "return a newline if point not preceded by a newline.
+with parameter N, insert up to N newlines.
+
+Used mostly so I can type a snippet key on the same line and have
+it start a new line of its own."
   (interactive)
   (doom-snippets-without-trigger
    (let* ((n (or n 1))
@@ -92,15 +96,15 @@ with parameter N, insert up to N newlines."
 ;; some function complains about this being void, idk how but this fixes it.
 (defun org-latex-link-override (&rest _))
 
-;; Recenter instead of 'stay in the same position'
-;; And yes, we are overriding an advice here.
+;; Recenter instead of 'preserve position'
+;; And yes, we are advising an advice here.
 (advice-add #'doom-preserve-window-position-a :override
             (lambda (orig-fn &rest args)
               (apply orig-fn args)
               (doom-recenter-a)))
 
 
-;; I like abbrevs, at least in org mode:
+;; I like abbrevs, at least in org mode
 (add-hook 'org-mode-hook #'abbrev-mode)
 ;; ALWAYS expand abbrevs
 (setq evil-want-abbrev-expand-on-insert-exit t)
@@ -161,7 +165,6 @@ with parameter N, insert up to N newlines."
 (load! "org-config")
 (load! "imenu-list-config")
 (load! "general-keys")
-
 
 ;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))

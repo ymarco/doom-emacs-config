@@ -4,24 +4,22 @@
 
 ;; Things I wanna push upstream someday
 (map!
- (:after lsp :map lsp-mode-map
-   "M-RET"                            #'lsp-execute-code-action) ; like in IntelliJ
  (:after treemacs :map treemacs-mode-map
-   "+"                                #'treemacs-create-dir) ; just like in dired
-
+   "+" #'treemacs-create-dir) ; just like in dired
  :leader
-   ;; :desc "Find file in ~/.config" "fc" #'prvt/find-file-in-general-config
-   :desc "Rename buffer" "bR"          #'rename-buffer)
+ :desc "Rename buffer" "bR" #'rename-buffer)
 
 ;; Private
 (map!
  ;; General
- :n "g SPC" #'evil-avy-goto-word-1
+ :n "g SPC"   #'evil-avy-goto-word-1
  :n "ga" (λ!! #'what-cursor-position t)
  ;; Things I picked up from JetBrains IDEs
  :eni "C-/"   #'comment-line
  :v   "C-/"   #'comment-or-uncomment-region
  :nie "C-M-l" #'+format/buffer
+ (:after lsp :map lsp-mode-map
+   "M-RET"    #'lsp-execute-code-action) ; like in IntelliJ
  ;; Smartparens Navigation
  :nie "M-u"   #'sp-up-sexp ; exit parenthesis
  :nie "M-U"   #'sp-backward-up-sexp ; exit parenthesis backward

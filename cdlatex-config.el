@@ -9,7 +9,7 @@
         (?m    ("\\mu"         ""           "\\lim"))
         (?d    ("\\delta"      "\\partial"  "\\dim"))
         (?D    ("\\Delta"      "\\nabla"    "\\deg"))
-        ;; no idea why Phi isnt on F in first place
+        ;; no idea why \Phi isnt on 'F' in first place, \phi is on 'f'.
         (?F    ("\\Phi"))
         ;; now just conveniance
         (?:    ("\\dots")))

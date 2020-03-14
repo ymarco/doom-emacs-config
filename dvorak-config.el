@@ -1,4 +1,4 @@
-;;; ~/.doom.d/dvorak-config.el -*- lexical-binding: t; -*-
+;;; ~/.config/doom/dvorak-config.el -*- lexical-binding: t; -*-
 
 ;; Make quail know what is the global key layout. maybe not useful for
 ;; everybody, but that way I can write in an another input method (Hebrew) while

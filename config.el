@@ -158,7 +158,7 @@ with parameter N, insert up to N newlines."
 (load! "latex-config") ; this also loads cdlatex-config
 (load! "hebrew-latex-config")
 (load! "dvorak-config")
-(load! "org-setup")
+(load! "org-config")
 (load! "imenu-list-config")
 (load! "general-keys")
 

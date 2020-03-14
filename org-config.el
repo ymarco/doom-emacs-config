@@ -1,4 +1,4 @@
-;;; ~/.doom.d/org-setup.el -*- lexical-binding: t; -*-
+;;; ~/.config/doom/org-config.el -*- lexical-binding: t; -*-
 ;; These are nicer defaults to LaTeX and HTML through org. It also configures minted for
 ;; src code syntex highlighting in LaTex
 

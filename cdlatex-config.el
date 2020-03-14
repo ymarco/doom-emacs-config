@@ -1,4 +1,4 @@
-;;; ~/.doom.d/cdlatex-config-mine.el -*- lexical-binding: t; -*-
+;;; ~/.config/doom/cdlatex-config-mine.el -*- lexical-binding: t; -*-
 
 (setq cdlatex-math-symbol-prefix ?\;
       cdlatex-math-symbol-alist

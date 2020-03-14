@@ -25,6 +25,7 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
         ("≤" ("le"))
         ("≥" ("ge"))
         ("≠" ("ne"))
+        ("‘{1}’" ("text"))
         ;; conviniance shorts
         ("‹" ("left"))
         ("›" ("right"))
@@ -38,14 +39,15 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
         ("ℝ→ℝ" ("rtr"))
         ("I→ℝ" ("itr"))
         ("½" ("halff"))
-        ("½({1})" ("half"))
-
         ("({1})" ("pa"))
-        ("[{1}]" ("bra"))
-        ("❴{1}❵" ("bre")) ; explicitly using unicode braces
-        ("[{1})" ("bpa"))
         ("({1}]" ("pba"))
+        ("[{1})" ("bpa"))
+        ("[{1}]" ("bra"))
         ("|{1}|" ("abs"))
+        ("❴{1}❵" ("bre")) ; explicitly using blod unicode braces
+        ("⌊{1}⌋" ("floor"))
+        ("⌈{1}⌉" ("ceil"))
+        ("‖{1}‖" ("norm"))
         ))
 
 (load! "fontification")

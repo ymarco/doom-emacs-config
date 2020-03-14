@@ -19,7 +19,7 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
  font-latex-fontify-script nil)
 
 
-;;; Asthetics
+;;; Aesthetics
 (setq TeX-fold-math-spec-list
       '(;; missing symbols
         ("≤" ("le"))

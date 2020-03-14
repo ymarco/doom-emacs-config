@@ -10,26 +10,21 @@
  user-mail-address "yoavm448@gmail.com"
  user-login-name "yoavm448"
 
- ;; Random collection of various package options
  ;; prettiness
  doom-theme 'doom-spacegrey
  ;; take new window space from all other windows (not just current)
  window-combination-resize t
 
- ;; seperate words also by CamelCase
- global-subword-mode t
  ;; Even more cololful pars
  rainbow-delimiters-max-face-count    4
  ;; Dired auto-detects multiple windows
  dired-dwim-target                    t
- ;; doom-expand-snippets -> %expand
- doom-snippets-enable-short-helpers   t
  ;; I don't need it to tell me its UTF-8
  doom-modeline-buffer-encoding nil
  ;; The unsaved icon made me notice and save the buffer on every stop
  doom-modeline-buffer-state-icon nil
  ;; Nested snippet expansion
- yas-triggers-in-field                nil
+ yas-triggers-in-field                t
  ;; Avy can jump through windows
  avy-all-windows                      t
  ;; Avy can auto-jump when theres 1 candidate
@@ -40,7 +35,9 @@
  treemacs-width 27
  ;; Leave my comments alone
  +evil-want-o/O-to-continue-comments  nil
- +zen-text-scale 1                        ; Don't scale text on zen
+ ;; Don't replace the current window when splitting
+ evil-split-window-below  t
+ evil-vsplit-window-right t
  ;; Wait for a bit longer before prompting me, lsp
  lsp-idle-delay 0.5
  lsp-ui-sideline-delay 0.5
@@ -56,10 +53,6 @@
  projectile-project-search-path '("~/projects")
  abbrev-file-name (concat doom-private-dir "abbrevs.el"))
 
-;; Don't replace the current window when splitting
-(setq
- evil-split-window-below  t
- evil-vsplit-window-right t)
 
 (add-hook 'org-brain-vis-current-title-append-functions #'org-brain-entry-tags-string) ; Show tags in org-brain
 ;; Colorify colors in X config mode
@@ -75,8 +68,7 @@
 (advice-add #'ispell-init-process :around #'doom-shut-up-a)
 
 
-;; TODO make this work just with md/org files
-(defun prvt/file-search-package-doc ()
+(defun prvt/file-search-package ()
   (interactive)
   (doom-project-find-file prvt/raw-git-packages-dir))
 
@@ -97,6 +89,17 @@ with parameter N, insert up to N newlines."
           (nl-count-minus (save-excursion (skip-chars-backward "\n" max-point))))
      (make-string (+ n nl-count-minus) ?\n))))
 
+;; some function complains about this being void, idk how but this fixes it.
+(defun org-latex-link-override (&rest _))
+
+;; Recenter instead of 'stay in the same position'
+;; And yes, we are overriding an advice here.
+(advice-add #'doom-preserve-window-position-a :override
+            (lambda (orig-fn &rest args)
+              (apply orig-fn args)
+              (doom-recenter-a)))
+
+
 ;; I like abbrevs, at least in org mode:
 (add-hook 'org-mode-hook #'abbrev-mode)
 ;; ALWAYS expand abbrevs
@@ -107,11 +110,12 @@ with parameter N, insert up to N newlines."
 ;; stuff
 (after! evil
   (map! :map org-mode-map
-   :mn "RET" #'+org/dwim-at-point ))
+        :mn "RET" #'+org/dwim-at-point ))
 
 
-;; Doom auto-configures a mode for sxhkd, override it:
 (use-package! sxhkd-mode
+  ;; Doom auto-configures a mode for sxhkd, using a slightly different key here
+  ;; overrides it
   :mode "sxhkdrc\\'")
 
 (use-package! pick-and-highlight
@@ -131,19 +135,7 @@ with parameter N, insert up to N newlines."
   (setq nov-save-place-file (concat doom-etc-dir "nov-places")))
 
 
-;;; Asthetics
-
-;; That ultra-bold annoys me, and bold is annoying when theres too much of it.
-;; Semi-bold is a lot prettier (when supported).
-(custom-set-faces!
-  '(outline-1 :weight bold :height 1.11)
-  '(outline-2 :weight semi-bold :height 1.1)
-  '(outline-3 :weight semi-bold :height 1.07)
-  '(outline-4 :weight semi-bold :height 1.06)
-  '(outline-5 :weight semi-bold :height 1.04)
-  '(outline-6 :weight semi-bold :height 1.02)
-  '(outline-8 :weight semi-bold)
-  '(outline-9 :weight semi-bold))
+;;; Aesthetics
 
 (after! rainbow-mode
   (defadvice! +rainbow-priority-over-hl-line (color &optional match)

@@ -21,7 +21,7 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
 
 ;;; Aesthetics
 (setq TeX-fold-math-spec-list
-      '(;; missing symbols
+      '( ;; missing symbols
         ("≤" ("le"))
         ("≥" ("ge"))
         ("≠" ("ne"))
@@ -34,18 +34,23 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
         ("ℚ" ("QQ"))
         ("ℤ" ("ZZ"))
         ("ℂ" ("CC"))
-        ("𝔽" ("FF"))))
+        ("𝔽" ("FF"))
+        ("ℝ→ℝ" ("rtr"))
+        ("I→ℝ" ("itr"))
+        ("½" ("halff"))
+        ("½({1})" ("half"))
+
+        ("({1})" ("pa"))
+        ("[{1}]" ("bra"))
+        ("❴{1}❵" ("bre")) ; explicitly using unicode braces
+        ("[{1})" ("bpa"))
+        ("({1}]" ("pba"))
+        ("|{1}|" ("abs"))
+        ))
 
 (load! "fontification")
 (appendq! font-latex-match-math-command-keywords ; just adding my own macros as keywords
-          '(("oner")
-            ("half")
-            ("pa")
-            ("bra")
-            ("bre")
-            ("pba")
-            ("bpa")
-            ("abs")))
+          '("oner" "half" "pa" "bra" "bre" "pba" "bpa" "abs"))
 
 ;; Making \( \) less visible
 (defface unimportant-latex-face
@@ -66,14 +71,17 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
 
 (after! doom-themes
   (custom-set-faces!
-    ;; on default, 1-depth braces don't stand out in latex math
+    ;; on default, 1-depth braces don't stand out in LaTeX math
     `(rainbow-delimiters-depth-1-face :foreground nil :inherit rainbow-delimiters-depth-6-face)
     ;; fixes latex preview background color in solaire
     `(preview-reference-face :inherit solaire-default-face)
     ;; Just configured for the theme:
     `(preview-face :background ,(doom-color 'base2))
     `(font-latex-doctex-documentation-face :background ,(doom-color 'base2))
-    `(TeX-fold-folded-face :inherit font-lock-builtin-face)))
+    `(TeX-fold-folded-face :inherit font-lock-builtin-face)
+    ;; This should stand out from hl-line
+    `(TeX-fold-unfolded-face
+      :background ,(doom-blend (doom-color 'base4) (doom-color 'bg) 0.3))))
 
 (add-hook! 'TeX-mode-hook :append
            ;; (hl-todo-mode) ; FIXME

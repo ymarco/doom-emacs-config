@@ -158,13 +158,40 @@ it start a new line of its own."
                            "white" "black"))
          (:background ,color))))))
 
+;;; Keybinds
+
+;; Things I wanna push upstream someday
+(map!
+ (:after treemacs :map treemacs-mode-map
+   "+" #'treemacs-create-dir) ; just like in dired
+ :leader
+ :desc "Rename buffer" "bR" #'rename-buffer)
+
+;; Private
+(map!
+ ;; General
+ :n "g SPC"   #'evil-avy-goto-word-1
+ :n "ga" (λ!! #'what-cursor-position t)
+ ;; Things I picked up from JetBrains IDEs
+ :eni "C-/"   #'comment-line
+ :v   "C-/"   #'comment-or-uncomment-region
+ :nie "C-M-l" #'+format/buffer
+ (:after lsp :map lsp-mode-map
+   "M-RET"    #'lsp-execute-code-action) ; like in IntelliJ
+ ;; Smartparens Navigation
+ :nie "M-u"   #'sp-up-sexp ; exit parenthesis
+ :nie "M-U"   #'sp-backward-up-sexp ; exit parenthesis backward
+ :nie "M-n"   (λ! (sp-up-sexp) (sp-down-sexp)) ; next parentheses on same level
+ :nie "M-N"   (λ! (sp-backward-up-sexp) (sp-backward-down-sexp))) ; opposite of M-n
+
+
+
 ;;; Load other configs
 (load! "latex-config") ; this also loads cdlatex-config
 (load! "hebrew-latex-config")
 (load! "dvorak-config")
 (load! "org-config")
 (load! "imenu-list-config")
-(load! "general-keys")
 
 ;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))

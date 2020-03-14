@@ -1,0 +1,15 @@
+#+TITLE: Doom Emacs Config
+#+AUTHOR: Yoav Marco
+
+I intend to push some of this (mostly latex stuff) upstream to
+doom someday.
++ [[file:config.el]] is a jumble of general config and preferences, mostly ~setq~'s
+  and keybinds.
++ [[file:dvorak-config.el]] - just some simple dvorak stuff. I use vim with the
+  default keys on top of dvorak, this is mostly so I can type normally with an
+  another input method (be damned, Hebrew!).
++ [[file:modules/lang/math]] configure a math mode for use in LaTeX and
+  org buffers. It creates the ~math-mode~ minor mode. In that module, with a
+  =+heberw= flag to math module, I create a ~hebrew-math~ minor mode which adds
+  convenient snippets and commands for writing LaTeX-like math in with a
+  usually-Hebrew input method. It has a README of its own.

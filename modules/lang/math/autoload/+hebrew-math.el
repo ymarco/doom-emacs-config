@@ -4,7 +4,7 @@
 (defun +hebrew-math-backwards-till-math ()
   "Go backwards until reaching a math env"
   (interactive)
-  (while (not (or (funcall math-mathp-fn)
+  (while (not (or (funcall +math-mathp-fn)
                   (= (point) (point-min))))
     ;; only searching for \ beause all math commands start with a \ (well not
     ;; tex dollars but I don't use them.)
@@ -18,7 +18,7 @@
 
 (defun +hebrew-math-forward-exit-math ()
   "Go forward until exiting a math env"
-  (while (and (funcall math-mathp-fn)
+  (while (and (funcall +math-mathp-fn)
               (/= (point) (point-max)))
     (forward-char)))
 
@@ -34,7 +34,7 @@
 If already in math mode, exit it and go back to Hebrew."
   (interactive)
   (hebrew-set-regular-input-method)
-  (if (funcall math-mathp-fn)
+  (if (funcall +math-mathp-fn)
       (+hebrew-math-forward-exit-math-regular)
     (doom-snippets-expand :name "hebrew-math")))
 

@@ -96,9 +96,8 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
   (TeX-fold-region (line-beginning-position) (line-end-position)))
 
 (when +latex-use-TeX-fold
-  (advice-add #'cdlatex-math-symbol :after #'TeX-fold-line-ah)
-  (advice-add #'cdlatex-math-modify :after #'TeX-fold-line-ah)
-  ;; local after-snippet hook for folding, but only in TeX buffers
+  (advice-add #'cdlatex-math-symbol :after #'+TeX-fold-line-ah)
+  (advice-add #'cdlatex-math-modify :after #'+TeX-fold-line-ah)
   (add-hook! 'TeX-mode-hook
     (add-hook 'yas-after-exit-snippet-hook #'+TeX-fold-line-ah nil t))
 

@@ -51,10 +51,6 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
         ("❬{1}❭" ("anb")) ; explititly using narrower unicode angle brackets
         ))
 
-(load! "fontification")
-(appendq! font-latex-match-math-command-keywords ; just adding my own macros as keywords
-          '("oner" "half" "pa" "bra" "bre" "pba" "bpa" "abs"))
-
 ;; Making \( \) less visible
 (defface unimportant-latex-face
   '((t

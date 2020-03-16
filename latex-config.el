@@ -67,6 +67,8 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
  `((,(rx (and "\\" (any "()[]"))) 0 'unimportant-latex-face prepend))
  'end)
 
+;; Fontify anything that looks like a TeX macro, not limited to known commands
+;; FIXME this also fontifies tex macros in comments, hadn't found a solution yet
 (font-lock-add-keywords
  'latex-mode
  `((,"\\\\[[:word:]]+" 0 'font-lock-keyword-face prepend))
@@ -74,16 +76,16 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
 
 (after! doom-themes
   (custom-set-faces!
-    ;; on default, 1-depth braces don't stand out in LaTeX math
+    ;; On default, 1-depth braces don't stand out in LaTeX math
     `(rainbow-delimiters-depth-1-face :foreground nil :inherit rainbow-delimiters-depth-6-face)
-    ;; fixes latex preview background color in solaire
+    ;; Fixes latex preview background color in solaire
     `(preview-reference-face :inherit solaire-default-face)
     ;; Just configured for the theme:
     `(preview-face :background ,(doom-color 'base2))
     `(font-latex-doctex-documentation-face :background ,(doom-color 'base2))
     `(TeX-fold-folded-face :inherit font-lock-builtin-face)
-    ;; This should stand out from hl-line
     `(TeX-fold-unfolded-face
+      ;; This should stand out from hl-line
       :background ,(doom-blend (doom-color 'base4) (doom-color 'bg) 0.3))))
 
 (add-hook! 'TeX-mode-hook :append

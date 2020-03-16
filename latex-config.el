@@ -99,7 +99,10 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
   (advice-add #'cdlatex-math-symbol :after #'+TeX-fold-line-ah)
   (advice-add #'cdlatex-math-modify :after #'+TeX-fold-line-ah)
   (add-hook! 'TeX-mode-hook
-    (add-hook 'yas-after-exit-snippet-hook #'+TeX-fold-line-ah nil t))
+             ;; FOLD MASTER
+             #'TeX-fold-buffer
+             ;; local after-snippet hook for folding, but only in TeX buffers
+             (add-hook 'yas-after-exit-snippet-hook #'+TeX-fold-line-ah nil t))
 
   (add-hook! 'mixed-pitch-mode-hook
     (when mixed-pitch-mode

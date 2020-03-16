@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: overlay-put
+# key: ovp
+# --
+(overlay-put ${1: ov} ${2:property} ${0:value})

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: decumentclass
+# key: cls
+# --
+\documentclass{${1:article}}
+$0

@@ -84,8 +84,8 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
       ;; This should stand out from hl-line
       :background ,(doom-blend (doom-color 'base4) (doom-color 'bg) 0.3))))
 
-(add-hook! 'TeX-mode-hook :append
-           ;; (hl-todo-mode) ; FIXME
+(add-hook! 'TeX-mode-hook
+           ;; (hl-todo-mode) ; TODO
            (setq preview-scale 1.8)) ; bigger compiled math cause it's beautiful
 
 ;;; Folding
@@ -109,13 +109,11 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
                      (face-remap-add-relative
                       'TeX-fold-folded-face :family var-pitch :height var-height))))))
 
-
 ;;; Keybinds
 
 (add-hook! 'TeX-mode-hook
-           ;; auto-complete is annoying here
-           (setq-local company-idle-delay nil))
-
+           ;; complete is 100% annoying me here, just adds lag
+           (company-mode -1))
 
 (after! tex
   (map!

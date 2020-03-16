@@ -14,7 +14,7 @@
   "Call `+hebrew-math-backwards-till-math', and go back to normal (English) input method."
   (interactive)
   (+hebrew-math-backwards-till-math)
-  (hebrew-set-hebrew-input-method))
+  (hebrew-set-regular-input-method))
 
 (defun +hebrew-math-forward-exit-math ()
   "Go forward until exiting a math env"

@@ -3,6 +3,7 @@
 (setq cdlatex-math-symbol-prefix ?\;
       cdlatex-math-symbol-alist
       '( ;; adding missing functions to 3rd level symbols
+        ;;key   1st            2nd           3rd
         (?_    ("\\downarrow"  ""           "\\inf"))
         (?^    ("\\uparrow"    ""           "\\sup"))
         (?k    ("\\kappa"      ""           "\\ker"))
@@ -15,5 +16,6 @@
         (?:    ("\\dots")))
       cdlatex-math-modify-alist
       '( ;; my own stuff
-        (?/  "\\oner"        nil          t    nil  nil)
-        (?h  "\\half"        nil          t    nil  nil)))
+        ;;key  mathcmd   textcmd  type  rmdot(?)  it(?)
+        (?/    "\\oner"  nil      t     nil       nil)
+        (?h    "\\half"  nil      t     nil       nil)))

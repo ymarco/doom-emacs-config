@@ -2,4 +2,4 @@
 # name: frac-short
 # group: math
 # --
-\frac{${1:`(or % "nume")`}}{${2:denu}} $0
+\frac{${1:`(or % "nume")`}}{${2:denu}}$0

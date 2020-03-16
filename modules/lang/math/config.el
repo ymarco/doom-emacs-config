@@ -1,6 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; ~/.config/doom/math.el
 
-(set-yas-minor-mode! 'math-mode)
+(set-yas-minor-mode! '+math-mode)
 (when  (featurep! +hebrew)
-  (set-yas-minor-mode! 'hebrew-math-mode))
+  (set-yas-minor-mode! '+hebrew-math-mode))

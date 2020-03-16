@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: hebrew-align-math
-# group: hebrew latex
-# --
-`(prvt/snippets-newline-if-needed 2)`\begin{align*}
-`%`$0
-\end{align*}

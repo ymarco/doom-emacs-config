@@ -3,4 +3,4 @@
 # key: beg
 # type: command
 # --
-(%expand :name "begin")
+(doom-snippets-expand :name "begin")

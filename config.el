@@ -47,6 +47,7 @@
  ;; mixed-pitch brothers. Setting the font size would normally work, but it
  ;; doesn't with mixed-pitch-mode which I use. Fortunately, Source Sans Pro is
  ;; just in the perfect size for ubuntu-mono!
+ ;; EDIT: you can do that by setting 'height property, I've read the code
  doom-variable-pitch-font (font-spec :family "Source Sans Pro")
  ;; Just testing fonts
  ;;doom-font (font-spec :family "Source Code Pro" :size 18)

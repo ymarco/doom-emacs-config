@@ -122,6 +122,8 @@ typically insert macros."
     :after  #'cdlatex-math-symbol
     :after  #'cdlatex-math-modify
     (TeX-fold-region (line-beginning-position) (line-end-position)))
+
+  (add-hook! 'LaTeX-mode-hook
              ;; FOLD MASTER
              #'TeX-fold-buffer
              ;; local after-snippet hook for folding, but only in TeX buffers

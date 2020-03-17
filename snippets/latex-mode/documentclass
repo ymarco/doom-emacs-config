@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: documentclass
+# key: doc
+# --
+\documentclass{${1:article}}
+
+$0
+
+\begin{document}
+
+\end{document}

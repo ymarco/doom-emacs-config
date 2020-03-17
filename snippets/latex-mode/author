@@ -1,0 +1,5 @@
+# key: aut
+# name: author
+# --
+\author{${1:`(or % user-full-name)`}}
+$0

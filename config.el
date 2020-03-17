@@ -143,12 +143,12 @@ it start a new line of its own."
 
 (after! rainbow-mode
   (defadvice! +rainbow-priority-over-hl-line (color &optional match)
-    "Advice to make sure the colors made by rainbow-mode are
-    not hidden by the current-line highlighting done by hl-line"
+    "Advice to make sure the colors made by rainbow-mode are not
+hidden by the current-line highlighting done by hl-line"
     :override 'rainbow-colorize-match
     ;; This just converts `rainbow-colorize-match' to use overlays instead of
-    ;; faces - this way the overlay priority kicks in. Since hl-mode has
-    ;; priority of -50, not specifying a priority here would mean priority=0
+    ;; faces - this way the overlay priority kicks in. Since the hl-mode overlay
+    ;; has priority of -50, not specifying a priority here would mean priority=0
     ;; which is fine.
     (let ((match (or match 0)))
       (overlay-put

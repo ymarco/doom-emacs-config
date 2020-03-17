@@ -126,7 +126,7 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
              ;; FOLD MASTER
              #'TeX-fold-buffer
              ;; local after-snippet hook for folding, but only in TeX buffers
-             (add-hook 'yas-after-exit-snippet-hook #'+TeX-fold-line-ah nil t))
+             (add-hook 'yas-after-exit-snippet-hook #'TeX-fold-paragraph nil t))
 
   (add-hook! 'mixed-pitch-mode-hook
     (when mixed-pitch-mode

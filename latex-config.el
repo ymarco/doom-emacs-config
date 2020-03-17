@@ -20,36 +20,60 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
 
 
 ;;; Aesthetics
-(setq TeX-fold-math-spec-list
-      '( ;; missing symbols
-        ("≤" ("le"))
-        ("≥" ("ge"))
-        ("≠" ("ne"))
-        ("‘{1}’" ("text"))
-        ;; conviniance shorts
-        ("‹" ("left"))
-        ("›" ("right"))
-        ;; private macros
-        ("ℝ" ("RR"))
-        ("ℕ" ("NN"))
-        ("ℚ" ("QQ"))
-        ("ℤ" ("ZZ"))
-        ("ℂ" ("CC"))
-        ("𝔽" ("FF"))
-        ("ℝ→ℝ" ("rtr"))
-        ("I→ℝ" ("itr"))
-        ("½" ("halff"))
-        ("({1})" ("pa"))
-        ("({1}]" ("pba"))
-        ("[{1})" ("bpa"))
-        ("[{1}]" ("bra"))
-        ("|{1}|" ("abs"))
-        ("❴{1}❵" ("bre" "set")) ; explicitly using bold unicode braces
-        ("⌊{1}⌋" ("floor"))
-        ("⌈{1}⌉" ("ceil"))
-        ("‖{1}‖" ("norm"))
-        ("❬{1}❭" ("anb")) ; explititly using narrower unicode angle brackets
-        ))
+(setq
+ TeX-fold-math-spec-list
+ '( ;; missing symbols
+   ("≤" ("le"))
+   ("≥" ("ge"))
+   ("≠" ("ne"))
+   ("‘{1}’" ("text"))
+   ;; conviniance shorts
+   ("‹" ("left"))
+   ("›" ("right"))
+   ;; private macros
+   ("ℝ" ("RR"))
+   ("ℕ" ("NN"))
+   ("ℚ" ("QQ"))
+   ("ℤ" ("ZZ"))
+   ("ℂ" ("CC"))
+   ("𝔽" ("FF"))
+   ("ℝ→ℝ" ("rtr"))
+   ("I→ℝ" ("itr"))
+   ("½" ("halff"))
+   ("({1})" ("pa"))
+   ("({1}]" ("pba"))
+   ("[{1})" ("bpa"))
+   ("[{1}]" ("bra"))
+   ("|{1}|" ("abs"))
+   ("❴{1}❵" ("bre" "set")) ; explicitly using bold unicode braces
+   ("⌊{1}⌋" ("floor"))
+   ("⌈{1}⌉" ("ceil"))
+   ("‖{1}‖" ("norm"))
+   ("❬{1}❭" ("anb")) ; explititly using narrower unicode angle brackets
+   )
+ TeX-fold-macro-spec-list ; thanks to @tecosaur
+ '( ;; as the defaults
+   ("[f]" ("footnote" "marginpar"))
+   ("[c]" ("cite"))
+   ("[l]" ("label"))
+   ("[r]" ("ref" "pageref" "eqref"))
+   ("[i]" ("index" "glossary"))
+   ("..." ("dots"))
+   ("{1}" ("emph" "textit" "textsl" "textmd" "textrm" "textsf" "texttt"
+           "textbf" "textsc" "textup"))
+   ;; tweaked defaults
+   ("©" ("copyright"))
+   ("®" ("textregistered"))
+   ("™"  ("texttrademark"))
+   ("[1]:||•" ("item"))
+   ("❡ {1}" ("chapter" "chapter*"))
+   ("❡❡ {1}" ("part" "part*"))
+   ("§ {1}" ("section" "section*"))
+   ("§§ {1}" ("subsection" "subsection*"))
+   ("§§§ {1}" ("subsubsection" "subsubsection*"))
+   ("¶ {1}" ("paragraph" "paragraph*"))
+   ("¶¶ {1}" ("subparagraph" "subparagraph*"))
+   ))
 
 ;; Making \( \) less visible
 (defface unimportant-latex-face

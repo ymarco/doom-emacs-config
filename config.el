@@ -50,7 +50,6 @@
  ;; EDIT: you can do that by setting 'height property, I've read the code
  doom-variable-pitch-font (font-spec :family "Source Sans Pro")
  ;; Just testing fonts
- ;;doom-font (font-spec :family "Source Code Pro" :size 18)
  projectile-project-search-path '("~/projects")
  abbrev-file-name (concat doom-private-dir "abbrevs.el"))
 

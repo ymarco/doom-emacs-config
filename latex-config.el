@@ -127,8 +127,10 @@ typically insert macros."
              ;; FOLD MASTER
              #'TeX-fold-buffer
              ;; local after-snippet hook for folding, but only in TeX buffers
-             (add-hook 'yas-after-exit-snippet-hook #'TeX-fold-paragraph nil t))
-
+             (add-hook! 'yas-after-exit-snippet-hook :local
+               (TeX-fold-region yas-snippet-beg yas-snippet-end)))
+  ;; Fix folded things always getting fixed pitch when using mixed pitch
+  ;; Its your fault @tecosaur
   (add-hook! 'mixed-pitch-mode-hook
     (when mixed-pitch-mode
       (let ((var-pitch (face-attribute 'variable-pitch :family))

@@ -115,14 +115,13 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
 ;;; Folding
 
 ;; Fold after cdlatex and snippets.
-(defun +TeX-fold-line-ah (&rest _)
-  "Auto-fold LaTeX macros after functions that typically insert them."
-  (TeX-fold-region (line-beginning-position) (line-end-position)))
-
 (when +latex-use-TeX-fold
-  (advice-add #'cdlatex-math-symbol :after #'+TeX-fold-line-ah)
-  (advice-add #'cdlatex-math-modify :after #'+TeX-fold-line-ah)
-  (add-hook! 'TeX-mode-hook
+  (defadvice! +TeX-fold-line-a (&rest _)
+    "Advice to auto-fold LaTeX macros after functions that
+typically insert macros."
+    :after  #'cdlatex-math-symbol
+    :after  #'cdlatex-math-modify
+    (TeX-fold-region (line-beginning-position) (line-end-position)))
              ;; FOLD MASTER
              #'TeX-fold-buffer
              ;; local after-snippet hook for folding, but only in TeX buffers

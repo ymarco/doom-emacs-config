@@ -123,12 +123,15 @@ typically insert macros."
     :after  #'cdlatex-math-modify
     (TeX-fold-region (line-beginning-position) (line-end-position)))
 
+  (defun +TeX-fold-add-snippet-hook ()
+    "local after-snippet hook for folding, but only in TeX buffers"
+    (add-hook! 'yas-after-exit-snippet-hook :local
+      (TeX-fold-region yas-snippet-beg yas-snippet-end)))
+
   (add-hook! 'LaTeX-mode-hook
              ;; FOLD MASTER
              #'TeX-fold-buffer
-             ;; local after-snippet hook for folding, but only in TeX buffers
-             (add-hook! 'yas-after-exit-snippet-hook :local
-               (TeX-fold-region yas-snippet-beg yas-snippet-end)))
+             #'+TeX-fold-add-snippet-hook)
   ;; Fix folded things always getting fixed pitch when using mixed pitch
   ;; Its your fault @tecosaur
   (add-hook! 'mixed-pitch-mode-hook

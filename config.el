@@ -172,6 +172,8 @@ hidden by the current-line highlighting done by hl-line"
  ;; General
  :n "g SPC"   #'evil-avy-goto-word-1
  :n "ga" (λ!! #'what-cursor-position t)
+ :v "="       #'er/expand-region
+ :v "-"       #'er/contract-region
  ;; Things I picked up from JetBrains IDEs
  :eni "C-/"   #'comment-line
  :v   "C-/"   #'comment-or-uncomment-region

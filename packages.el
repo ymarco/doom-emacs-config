@@ -5,6 +5,8 @@
 ;;(package! xelb :pin "5970017d9b")
 ;; ebook reading in emacs
 (package! nov :pin "cd1b264b3f")
+;; I like expanding regions sometimes
+(package! expand-region :pin "ea6b4cbb99")
 ;; sideline buffer navigator powered by imenu
 (package! imenu-list :pin "46008738f8")
 ;; unpin doom-snippets, living on the edge here

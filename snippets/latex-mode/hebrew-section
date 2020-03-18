@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: hebrew-section
-# key: סקש
+# key: סק
 # group: hebrew latex
+# type: command
 # --
-`(prvt/snippets-newline-if-needed 2)`‏\section{`%`${1:סקשן}}
-$0
+(doom-snippets-expand :uuid "section")

@@ -9,7 +9,9 @@
  ;; configured in css.
  org-html-htmlize-output-type 'css
  ;; try not to accidently do weird stuff in invisible regions
- org-catch-invisible-edits 'smart)
+ org-catch-invisible-edits 'smart
+ ;; moon is ugly imo
+ org-reveal-theme "black")
 
 ;; I LOVE PRETTY STUFF
 (add-hook! 'org-mode-hook

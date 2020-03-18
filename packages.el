@@ -12,8 +12,8 @@
 ;; unpin doom-snippets, living on the edge here
 (package! doom-snippets
   :recipe (:host github
-                 :repo "hlissner/doom-snippets"
-                 :files ("*.el" "*"))
+           :repo "hlissner/doom-snippets"
+           :files ("*.el" "*"))
   :pin nil)
 ;; FIXME latex math previews using katex and webkit
 (package! webkit-katex-render

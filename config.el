@@ -38,11 +38,17 @@
  ;; Don't replace the current window when splitting
  evil-split-window-below  t
  evil-vsplit-window-right t
+ ;; This way I use evil-snipe instead of evil-easymotion. I find
+ ;; searching-then-repeating-search-until-done faster then
+ ;; searching-then-typing-the-displayed-letter-pair
+ evil-snipe-scope 'visible
  ;; Wait for a bit longer before prompting me, lsp
  lsp-idle-delay 0.5
  lsp-ui-sideline-delay 0.5
  ;; js2 you too
  js2-idle-timer-delay 0.5
+ ;; Fix inconsistency with tab width in JSON files
+ json-reformat:indent-width 2
  ;; I have issues with variable-pitch fonts that appear larger than their
  ;; mixed-pitch brothers. Setting the font size would normally work, but it
  ;; doesn't with mixed-pitch-mode which I use. Fortunately, Source Sans Pro is
@@ -58,6 +64,9 @@
 (add-hook 'org-brain-vis-current-title-append-functions #'org-brain-entry-tags-string)
 ;; Colorify colors in X config mode
 (add-hook! 'conf-xdefaults-mode-hook (rainbow-mode 1))
+;; When I have something witty to say about mixed-pitch, this comment would be
+;; replaced
+(add-hook! 'markdown-mode-hook #'mixed-pitch-mode)
 
 (defconst prvt/raw-git-packages-dir
   (eval-when-compile

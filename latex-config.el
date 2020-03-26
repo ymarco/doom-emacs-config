@@ -30,9 +30,13 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
    ;; conviniance shorts
    ("‹" ("left"))
    ("›" ("right"))
+   ("¡{1}" ("mathclap"))
    ;; private macros
    ("ℝ" ("RR"))
    ("ℕ" ("NN"))
+   ("Nₑ" ("NE"))
+   ("Nₒ" ("NO"))
+
    ("ℚ" ("QQ"))
    ("ℤ" ("ZZ"))
    ("ℂ" ("CC"))
@@ -84,7 +88,7 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
 
 (font-lock-add-keywords
  'latex-mode
- `((,(rx (and "\\" (any "()[]"))) 0 'unimportant-latex-face prepend))
+ `((,(rx "\\" (any "()[]")) 0 'unimportant-latex-face prepend))
  'end)
 
 ;; Fontify anything that looks like a TeX macro, not limited to known commands

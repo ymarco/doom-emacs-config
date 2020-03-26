@@ -21,6 +21,7 @@ Some of that gets overridden, so we override it back on a hook."
   ;; still don't like them.)
   (setq preview-default-option-list '("displaymath" "floats" "graphics"
                                       "textmath" "footnotes"))
+  (add-hook 'TeX-mode-hook #'+hebrew-math-mode)
   (map! :map LaTeX-mode-map
         ;; have <SPC m c> compile with xetex. That way, previews are generated
         ;; with the fast pdlatex and actual big compiles with XeTeX which gives

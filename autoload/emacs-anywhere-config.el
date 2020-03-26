@@ -1,7 +1,7 @@
 ;;; ~/.config/doom/emacs-anywhere-config.el -*- lexical-binding: t; -*-
 
 (defun markdown-window-p (window-title)
-  "Judges from WINDOW-TITLE whether the current window likes markdown"
+  "Decide if a window titled WINDOW-TITLE would accept markdown text"
   (string-match-p (rx (or "Stack Exchange" "Stack Overflow"
                           "Pull Request" "Issue" "Discord"))
                   window-title))
@@ -23,9 +23,9 @@
     (when (bound-and-true-p centaur-tabs-mode)
       (centaur-tabs-local-mode t))))
 
+;;;###autoload
 (defun ea-popup-handler (_app-name window-title _x _y _w _h)
   "TODO"
-  (interactive)
   (set-frame-size (selected-frame) 80 12)
   ;; Position frame to where the mouse is
   (let* ((mousepos (split-string
@@ -56,5 +56,3 @@
 
   (evil-insert-state) ; start in insert
   (emacs-anywhere-mode 1))
-
-(add-hook 'ea-popup-hook 'ea-popup-handler)

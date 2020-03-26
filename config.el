@@ -200,6 +200,7 @@ hidden by the current-line highlighting done by hl-line"
 ;;   (pushnew! dired-omit-extensions
 ;;             ".bbl" ".blg" ".brf" ".log" ".out" ".synctex.gz"))
 
+(add-hook 'ea-popup-hook 'ea-popup-handler)
 
 ;;; Load other configs
 (load! "latex-config") ; this also loads cdlatex-config
@@ -207,7 +208,6 @@ hidden by the current-line highlighting done by hl-line"
 (load! "dvorak-config")
 (load! "org-config")
 (load! "imenu-list-config")
-(load! "emacs-anywhere-config")
 
 ;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))

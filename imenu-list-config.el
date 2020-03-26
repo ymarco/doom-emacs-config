@@ -34,20 +34,13 @@
    :n "gr"  #'imenu-list-refresh)
 
   (add-hook 'imenu-list-minor-mode-hook
-            #'+imenu-list-set-update-hooks)
-  :config
-  ;; (set-popup-rule! (concat "^ "(regexp-quote imenu-list-buffer-name) "$")
-  ;; :ignore t)
-  ;; (after! winner
-  ;;   (add-to-list 'winner-boring-buffers imenu-list-buffer-name))
-  )
+            #'+imenu-list-set-update-hooks))
 
 (defun +imenu-list-update-unless-popup ()
   "Call `imenu-list-update-safe' if not in a popup buffer."
   (unless (+popup-buffer-p)
     (imenu-list-update-safe)))
 
-;;;###autoload
 (defun +imenu-list-set-update-hooks ()
   "Set hooks to update imenu-list, instead of waiting for the idle timer."
   (if imenu-list-minor-mode

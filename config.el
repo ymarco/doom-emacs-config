@@ -196,9 +196,9 @@ hidden by the current-line highlighting done by hl-line"
  :nie "M-N"   (λ! (sp-backward-up-sexp) (sp-backward-down-sexp))) ; opposite of M-n
 
 
-(after! dired-x
-  (pushnew! dired-omit-extensions
-            ".bbl" ".blg" ".brf" ".log" ".out" ".synctex.gz"))
+;; (after! dired-x
+;;   (pushnew! dired-omit-extensions
+;;             ".bbl" ".blg" ".brf" ".log" ".out" ".synctex.gz"))
 
 
 ;;; Load other configs

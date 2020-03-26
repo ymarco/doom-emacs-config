@@ -1,18 +1,10 @@
 ;;; ~/.config/doom/hebrew-latex-config.el -*- lexical-binding: t; -*-
 ;; Notice that this contains no math config, that's on modules/lang/hebrew-math
 
-(defun prvt/hebrew-set-stuff ()
-  "Set Hebrew stuff, used in a hook.
-Some of that gets overridden, so we override it back on a hook."
-  (interactive)
-  ;; yas doesnt know how to indent in Hebrew LaTex,
-  ;; disable it
-  (setq yas-indent-line nil))
-
-
-(use-package! hebrew-mode
-  :init (setq hebrew-use-hebrew-spell-checking t)
-  :hook (LaTeX-mode . hebrew-mode))
+;; yas doesnt know how to indent in Hebrew LaTex,
+;; disable it
+(setq yas-indent-line nil)
+(setq hebrew-use-hebrew-spell-checking t)
 
 (use-package! tex
   :defer t

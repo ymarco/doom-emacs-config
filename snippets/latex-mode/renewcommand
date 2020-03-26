@@ -1,0 +1,4 @@
+# key: rcmd
+# name: renewcommand
+# --
+\\renewcommand{\\${1:command}}{$2}$0

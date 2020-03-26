@@ -1,10 +1,8 @@
 # -*- mode: snippet -*-
 # name: hebrew-enumerate
 # key: אנמ
-# condition: (doom-snippets-bolp)
-# expand-env: ((yas-after-exit-snippet-hook #'prvt/TeX-fold-current-line))
 # group: hebrew latex
 # --
-‏\begin{enumerate}
-`(or % "\\item ")`$0
-‏\end{enumerate}
+\begin{enumerate}
+  `(or % "\\item ")`$0
+\end{enumerate}

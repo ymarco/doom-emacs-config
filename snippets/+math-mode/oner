@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: oner
+# key: oner
+# --
+\oner{$1}$0

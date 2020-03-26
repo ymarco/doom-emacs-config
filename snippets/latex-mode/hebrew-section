@@ -4,4 +4,5 @@
 # group: hebrew latex
 # type: command
 # --
-(doom-snippets-expand :uuid "section")
+‏\section{${1:`%`}}
+$0

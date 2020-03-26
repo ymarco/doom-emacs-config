@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: maketitle
+# key: mkt
+# --
+\maketitle
+$0

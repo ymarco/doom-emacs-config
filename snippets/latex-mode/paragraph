@@ -2,4 +2,4 @@
 # name: paragraph
 # key: par
 # --
-\paragraph{$1} `%`$0
+\paragraph{${1:`%`}} $0

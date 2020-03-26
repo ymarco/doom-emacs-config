@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: {color{}}
+# key: colo
+# --
+{\color{$1}`%`$0}

@@ -1,0 +1,47 @@
+# -*- mode: snippet -*-
+# group: file templates
+# expand-env: ((snippet-env (prvt/get-latex-template-env "../config.json" "config.json")))
+# --
+\documentclass{article}
+
+`
+(pcase (plist-get snippet-env :language)
+  ("english"
+   (concat "\\usepackage[a4paper,margin=1.3in]{geometry} % margins setup
+\\usepackage[colorlinks]{hyperref}
+% fonts!
+"
+   (format "\\usepackage%s"
+     (yas-choose-value
+     "{charter}" "[default]{sourcesanspro}" "noto"))
+"
+% dont mind if I do
+\\usepackage[activate={true,nocompatibility},final,tracking,kerning,spacing]{microtype}"
+  (when (plist-get snippet-env :english-includes-hebrew)
+"
+% hebrew as second language
+\\usepackage{ucs}
+\\usepackage[utf8x]{inputenc}
+\\usepackage[hebrew,english]{babel}
+")))
+  ("hebrew"
+   "\\usepackage{preamble}"))`
+`
+(when (equal (plist-get snippet-env :type) "hw")
+  (pcase (plist-get snippet-env :language)
+    ("hebrew"
+     "\\ifxetex  \\renewcommand\\thesubsection{(\\alph{subsection})} \\fi
+\\ifPDFTeX \\renewcommand\\thesubsection{)\\alph{subsection}(} \\fi")
+    ("english"
+     "\\renewcommand\\thesubsection{(\\alph{subsection})}")
+     ))`
+
+\title{${1:`(plist-get snippet-env :title)`}}
+\author{`(plist-get snippet-env :author)`}
+
+\begin{document}
+\maketitle
+
+$0
+
+\end{document}

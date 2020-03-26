@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: lim
+# key: lim
+# --
+\lim_{${1:x} \to ${2:\infty}{3:$(when (> (length yas-text) 0)
+"^")}$3} $0

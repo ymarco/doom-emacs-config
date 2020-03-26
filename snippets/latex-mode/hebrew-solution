@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: hebrew-solution
+# key: פתר
+# --
+‏\begin{solution}
+`%`$0
+‏\end{solution}

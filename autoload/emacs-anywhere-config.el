@@ -26,14 +26,14 @@
 ;;;###autoload
 (defun ea-popup-handler (_app-name window-title _x _y _w _h)
   "TODO"
-  (set-frame-size (selected-frame) 80 12)
-  ;; Position frame to where the mouse is
-  (let* ((mousepos (split-string
-                    (shell-command-to-string
-                     "xdotool getmouselocation | sed -E \"s/ screen:0 window:[^ ]*|x:|y://g\"")))
-         (mouse-x (- (string-to-number (nth 0 mousepos)) 100))
-         (mouse-y (- (string-to-number (nth 1 mousepos)) 50)))
-    (set-frame-position (selected-frame) mouse-x mouse-y))
+  (let* ((gwidth (display-pixel-width))
+         (gheight (display-pixel-height))
+         (width (/ gwidth 3))
+         (height (/ gheight 4)))
+    (set-frame-size (selected-frame) width height t)
+    ;; Center frame in droplike fasion
+    (set-frame-position (selected-frame) (/ (- gwidth width) 2) 50))
+  (push '((undecorated . t)) default-frame-alist)
 
   (set-frame-name (concat "Quick Edit ∷ " ea-app-name " — "
                           (truncate-string-to-width
@@ -42,7 +42,6 @@
                                                (format "-[A-Za-z0-9 ]*%s" ea-app-name))
                             "[\s-]+" "[\s-]+")
                            45 nil nil "…")))
-  (message "window-title: %s" window-title)
 
   ;; Set major mode
   (cond

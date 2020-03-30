@@ -183,6 +183,15 @@ it start a new line of its own."
 
 ;; See autoload/emacs-anywhere-config
 (add-hook 'ea-popup-hook 'ea-popup-handler)
+;; See autoload/latex-template
+(set-file-template!
+  "/.*\\.tex$"
+  :mode 'latex-mode
+  ;; When we let file-templates trigger the snippet it errors out, so I'm
+  ;; triggering manually here
+  :trigger (lambda ()
+             (evil-initialize-state 'insert) ; start in insert
+             (doom-snippets-expand :uuid "__")))
 
 ;;; Load other configs
 (load! "latex-config") ; this also loads cdlatex-config

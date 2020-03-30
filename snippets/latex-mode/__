@@ -41,7 +41,9 @@
 
 \begin{document}
 \maketitle
-
+`
+(when (equal (plist-get snippet-env :type) "hw")
+  "\\section{}")`
 $0
 
 \end{document}

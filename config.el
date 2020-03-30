@@ -1,6 +1,6 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
-;; measure time!
+;; measure time! see end of file for explanation
 (setq t0 (current-time))
 
 ;;; Misc package options
@@ -188,7 +188,7 @@ hidden by the current-line highlighting done by hl-line"
  :v   "C-/"   #'comment-or-uncomment-region
  :nie "C-M-l" #'+format/buffer
  (:after lsp :map lsp-mode-map
-   "M-RET"    #'lsp-execute-code-action) ; like in IntelliJ
+   "M-RET"    #'lsp-execute-code-action)
  ;; Smartparens Navigation
  :nie "M-u"   #'sp-up-sexp ; exit parenthesis
  :nie "M-U"   #'sp-backward-up-sexp ; exit parenthesis backward
@@ -200,6 +200,7 @@ hidden by the current-line highlighting done by hl-line"
 ;;   (pushnew! dired-omit-extensions
 ;;             ".bbl" ".blg" ".brf" ".log" ".out" ".synctex.gz"))
 
+;; See autoload/emacs-anywhere-config
 (add-hook 'ea-popup-hook 'ea-popup-handler)
 
 ;;; Load other configs

@@ -35,6 +35,7 @@ that input method."
     (add-hook! 'evil-insert-state-entry-hook :local
                #'input-method-heuristic))
   (map! :map LaTeX-mode-map
+        "\"" (lambda! (insert "\""))
         ;; have <SPC m c> compile with xetex. That way, previews are generated
         ;; with the fast pdlatex and actual big compiles with XeTeX which gives
         ;; better output (it can have hyperref and stuff).

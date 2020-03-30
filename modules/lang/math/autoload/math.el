@@ -9,7 +9,7 @@
   "Function to check if point is inside a math env")
 
 (defun +texmathp ()
-  "TODO widen bufer then texmathp"
+  "TODO widen buffer then texmathp"
   ())
 
 (defvar +math-mode-map
@@ -32,9 +32,9 @@
   "Minor mode for LaTeX-like math writing."
   :keymap +math-mode-map
   (setq +math-mathp-fn (pcase major-mode
-                        ('latex-mode #'texmathp)
-                        ;; No reason for me to be in a LaTeX fragment unless mathing
-                        ('org-mode   #'org-inside-LaTeX-fragment-p)))
+                         ('latex-mode #'texmathp)
+                         ;; No reason for me to be in a LaTeX fragment unless mathing
+                         ('org-mode   #'org-inside-LaTeX-fragment-p)))
   (setq +math-preview-fn (pcase major-mode
-                          ('latex-mode #'preview-at-point)
-                          ('org-mode   #'org-latex-preview))))
+                           ('latex-mode #'preview-at-point)
+                           ('org-mode   #'org-latex-preview))))

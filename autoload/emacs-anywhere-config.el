@@ -50,8 +50,14 @@
    (t
     (org-mode))) ; default major mode
 
-  ;; (when-let ((selection (gui-get-selection 'PRIMARY)))
-  ;; (insert selection))
+  (when-let ((selection (gui-get-selection 'PRIMARY)))
+    (insert selection))
 
-  (evil-insert-state) ; start in insert
+  (set-transient-map (let ((keymap (make-sparse-keymap)))
+                       (define-key keymap (kbd "DEL")   (lambda! (delete-region (point-min) (point-max))))
+                       (define-key keymap (kbd "C-SPC") (lambda! (delete-region (point-min) (point-max))))
+                       keymap))
+  (message "Press DEL to clear")
+
+  (evil-initialize-state 'insert) ; start in insert
   (emacs-anywhere-mode 1))

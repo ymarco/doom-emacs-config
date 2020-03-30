@@ -172,7 +172,11 @@ typically insert macros."
            ;; Completion is 100% annoying me here, adds tons of lag and gives
            ;; terrible suggestions
            ;; TODO Debug those company backends, maybe fix completion with texlab
-           (company-mode -1))
+           (company-mode -1)
+           ;; Flycheck with both chktex and lacheck both just bother me with
+           ;; worthless advice all the time. when my HW doesn't compile I'll re-
+           ;; enable them.
+           (flycheck-mode -1))
 
 ;; mixed-pitch is pretty
 (add-hook 'TeX-mode-hook #'mixed-pitch-mode)

@@ -20,7 +20,7 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
 ;;; Aesthetics
 (setq
  TeX-fold-math-spec-list
- '( ;; missing symbols
+ `( ;; missing symbols
    ("≤" ("le"))
    ("≥" ("ge"))
    ("≠" ("ne"))
@@ -29,6 +29,8 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
    ("‹" ("left"))
    ("›" ("right"))
    ("¡{1}" ("mathclap"))
+   ("👻{1}" ("phantom"))
+   ("⟋{1}" ("cancel"))
    ;; private macros
    ("ℝ" ("RR"))
    ("ℕ" ("NN"))
@@ -52,6 +54,15 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
    ("⌈{1}⌉" ("ceil"))
    ("‖{1}‖" ("norm"))
    ("❬{1}❭" ("anb")) ; explititly using narrower unicode angle brackets
+
+   ;; fancification
+   ("{1}" ("mathrm"))
+   (,(lambda (word) (string-offset-roman-chars 119743 word)) ("mathbf"))
+   (,(lambda (word) (string-offset-roman-chars 119951 word)) ("mathcal"))
+   (,(lambda (word) (string-offset-roman-chars 120003 word)) ("mathfrak"))
+   (,(lambda (word) (string-offset-roman-chars 120055 word)) ("mathbb"))
+   (,(lambda (word) (string-offset-roman-chars 120159 word)) ("mathsf"))
+   (,(lambda (word) (string-offset-roman-chars 120367 word)) ("mathtt"))
    )
  TeX-fold-macro-spec-list ; thanks to @tecosaur
  '( ;; as the defaults
@@ -76,6 +87,12 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
    ("¶ {1}" ("paragraph" "paragraph*"))
    ("¶¶ {1}" ("subparagraph" "subparagraph*"))
    ))
+
+;; Kindly borrowed from @tecosaur
+(defun string-offset-roman-chars (offset word)
+  "Shift the codepoint of each charachter in WORD by OFFSET with an extra -6 shift if the letter is lowercase"
+  (apply 'string
+         (mapcar (lambda (c) (+ (if (>= c 97) (- c 6) c) offset)) word)))
 
 ;; Making \( \) less visible
 (defface unimportant-latex-face

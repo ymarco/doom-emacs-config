@@ -162,12 +162,13 @@ typically insert macros."
                       'TeX-fold-folded-face :family var-pitch :height var-height))))))
 
 ;;; Keybinds
+;; Bigger compiled math cause it's pretty
+(after! preview
+  (setq-default preview-scale 1.8)
+  (setq preview-scale 1.8))
 
 (add-hook! 'TeX-mode-hook
            ;;(hl-todo-mode) ; TODO
-           ;; Bigger compiled math cause it's pretty
-           (setq-default preview-scale 1.8)
-           (setq preview-scale 1.8)
            ;; Completion is 100% annoying me here, adds tons of lag and gives
            ;; terrible suggestions
            ;; TODO Debug those company backends, maybe fix completion with texlab

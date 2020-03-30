@@ -209,6 +209,9 @@ hidden by the current-line highlighting done by hl-line"
 (load! "dvorak-config")
 (load! "org-config")
 (load! "imenu-list-config")
+(load! "splash")
+
+(setq initial-frame-alist '((undecorated . t)))
 
 ;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))

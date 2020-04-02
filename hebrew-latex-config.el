@@ -9,7 +9,6 @@
 (defun input-method-heuristic ()
   "Politely try to figure out if I would probably want this or
 that input method."
-  (message "aoeu")
   (save-excursion
     (cond
      ;; Easiest search: after a latin word or a backslash
@@ -34,6 +33,7 @@ that input method."
   (add-hook! 'TeX-mode-hook
     (add-hook! 'evil-insert-state-entry-hook :local
                #'input-method-heuristic))
+  :config
   (map! :map LaTeX-mode-map
         "\"" (lambda! (insert "\""))
         ;; have <SPC m c> compile with xetex. That way, previews are generated

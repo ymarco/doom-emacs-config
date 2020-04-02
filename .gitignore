@@ -4,3 +4,4 @@
 tmp/
 
 flycheck_*.elc
+.yas-compiled-snippets.el

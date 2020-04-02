@@ -46,7 +46,10 @@
   ;; Set major mode
   (cond
    ((markdown-window-p window-title)
-    (gfm-mode))
+    (gfm-mode)
+    ;; Discord and github don't like newlines
+    (auto-fill-mode -1))
+    (setq truncate-lines nil)
    (t
     (org-mode))) ; default major mode
 

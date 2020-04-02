@@ -1,0 +1,8 @@
+# key: ליס
+# name: hebrew-listing
+# --
+\begin{english}
+\begin{lstlisting}
+$0
+\end{lstlisting}
+\end{english}

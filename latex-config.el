@@ -127,41 +127,6 @@ When set to non-nil, this adds a few hooks/advices to fold stuff.")
       ;; This should stand out from hl-line
       :background ,(doom-blend (doom-color 'base4) (doom-color 'bg) 0.3))))
 
-(add-hook! 'TeX-mode-hook
-           ;; (hl-todo-mode) ; TODO
-           (setq preview-scale 1.8)) ; bigger compiled math cause it's beautiful
-
-;;; Folding
-
-;; Fold after cdlatex and snippets.
-(when +latex-use-TeX-fold
-  (defadvice! +TeX-fold-line-a (&rest _)
-    "Advice to auto-fold LaTeX macros after functions that
-typically insert macros."
-    :after  #'cdlatex-math-symbol
-    :after  #'cdlatex-math-modify
-    (TeX-fold-region (line-beginning-position) (line-end-position)))
-
-  (defun +TeX-fold-add-snippet-hook ()
-    "local after-snippet hook for folding, but only in TeX buffers"
-    (add-hook! 'yas-after-exit-snippet-hook :local
-      (TeX-fold-region yas-snippet-beg yas-snippet-end)))
-
-  (add-hook! 'LaTeX-mode-hook
-             ;; FOLD MASTER
-             #'TeX-fold-buffer
-             #'+TeX-fold-add-snippet-hook)
-  ;; Fix folded things always getting fixed pitch when using mixed pitch
-  ;; Its your fault @tecosaur
-  (add-hook! 'mixed-pitch-mode-hook
-    (when mixed-pitch-mode
-      (let ((var-pitch (face-attribute 'variable-pitch :family))
-            (var-height (face-attribute 'variable-pitch :height)))
-        (add-to-list 'mixed-pitch-fixed-cookie
-                     (face-remap-add-relative
-                      'TeX-fold-folded-face :family var-pitch :height var-height))))))
-
-;;; Keybinds
 ;; Bigger compiled math cause it's pretty
 (after! preview
   (setq-default preview-scale 1.8)
@@ -185,19 +150,14 @@ typically insert macros."
 
 ;;; Keybinds
 
-(after! tex
-  (map!
-   :map LaTeX-mode-map
-   :ei [C-return] #'LaTeX-insert-item
+(map!
+ :after tex :map LaTeX-mode-map
+ :ei [C-return] #'LaTeX-insert-item
 
-   ;; normal stuff here
-   :localleader
-   :desc "View" "v" #'TeX-view
-   (:when +latex-use-TeX-fold
-     :desc "Fold paragraph"     "f"   #'TeX-fold-paragraph
-     :desc "Unfold paragraph"   "C-f" #'TeX-fold-clearout-paragraph
-     :desc "Fold buffer"        "F"   #'TeX-fold-buffer
-     :desc "Unfold buffer"      "C-F" #'TeX-fold-clearout-buffer)))
+ ;; normal stuff here
+ :localleader
+ :desc "View" "v" #'TeX-view)
+
 (setq
  cdlatex-math-symbol-prefix ?\;
  cdlatex-math-symbol-alist

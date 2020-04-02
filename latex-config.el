@@ -2,9 +2,6 @@
 ;; Notice that this contains no math config, that's on modules/lang/math
 
 ;;; Misc config
-(defvar +latex-use-TeX-fold t
-  "Use TeX fold in TeX-mode.
-When set to non-nil, this adds a few hooks/advices to fold stuff.")
 
 (setq
  ;; Dont auto-insert braces on _^

@@ -58,10 +58,11 @@
  doom-variable-pitch-font (font-spec :family "Source Sans Pro")
  projectile-project-search-path '("~/projects")
  abbrev-file-name (concat doom-private-dir "abbrevs.el")
- ;; I hate these vertical scrolls
- truncate-lines nil)
+ )
 
-
+;; I hate these vertical scrolls
+(setq truncate-lines nil)
+(setq-default truncate-lines nil)
 ;; Show tags in org-brain
 (add-hook 'org-brain-vis-current-title-append-functions #'org-brain-entry-tags-string)
 ;; Colorify colors in X config mode

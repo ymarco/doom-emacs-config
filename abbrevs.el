@@ -1,7 +1,10 @@
 ;;-*-coding: utf-8;-*-
+
+(define-abbrev-table 'latex-mode-abbrev-table
+  '(("קוביה" "קובייה" nil :count 1)))
+
 (define-abbrev-table 'org-mode-abbrev-table
-  '(
-    ("html" "HTML" nil :count 0)
+  '(("html" "HTML" nil :count 0)
     ("katex" "KaTeX" nil :count 0)
     ("latex" "LaTeX" nil :count 0)
     ("mathjax" "MathJax" nil :count 0)
@@ -15,4 +18,3 @@
     ("xel" "=XeLaTeX=" nil :count 0)
     ("xetex" "=XeTeX=" nil :count 0)
    ))
-

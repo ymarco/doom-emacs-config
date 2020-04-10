@@ -10,14 +10,10 @@
 ;; sideline buffer navigator powered by imenu
 (package! imenu-list :pin "46008738f8")
 ;; unpin doom-snippets, living on the edge here
-(package! doom-snippets
-  :recipe (:host github
-           :repo "hlissner/doom-snippets"
-           :files ("*.el" "*"))
-  :pin nil)
+(unpin! doom-snippets)
 ;; FIXME latex math previews using katex and webkit
-(package! webkit-katex-render
-  :recipe (:local-repo "~/projects/emacs-webkit-katex-render"))
+;; (package! webkit-katex-render
+;;   :recipe (:local-repo "~/projects/emacs-webkit-katex-render"))
 ;; nicer sxhkd config file editing
 (package! sxhkd-mode
   :recipe (:local-repo "~/projects/sxhkd-mode"))
@@ -31,5 +27,6 @@
 (package! pick-and-highlight
   :recipe (:local-repo "~/projects/emacs-pick-and-highlight"))
 ;; WIP org export figures written in latex in both latex and html backend
-(package! org-tex-fig
-  :recipe (:local-repo "~/projects/org-tex-fig"))
+;; (package! org-tex-fig
+;;   :recipe (:local-repo "~/projects/org-tex-fig"))
+(package! vimgolf :pin "f565447ed2")

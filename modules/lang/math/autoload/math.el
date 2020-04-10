@@ -1,7 +1,7 @@
 ;;; +math/autoload.el -*- lexical-binding: t; -*-
 
 (defvar +math-preview-fn (lambda ()
-                          (message "Math: no preview function selected"))
+                           (message "Math: no preview function selected"))
   "Function to call to preview math")
 (defvar +math-mathp-fn (lambda ()
                          (message "Math: no mathp functcion selected")
@@ -34,7 +34,7 @@
   (setq +math-mathp-fn (pcase major-mode
                          ('latex-mode #'texmathp)
                          ;; No reason for me to be in a LaTeX fragment unless mathing
-                         ('org-mode   #'org-inside-LaTeX-fragment-p)))
-  (setq +math-preview-fn (pcase major-mode
+                         ('org-mode   #'org-inside-LaTeX-fragment-p))
+        +math-preview-fn (pcase major-mode
                            ('latex-mode #'preview-at-point)
                            ('org-mode   #'org-latex-preview))))

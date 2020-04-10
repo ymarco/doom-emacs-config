@@ -1,5 +1,6 @@
 ;;; ~/.config/doom/hebrew-latex-config.el -*- lexical-binding: t; -*-
-;; Notice that this contains no math config, that's on modules/lang/hebrew-math
+;; Notice that this contains no math config, that's on
+;; modules/lang/math/autoload/+hebrew
 
 ;; yas doesnt know how to indent in Hebrew LaTex,
 ;; disable it
@@ -11,14 +12,14 @@
 that input method."
   (save-excursion
     (cond
-     ;; Easiest search: after a latin word or a backslash
+     ;; After a latin word or a backslash.
      ((re-search-backward "[A-Za-z\\\\]" (- (point) 1) t)
       (hebrew-set-regular-input-method))
-     ;; After end of math, or Hebrew things
+     ;; Right after end of math, or after Hebrew letters
      ((re-search-backward "\\\\)\\|\\\\]\\|[א-ת]"
                           (- (point) 3) t)
       (hebrew-set-hebrew-input-method))
-     ;; Last search, as it's the heaviest
+     ;; Inside math. Last search, as it's the heaviest
      ((texmathp)
       (hebrew-set-regular-input-method)))))
 
@@ -36,7 +37,7 @@ that input method."
   :config
   (map! :map LaTeX-mode-map
         "\"" (lambda! (insert "\""))
-        ;; have <SPC m c> compile with xetex. That way, previews are generated
+        ;; Have SPC m c compile with xetex. That way, previews are generated
         ;; with the fast pdlatex and actual big compiles with XeTeX which gives
         ;; better output (it can have hyperref and stuff).
         :localleader

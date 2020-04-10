@@ -9,7 +9,7 @@
  ;; Just save, dont ask me
  TeX-save-query nil
  ;; Just cache, dont ask me
- preview-auto-cache-preamble t
+ preview-auto-cache-preamble nil
  ;; Don't raise/lower super/subscripts
  font-latex-fontify-script nil)
 
@@ -142,7 +142,7 @@
 
 ;; mixed-pitch is pretty
 (add-hook 'TeX-mode-hook #'mixed-pitch-mode)
-;; WIP mine and @itai33 plugin
+;; WIP mine and @itai33's plugin
 (add-hook 'TeX-mode-hook #'evil-tex-mode)
 
 ;;; Keybinds
@@ -175,3 +175,6 @@
    ;;key  mathcmd   textcmd  type  rmdot(?)  it(?)
    (?/    "\\oner"  nil      t     nil       nil)
    (?h    "\\half"  nil      t     nil       nil)))
+
+(set-popup-rule! "^\\*TeX \\(Help\\|errors\\)"
+  :size 0.3 :ttl nil)

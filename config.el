@@ -5,6 +5,8 @@
 
 ;;; Misc package options
 (setq
+ gc-cons-threshold 67108864 ; 64mb
+ gc-cons-percentage 0.2
  ;; User config, used for templates mostly
  user-full-name "Yoav Marco"
  user-mail-address "yoavm448@gmail.com"
@@ -55,9 +57,11 @@
  ;; just in the perfect size for ubuntu-mono!
  ;; EDIT: you can do that by setting 'height property, I've read the code. But
  ;; source sans pro is so pretty!
- doom-variable-pitch-font (font-spec :family "Source Sans Pro")
+ doom-serif-font (font-spec :family "Source Sans Pro")
+ doom-variable-pitch-font (font-spec :family "Bitstream Charter")
  projectile-project-search-path '("~/projects")
  abbrev-file-name (concat doom-private-dir "abbrevs.el")
+ org-roam-directory "~/org/roam/"
  )
 
 ;; I hate these vertical scrolls
@@ -121,14 +125,6 @@ it start a new line of its own."
 ;; ALWAYS expand abbrevs
 (setq evil-want-abbrev-expand-on-insert-exit t)
 
-
-;; I don't know what breaks it but sometimes RET gets bounded to some other
-;; stuff
-(after! evil
-  (map! :map org-mode-map
-        :mn "RET" #'+org/dwim-at-point ))
-
-
 (use-package! sxhkd-mode
   ;; Doom auto-configures a mode for sxhkd, using a slightly different key here
   ;; overrides it
@@ -150,6 +146,8 @@ it start a new line of its own."
   :init
   (setq nov-save-place-file (concat doom-etc-dir "nov-places")))
 
+(setq-hook! 'emacs-lisp-mode-hook
+  tab-width 4)
 
 ;;; Keybinds
 
@@ -173,16 +171,38 @@ it start a new line of its own."
  :nie "C-M-l" #'+format/buffer
  (:after lsp :map lsp-mode-map
    "M-RET"    #'lsp-execute-code-action)
+ ;; Old TAB behavior that was removed in b8a3cad295
+ :n [tab] (general-predicate-dispatch nil
+            (and (featurep! :editor fold)
+                 (save-excursion (end-of-line) (invisible-p (point))))
+            #'+fold/toggle
+            (fboundp 'evil-jump-item)
+            #'evil-jump-item)
+ :v [tab] (general-predicate-dispatch nil
+            (and (bound-and-true-p yas-minor-mode)
+                 (or (eq evil-visual-selection 'line)
+                     (not (memq (char-after) (list ?\( ?\[ ?\{ ?\} ?\] ?\))))))
+            #'yas-insert-snippet
+            (fboundp 'evil-jump-item)
+            #'evil-jump-item)
  ;; Smartparens Navigation
  :nie "M-u"   #'sp-up-sexp ; exit parenthesis
  :nie "M-U"   #'sp-backward-up-sexp ; exit parenthesis backward
  :nie "M-n"   (λ! (sp-up-sexp) (sp-down-sexp)) ; next parentheses on same level
  :nie "M-N"   (λ! (sp-backward-up-sexp) (sp-backward-down-sexp))) ; opposite of M-n
 
+;; Company, don't block my snippet expansion
+(define-key! company-active-map
+  "TAB" nil
+  [tab] nil)
 
+;; Don't show latex junk files in dired
 (after! dired-x
   (pushnew! dired-omit-extensions
             ".bbl" ".blg" ".brf" ".log" ".out" ".synctex.gz"))
+
+(custom-set-faces!
+  '(font-lock-preprocessor-face :foreground nil))
 
 ;; See autoload/emacs-anywhere-config
 (add-hook 'ea-popup-hook 'ea-popup-handler)
@@ -196,8 +216,10 @@ it start a new line of its own."
              (evil-initialize-state 'insert) ; start in insert
              (doom-snippets-expand :uuid "__")))
 
+;; (set-fontset-font t 'unicode (font-spec :family "Font Awesome"))
+
 ;;; Load other configs
-(load! "latex-config") ; this also loads cdlatex-config
+(load! "latex-config")
 (load! "hebrew-latex-config")
 (load! "dvorak-config")
 (load! "org-config")

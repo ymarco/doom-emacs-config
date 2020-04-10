@@ -17,6 +17,9 @@
 (add-hook! 'org-mode-hook
            #'+org-pretty-mode
            #'mixed-pitch-mode)
+
+(add-hook! 'org-mode-hook (company-mode -1))
+
 (setq org-ellipsis " ▾")
 
 ;; Native LaTeX highlighting is slower but WAY prettier
@@ -85,10 +88,13 @@
  pdfsubject={%d},
  pdfcreator={%c},
  pdflang={%L},
- colorlinks=true
+ colorlinks=true,
+ linkcolor={cyan!35!black}
 }"
    ;; page break after TOC
    org-latex-toc-command "\\tableofcontents\n\\pagebreak\n\n"
+   ;; org-latex-minted-options '(("bgcolor" "{white!98!black}"))
+   ;; org-latex-minted-options '(("bgcolor" "\\color{white!96!black}"))
    ;; In case I configured hyperref in a separate latex preamble
    ;;(setq org-latex-hyperref-template "")
    ))

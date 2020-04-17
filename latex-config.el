@@ -91,6 +91,22 @@
   (apply 'string
          (mapcar (lambda (c) (+ (if (>= c 97) (- c 6) c) offset)) word)))
 
+(defun prvt/auto-number-subscript ()
+  (interactive)
+  (if (and
+       ;; Before is some indexable char
+       (or (<= ?a (char-before) ?z)
+           (<= ?A (char-before) ?Z))
+       ;; Not a macro
+       (not (save-excursion
+              (and (search-backward "\\" (line-beginning-position) t)
+                   (looking-at "\\\\[a-zA-Z0-9*@]+")
+                   (<= (match-beginning 0) (point) (match-end 0)))))
+       ;; Inside math
+       (texmathp))
+      (insert "_" (this-command-keys))
+    (insert (this-command-keys))))
+
 ;; Making \( \) less visible
 (defface unimportant-latex-face
   '((t
@@ -149,6 +165,15 @@
 
 (map!
  :after tex :map LaTeX-mode-map
+ :i "1" #'prvt/auto-number-subscript
+ :i "2" #'prvt/auto-number-subscript
+ :i "3" #'prvt/auto-number-subscript
+ :i "4" #'prvt/auto-number-subscript
+ :i "5" #'prvt/auto-number-subscript
+ :i "6" #'prvt/auto-number-subscript
+ :i "7" #'prvt/auto-number-subscript
+ :i "8" #'prvt/auto-number-subscript
+ :i "9" #'prvt/auto-number-subscript
  :ei [C-return] #'LaTeX-insert-item
 
  ;; normal stuff here

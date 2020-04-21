@@ -23,10 +23,10 @@
 ;; WIP evil enhancements for latex buffers
 (package! evil-tex
   :recipe (:local-repo "~/projects/evil-tex"))
-;; highlight areas for screenshots
+;; WIP auto snippets for latex
 (package! auto-latex-snippets
   :recipe (:local-repo "~/projects/Auto-LaTeX-Snippets"))
-
+;; highlight areas for screenshots
 (package! pick-and-highlight
   :recipe (:local-repo "~/projects/emacs-pick-and-highlight"))
 ;; WIP org export figures written in latex in both latex and html backend

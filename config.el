@@ -179,9 +179,9 @@ it start a new line of its own."
  ;; To replace the lost r
  :n "R" #'evil-replace
  ;; Things I picked up from JetBrains IDEs
- :eni "C-/"   #'comment-line
+ :ni "C-/"   #'comment-line
  :v   "C-/"   #'comment-or-uncomment-region
- :nie "C-M-l" #'+format/buffer
+ :ni "C-M-l" #'+format/buffer
  (:after lsp :map lsp-mode-map
    "M-RET"    #'lsp-execute-code-action)
  ;; Old TAB behavior that was removed in b8a3cad295
@@ -199,10 +199,10 @@ it start a new line of its own."
             (fboundp 'evil-jump-item)
             #'evil-jump-item)
  ;; Smartparens Navigation
- :nie "M-u"   #'sp-up-sexp ; exit parenthesis
- :nie "M-U"   #'sp-backward-up-sexp ; exit parenthesis backward
- :nie "M-n"   (λ! (sp-up-sexp) (sp-down-sexp)) ; next parentheses on same level
- :nie "M-N"   (λ! (sp-backward-up-sexp) (sp-backward-down-sexp))) ; opposite of M-n
+ :ni "M-u"   #'sp-up-sexp ; exit parenthesis
+ :ni "M-U"   #'sp-backward-up-sexp ; exit parenthesis backward
+ :ni "M-n"   (λ! (sp-up-sexp) (sp-down-sexp)) ; next parentheses on same level
+ :ni "M-N"   (λ! (sp-backward-up-sexp) (sp-backward-down-sexp))) ; opposite of M-n
 
 ;; Company, don't block my snippet expansion
 (define-key! company-active-map

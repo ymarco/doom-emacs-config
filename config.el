@@ -57,12 +57,17 @@
  ;; just in the perfect size for ubuntu-mono!
  ;; EDIT: you can do that by setting 'height property, I've read the code. But
  ;; source sans pro is so pretty!
- doom-serif-font (font-spec :family "Source Sans Pro")
- doom-variable-pitch-font (font-spec :family "Bitstream Charter")
+ doom-variable-pitch-font (font-spec :family "Source Sans Pro")
+ doom-serif-font (font-spec :family "Bitstream Charter")
  projectile-project-search-path '("~/projects")
  abbrev-file-name (concat doom-private-dir "abbrevs.el")
  org-roam-directory "~/org/roam/"
  )
+
+
+;; Don't blink the cursor, it's too distracting.
+(blink-cursor-mode -1)
+(setq visible-cursor nil)
 
 ;; I hate these vertical scrolls
 (setq truncate-lines nil)

@@ -142,8 +142,13 @@
            ;; enable them.
            (flycheck-mode -1))
 
-;; mixed-pitch is pretty
-(add-hook 'TeX-mode-hook #'mixed-pitch-mode)
+(add-hook! 'TeX-mode-hook
+           ;; mixed-pitch is pretty
+           #'mixed-pitch-mode
+           ;; WIP mine and @tecosaur's plugin
+           #'auto-latex-snippets-mode)
+
+
 ;; WIP mine and @itai33's plugin
 (use-package! evil-tex
   :hook (LaTeX-mode . evil-tex-mode)
@@ -186,5 +191,5 @@
    (?/    "\\oner"  nil      t     nil       nil)
    (?h    "\\half"  nil      t     nil       nil)))
 
-(set-popup-rule! "^\\*TeX \\(Help\\|errors\\)"
-  :size 0.3 :ttl nil)
+(set-popup-rule! "^\\*TeX \\(?:Help\\|errors\\)"
+  :size 0.3 :select t :ttl nil)

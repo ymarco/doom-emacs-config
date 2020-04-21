@@ -23,6 +23,9 @@
  dired-dwim-target                    t
  ;; I don't need it to tell me its UTF-8
  doom-modeline-buffer-encoding nil
+ +modeline-encoding nil ; same for (modeline +light)
+ ;; No line numbers. The ones on the modeline are enough for me.
+ display-line-numbers-type nil
  ;; The unsaved icon made me notice and save the buffer on every stop
  doom-modeline-buffer-state-icon nil
  ;; Nested snippet expansion

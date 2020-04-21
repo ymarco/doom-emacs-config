@@ -240,6 +240,17 @@ it start a new line of its own."
   (let ((confirm-kill-emacs nil))
     (apply orig-fn args)))
 
+;; No window borders (doesn't work in daemon)
+(setq initial-frame-alist '((undecorated . t)))
+
+;; Set fringes for solaire, experimental in emacs27
+(after! solaire-mode
+  (setq solaire-mode-remap-fringe nil)
+  (add-to-list 'solaire-mode-remap-alist '((fringe solaire-fringe-face) . t))
+
+  (remove-hook 'focus-in-hook #'solaire-mode-reset)
+  (remove-hook! '(doom-load-theme-hook doom-reload-hook) #'solaire-mode-reset))
+
 ;;; Load other configs
 (load! "latex-config")
 (load! "hebrew-latex-config")

@@ -2,7 +2,6 @@
 # name: hebrew-section
 # key: סק
 # group: hebrew latex
-# type: command
 # --
 ‏\section{${1:`%`}}
 $0

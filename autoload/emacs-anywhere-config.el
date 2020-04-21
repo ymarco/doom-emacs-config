@@ -54,7 +54,8 @@
     (org-mode))) ; default major mode
 
   (when-let ((selection (gui-get-selection 'PRIMARY)))
-    (insert selection))
+    (insert selection)
+    (flyspell-buffer))
 
   (set-transient-map (let ((keymap (make-sparse-keymap)))
                        (define-key keymap (kbd "DEL")   (lambda! (delete-region (point-min) (point-max))))

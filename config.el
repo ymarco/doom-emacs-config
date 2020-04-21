@@ -234,6 +234,12 @@ it start a new line of its own."
 
 ;; (set-fontset-font t 'unicode (font-spec :family "Font Awesome"))
 
+(defadvice! prvt/dont-confirm-kill-on-restart-a (orig-fn &rest args)
+  "An advice to make emacs not ask for killing confirmration when using SPC q r."
+  :around #'doom/restart-and-restore
+  (let ((confirm-kill-emacs nil))
+    (apply orig-fn args)))
+
 ;;; Load other configs
 (load! "latex-config")
 (load! "hebrew-latex-config")

@@ -145,7 +145,15 @@
 ;; mixed-pitch is pretty
 (add-hook 'TeX-mode-hook #'mixed-pitch-mode)
 ;; WIP mine and @itai33's plugin
-(add-hook 'TeX-mode-hook #'evil-tex-mode)
+(use-package! evil-tex
+  :hook (LaTeX-mode . evil-tex-mode)
+  :init
+  (setq evil-tex-toggle-override-m nil)
+  :config
+  (defvar +evil-tex-quote-functions `(lambda (count key) (evil-goto-mark-line key)))
+  (evil-define-key 'normal evil-tex-mode-map "'"
+    (evil-tex-dispatch-single-key ?t #'evil-tex-read-and-execute-toggle
+                                  '+evil-tex-quote-functions)))
 
 ;;; Keybinds
 

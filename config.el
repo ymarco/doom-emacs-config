@@ -170,6 +170,14 @@ it start a new line of its own."
  :n "ga" (λ!! #'what-cursor-position t)
  :v "="       #'er/expand-region
  :v "-"       #'er/contract-region
+ ;; $ is way too inconvenient, and I barely use marks
+ :n "m" #'evil-end-of-line
+ ;; to replace the lost m. I never use regisetrs, and we have SPC i y anyway.
+ :n "\"" #'evil-set-marker
+ ;; More conviniant surround operators
+ :n "r" (λ!! #'evil-surround-edit nil)
+ ;; To replace the lost r
+ :n "R" #'evil-replace
  ;; Things I picked up from JetBrains IDEs
  :eni "C-/"   #'comment-line
  :v   "C-/"   #'comment-or-uncomment-region

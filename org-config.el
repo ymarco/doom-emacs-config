@@ -66,19 +66,20 @@
 
 (after! org
   ;; Minted config for much better syntax highlightig to src blocks.
-  (setq org-latex-listings 'minted)
-  ;; minted calls the pygmentize process and thus needs shell escaping
-  (setq org-latex-pdf-process
-        '("%latex -shell-escape -interaction nonstopmode -output-directory %o %f"
-          "%latex -shell-escape -interaction nonstopmode -output-directory %o %f"
-          "%latex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-  ;; NOTE I don't actually add minted to the package list, I'll just \usepackage it when needed
-
-  ;;(setq org-latex-pdf-process
-  ;;'("latexmk -f -pdf %f")) ; Doesn't work with pdflatex
-  ;; Margins
-  ;;(add-to-list 'org-latex-packages-alist '("a4paper,margin=1.1in" "geometry"))
   (setq
+   org-latex-listings 'minted
+   ;; minted calls the pygmentize process and thus needs shell escaping
+   org-latex-pdf-process
+   '("%latex -shell-escape -interaction nonstopmode -output-directory %o %f"
+     "%latex -shell-escape -interaction nonstopmode -output-directory %o %f"
+     "%latex -shell-escape -interaction nonstopmode -output-directory %o %f")
+   ;; NOTE I don't actually add minted to the package list, I'll just \usepackage it when needed
+
+   ;;(setq org-latex-pdf-process
+   ;;'("latexmk -f -pdf %f")) ; Doesn't work with pdflatex
+   ;; Margins
+   ;;(add-to-list 'org-latex-packages-alist '("a4paper,margin=1.1in" "geometry"))
+
    ;; Add 'colorlinks' option to hyperrref, its much prettier
    org-latex-hyperref-template
    "\\hypersetup{

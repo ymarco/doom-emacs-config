@@ -91,7 +91,28 @@
   (apply 'string
          (mapcar (lambda (c) (+ (if (>= c 97) (- c 6) c) offset)) word)))
 
+
+(defun +latex/dwim-at-point ()
+  "TODO."
   (interactive)
+  (let (preview-revealed? preview-unrevealed? tex-fold?)
+    (dolist (ol (overlays-at (point)))
+      ;; (message "%s %s" ol (overlay-get ol 'category))
+      (pcase (overlay-get ol 'category)
+        ('preview-overlay
+         (if (overlay-get ol 'display)
+             (setq preview-unrevealed? ol)
+           (setq preview-revealed? ol)))
+        ('TeX-fold
+         (setq tex-fold? ol))))
+    (cond
+     (preview-unrevealed?
+      (preview-toggle preview-unrevealed? nil))
+     (tex-fold?
+      (TeX-fold-show-item tex-fold?))
+     ((or preview-revealed? (texmathp))
+      (preview-at-point)))))
+
 
 ;; Making \( \) less visible
 (defface unimportant-latex-face

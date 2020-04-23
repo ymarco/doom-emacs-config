@@ -121,14 +121,14 @@ it start a new line of its own."
 (defun org-latex-link-override (&rest _))
 
 (dolist (fn '(evil-visualstar/begin-search-forward
-                evil-visualstar/begin-search-backward
-                evil-ex-search-word-forward
-                evil-ex-search-word-backward
-                evil-ex-search-next
-                evil-ex-search-previous
-                evil-ex-search-forward
-                evil-ex-search-backward))
-    (advice-add fn :after #'doom-recenter-a))
+              evil-visualstar/begin-search-backward
+              evil-ex-search-word-forward
+              evil-ex-search-word-backward
+              evil-ex-search-next
+              evil-ex-search-previous
+              evil-ex-search-forward
+              evil-ex-search-backward))
+  (advice-add fn :after #'doom-recenter-a))
 
 
 ;; I like abbrevs, at least in org mode

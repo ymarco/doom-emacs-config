@@ -133,7 +133,7 @@
  `((,"\\\\[[:word:]]+" 0 'font-lock-keyword-face prepend))
  'end)
 
-(after! doom-themes
+(add-hook! 'doom-load-theme-hook
   (custom-set-faces!
     ;; On default, 1-depth braces don't stand out in LaTeX math
     `(rainbow-delimiters-depth-1-face :foreground nil :inherit rainbow-delimiters-depth-6-face)

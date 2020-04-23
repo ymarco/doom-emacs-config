@@ -178,9 +178,7 @@ it start a new line of its own."
  ;; to replace the lost m. I never use regisetrs, and we have SPC i y anyway.
  :n "\"" #'evil-set-marker
  ;; More conviniant surround operators
- :n "r" (λ!! #'evil-surround-edit nil)
- ;; To replace the lost r
- :n "R" #'evil-replace
+ :n "R" (λ!! #'evil-surround-edit nil)
  ;; Things I picked up from JetBrains IDEs
  :ni "C-/"   #'comment-line
  :v   "C-/"   #'comment-or-uncomment-region

@@ -2,4 +2,4 @@
 # name: RequirePackage
 # key: req
 # --
-\RequirePackage{$1}$0
+\RequirePackage${1:[$2]}{$3}$0

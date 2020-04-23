@@ -210,10 +210,16 @@ it start a new line of its own."
   "TAB" nil
   [tab] nil)
 
+(defvar prvt/omitted-extensions '(".aux" ".bbl" ".blg" ".brf" ".dpth" ".auxlock"
+                                  ".log" ".out" ".synctex.gz" "dvi" "md5")
+  "Extensions that I never wanna see.")
 ;; Don't show latex junk files in dired
 (after! dired-x
-  (pushnew! dired-omit-extensions
-            ".bbl" ".blg" ".brf" ".log" ".out" ".synctex.gz"))
+  (setq dired-omit-extensions (append dired-omit-extensions
+                                      prvt/omitted-extensions)))
+
+(setq counsel-find-file-ignore-regexp (concat "\\(?:^[#.]\\|?:[#~]$\\|?:^Icon?\\)"
+                                              (regexp-opt prvt/omitted-extensions)))
 
 (custom-set-faces!
   '(font-lock-preprocessor-face :foreground nil))

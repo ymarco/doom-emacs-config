@@ -160,6 +160,26 @@ it start a new line of its own."
 (setq-hook! 'emacs-lisp-mode-hook
   tab-width 4)
 
+
+(evil-define-command +evil:drag-file (force-p)
+  "Open a drag window with dragon for current file.
+Without FORCE-P, if the file is tex/org, open the pdf. "
+  (interactive "<!>")
+  (start-process "dragon-from-emacs"
+                 nil
+                 "dragon"
+                 (cond
+                  (force-p
+                   buffer-file-name)
+                  ((and (or "org" "tex")
+                        (file-exists-p
+                         (concat (file-name-sans-extension buffer-file-name) ".pdf"))
+                        (concat (file-name-sans-extension buffer-file-name) ".pdf")))
+                  (t
+                   buffer-file-name))
+                 "-x"))
+(evil-ex-define-cmd "drag" #'+evil:drag-file)
+
 ;;; Keybinds
 
 ;; Things I wanna push upstream someday

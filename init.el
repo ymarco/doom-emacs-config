@@ -131,6 +131,7 @@
        ;;go                    ; the hipster dialect
        ;;(haskell +intero)     ; a language that's lazier than I am
        ;;hy                    ; readability of scheme w/ speed of python
+       scheme
        ;;idris             ;
        ;;(java +lsp)           ; the poster child for carpal tunnel syndrome
        (javascript +lsp)       ; all(hope(abandon(ye(who(enter(here))))))

@@ -32,4 +32,6 @@
 ;; WIP org export figures written in latex in both latex and html backend
 ;; (package! org-tex-fig
 ;;   :recipe (:local-repo "~/projects/org-tex-fig"))
+;; I don't really know what I'm doing
+(package! guix)
 (package! vimgolf :pin "f565447ed2")

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: left\{ right\]
+# name: left\{ right\}
 # key: \{
 # --
-\left\{ `%`$0 \right\}
+\left\{ `%`$0 \right`(unless (bound-and-true-p smartparens-mode) "}")`

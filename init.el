@@ -13,7 +13,7 @@
        ;;japanese
 
        :completion
-       company           ; the ultimate code completion backend
+       (company +childframe)           ; the ultimate code completion backend
         ;;+tng              ; makes company usable with just the tab key
         ;;+childframe ; a nicer company UI. Emacs +26 only!
 
@@ -58,7 +58,7 @@
        file-templates      ; auto-snippets for empty files
        fold                ; (nigh) universal code folding
        (format)            ; automated prettiness
-       ;;lispy             ; vim for lisp, for people who dont like vim
+       lispy             ; vim for lisp, for people who dont like vim
        multiple-cursors    ; editing in many places at once
        ;;objed             ; text object editing for the innocent
        ;; parinfer         ; turn lisp into python, sort of
@@ -146,9 +146,9 @@
        ;;ocaml                 ; an objective camel
        (org                    ; organize your plain life in plain text
         +dragndrop             ; drag & drop files/images into org buffers
-        +brain                 ; org-brain intergarion
-        +present               ; Emacs for presentations
-        +journal
+        ;; +brain                 ; org-brain intergarion
+        ;; +present               ; Emacs for presentations
+        ;; +journal
         +roam)
        ;;perl                  ; write code no one else can comprehend
        ;;php                   ; perl's insecure younger brother

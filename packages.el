@@ -15,9 +15,12 @@
 ;; (package! webkit-katex-render
 ;;   :recipe (:local-repo "~/projects/emacs-webkit-katex-render"))
 ;; nicer sxhkd config file editing
+;; Trying to avoid as many post-commnad hooks as possible
+(package! evil-escape :disable t)
+;; When I finally get back to bspwm
 (package! sxhkd-mode
   :recipe (:local-repo "~/projects/sxhkd-mode"))
-;; sane defaults to hebrew
+;; Sane defaults to hebrew
 (package! hebrew-mode
   :recipe (:local-repo "~/projects/hebrew-mode"))
 ;; WIP evil enhancements for latex buffers
@@ -26,7 +29,7 @@
 ;; WIP auto snippets for latex
 (package! auto-latex-snippets
   :recipe (:local-repo "~/projects/Auto-LaTeX-Snippets"))
-;; highlight areas for screenshots
+;; Highlight areas for screenshots
 (package! pick-and-highlight
   :recipe (:local-repo "~/projects/emacs-pick-and-highlight"))
 ;; WIP org export figures written in latex in both latex and html backend

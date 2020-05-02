@@ -90,7 +90,10 @@
 
 
 ;; No more 'Starting new Ispell process aspell with default dictionary...done'
-(advice-add #'ispell-init-process :around #'doom-shut-up-a)
+;; (defadvice! ispell-shut-up-a ()
+;;   :around #'ispell-init-process
+;;   (cl-letf (((symbol-function 'progress-reporter-done) #'ignore))
+;;     (ispell-init-process)))
 
 
 (defun prvt/file-search-package ()
@@ -244,6 +247,7 @@ Without FORCE-P, if the file is tex/org, open the pdf. "
 (setq counsel-find-file-ignore-regexp (concat "\\(?:^[#.]\\|?:[#~]$\\|?:^Icon?\\)"
                                               (regexp-opt prvt/omitted-extensions)))
 
+;; Let me see syntax highlighting under #ifndef which amount to false
 (custom-set-faces!
   '(font-lock-preprocessor-face :foreground nil))
 
@@ -286,7 +290,6 @@ Without FORCE-P, if the file is tex/org, open the pdf. "
 (load! "imenu-list-config")
 (load! "splash")
 
-(setq initial-frame-alist '((undecorated . t)))
 
 ;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))

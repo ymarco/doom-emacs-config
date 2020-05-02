@@ -114,9 +114,10 @@
  linkcolor={cyan!35!black}
 }"
    ;; page break after TOC
-   org-latex-toc-command "\\tableofcontents\n\\pagebreak\n\n"
-   ;; org-latex-minted-options '(("bgcolor" "{white!98!black}"))
-   ;; org-latex-minted-options '(("bgcolor" "\\color{white!96!black}"))
-   ;; In case I configured hyperref in a separate latex preamble
-   ;;(setq org-latex-hyperref-template "")
-   ))
+   org-latex-toc-command "\\tableofcontents\n\\pagebreak\n\n")
+  ;; org-latex-minted-options '(("bgcolor" "{white!98!black}"))
+  ;; org-latex-minted-options '(("bgcolor" "\\color{white!96!black}"))
+  ;; In case I configured hyperref in a separate latex preamble
+  ;;(setq org-latex-hyperref-template ""))
+  (add-hook! 'org-roam-buffer-prepare-hook
+    (setq display-line-numbers nil)))

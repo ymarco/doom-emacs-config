@@ -37,7 +37,7 @@
  ;; e.g don't colorise the word 'white'
  rainbow-x-colors                     nil
  ;; Treemacs usually seems too wide to me
- treemacs-width 27
+ treemacs-width 30
  ;; Leave my comments alone
  +evil-want-o/O-to-continue-comments  nil
  ;; Don't replace the current window when splitting

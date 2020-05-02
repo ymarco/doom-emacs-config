@@ -4,6 +4,14 @@
 
 ;; TODO organize this mess
 
+(defun prvt/separate-note ()
+  (interactive)
+  (let ((fname (concat (s-dashed-words (org-get-heading)) ".org")))
+    (execute-kbd-macro "dae")
+    (find-file fname)
+    (evil-goto-line)
+    (evil-paste-after nil)))
+
 (setq
  ;; Don't use the current theme for src blocks colorization in HTML, assume its
  ;; configured in css.
@@ -11,7 +19,20 @@
  ;; try not to accidently do weird stuff in invisible regions
  org-catch-invisible-edits 'smart
  ;; moon is ugly imo
- org-reveal-theme "black")
+ org-reveal-theme "black"
+ ;; show images no matter what
+ org-startup-with-inline-images t
+ org-startup-with-latex-preview t
+ ;; prettify org-roam graph, credit to @tecosaur
+ org-roam-graph-node-extra-config `(("shape"      . "\"underline\"")
+                                    ("style"      . "\"rounded,filled\"")
+                                    ("fillcolor"  . "\"#EEEEEE\"")
+                                    ("color"      . "\"#C9C9C9\"")
+                                    ("fontcolor"  . "\"#111111\"")
+                                    ("fontname"   . ,(format "\"%s\"" (font-get doom-variable-pitch-font :family))))
+ org-roam-graph-edge-extra-config '(("color"      . "\"#333333\""))
+ org-roam-graph-extra-config      `(("stylesheet" . ,(concat "\"" doom-private-dir
+                                                             "misc/roam-graphviz-style.css\""))))
 
 ;; I LOVE PRETTY STUFF
 (add-hook! 'org-mode-hook

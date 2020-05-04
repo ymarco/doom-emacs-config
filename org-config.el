@@ -22,17 +22,7 @@
  org-reveal-theme "black"
  ;; show images no matter what
  org-startup-with-inline-images t
- org-startup-with-latex-preview t
- ;; prettify org-roam graph, credit to @tecosaur
- org-roam-graph-node-extra-config `(("shape"      . "\"underline\"")
-                                    ("style"      . "\"rounded,filled\"")
-                                    ("fillcolor"  . "\"#EEEEEE\"")
-                                    ("color"      . "\"#C9C9C9\"")
-                                    ("fontcolor"  . "\"#111111\"")
-                                    ("fontname"   . ,(format "\"%s\"" (font-get doom-variable-pitch-font :family))))
- org-roam-graph-edge-extra-config '(("color"      . "\"#333333\""))
- org-roam-graph-extra-config      `(("stylesheet" . ,(concat "\"" doom-private-dir
-                                                             "misc/roam-graphviz-style.css\""))))
+ org-startup-with-latex-preview t)
 
 ;; I LOVE PRETTY STUFF
 (add-hook! 'org-mode-hook

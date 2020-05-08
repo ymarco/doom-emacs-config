@@ -161,7 +161,7 @@ it start a new line of its own."
   (setq nov-save-place-file (concat doom-etc-dir "nov-places")))
 
 (setq-hook! 'emacs-lisp-mode-hook
-  tab-width 4)
+  tab-width 8)
 
 
 (evil-define-command +evil:drag-file (force-p)

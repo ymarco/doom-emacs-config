@@ -197,8 +197,6 @@ Without FORCE-P, if the file is tex/org, open the pdf. "
  ;; General
  :n "g SPC"   #'evil-avy-goto-word-1
  :n "ga" (λ!! #'what-cursor-position t)
- :v "="       #'er/expand-region
- :v "-"       #'er/contract-region
  ;; $ is way too inconvenient, and I barely use marks
  :n "m" #'evil-end-of-line
  ;; to replace the lost m. I never use regisetrs, and we have SPC i y anyway.

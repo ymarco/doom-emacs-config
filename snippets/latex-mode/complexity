@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: complexity
+# key: comp
+# --
+\complexity{$O($0)$}

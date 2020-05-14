@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: texttt
+# key: tt
+# --
+`(if (texmathp) "\\mathtt" "\\texttt")`{`%`$1}$0

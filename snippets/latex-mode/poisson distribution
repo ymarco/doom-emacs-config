@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: poisson distribution
+# key: poid
+# --
+e^{-${1:\lambda}} \frac{$1^${2:$(when (> (length yas-text) 1) "{")}${2:k}${2:$(when (> (length yas-text) 1) "}")}}{${2:$(when (> (length yas-text) 1) "\\\\left(")}$2${2:$(when (> (length yas-text) 1) "\\\\right)")}!}

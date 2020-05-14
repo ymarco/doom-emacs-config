@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: declare-identity-math-operator
+# key: dimo
+# --
+\DeclareMathOperator{\\$1}{$1}$0

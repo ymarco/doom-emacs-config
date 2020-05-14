@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: docdef
+# key: dd
+# --
+\docdef{$1}
+$2

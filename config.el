@@ -164,22 +164,22 @@ it start a new line of its own."
   tab-width 8)
 
 
-(evil-define-command +evil:drag-file (force-p)
-  "Open a drag window with dragon for current file.
-Without FORCE-P, if the file is tex/org, open the pdf. "
-  (interactive "<!>")
+(evil-define-command +evil:drag-file (file)
+  "Open a drag window with dragon for the file opened in the current buffer.
+With FILE, use that file instead. If FILE not specified and the
+buffer is org/tex and a corresponding pdf exists, drag that pdf."
+  (interactive "<f>")
   (start-process "dragon-from-emacs"
                  nil
                  "dragon"
-                 (cond
-                  (force-p
-                   buffer-file-name)
-                  ((and (or "org" "tex")
-                        (file-exists-p
-                         (concat (file-name-sans-extension buffer-file-name) ".pdf"))
-                        (concat (file-name-sans-extension buffer-file-name) ".pdf")))
-                  (t
-                   buffer-file-name))
+                 (or
+                  file
+                  (and (or (equal major-mode 'org-mode)
+                           (equal major-mode 'latex-mode))
+                       (file-exists-p
+                        (concat (file-name-extension (buffer-file-name)) ".pdf"))
+                       (concat (file-name-extension (buffer-file-name)) ".pdf"))
+                  (buffer-file-name))
                  "-x"))
 (evil-ex-define-cmd "drag" #'+evil:drag-file)
 

@@ -272,13 +272,7 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 ;; No window borders (doesn't work in daemon)
 (setq initial-frame-alist '((undecorated . t)))
 
-;; Set fringes for solaire, experimental in emacs27
-(after! solaire-mode
-  (setq solaire-mode-remap-fringe nil)
-  (add-to-list 'solaire-mode-remap-alist '((fringe solaire-fringe-face) . t))
 
-  (remove-hook 'focus-in-hook #'solaire-mode-reset)
-  (remove-hook! '(doom-load-theme-hook doom-reload-hook) #'solaire-mode-reset))
 (setq iedit-toggle-key-default nil)
 
 ;;; Load other configs

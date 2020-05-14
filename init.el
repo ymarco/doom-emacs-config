@@ -21,8 +21,8 @@
        ;; +icons
        ;; +fuzzy)           ; enable fuzzy search backend for helm
        ;;ido               ; the other *other* search engine...
-       ivy               ; a search engine for love and life
-        ;;+prescient        ; Enables prescient filtering and sorting for Ivy searches.
+       (ivy               ; a search engine for love and life
+        +prescient)       ; Enables prescient filtering and sorting for Ivy searches.
         ;;+childframe       ;display in a floating child frame, above Emacs.
         ;;+fuzzy           ; enable fuzzy search backend for ivy
         ;;+icons)

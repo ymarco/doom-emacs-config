@@ -51,7 +51,7 @@
  lsp-idle-delay 0.5
  lsp-ui-sideline-delay 0.5
  ;; js2 you too
- js2-idle-timer-delay 0.5
+ js2-idle-timer-delay 0.1
  ;; Fix inconsistency with tab width in JSON files
  json-reformat:indent-width 2
  ;; I have issues with variable-pitch fonts that appear larger than their
@@ -286,6 +286,8 @@ Without FORCE-P, if the file is tex/org, open the pdf. "
 (load! "dvorak-config")
 (load! "org-config")
 (load! "imenu-list-config")
+(when EMACS28+
+  (load! "native-comp.el"))
 (load! "splash")
 
 

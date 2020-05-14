@@ -1,5 +1,6 @@
 ;;; ~/.config/doom/native-comp-fixes.el -*- lexical-binding: t; -*-
 
+;; for some reason the default font is smaller
 (setq doom-font (font-spec :family "monospace" :size 20))
 
 ;;;###autoload

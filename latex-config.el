@@ -201,7 +201,9 @@
    ;; no idea why \Phi isnt on 'F' in first place, \phi is on 'f'.
    (?F    ("\\Phi"))
    ;; now just conveniance
-   (?:    ("\\dots")))
+   (?.    ("\\cdot" "\\dots"))
+   (?:    ("\\vdots" "\\ddots"))
+   (?*    ("\\times" "\\star" "\\ast")))
  cdlatex-math-modify-alist
  '( ;; my own stuff
    ;;key  mathcmd   textcmd  type  rmdot(?)  it(?)

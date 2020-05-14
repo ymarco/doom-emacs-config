@@ -18,11 +18,12 @@
  org-html-htmlize-output-type 'css
  ;; try not to accidently do weird stuff in invisible regions
  org-catch-invisible-edits 'smart
- ;; moon is ugly imo
+ ;; moon theme is ugly imo
  org-reveal-theme "black"
  ;; show images no matter what
  org-startup-with-inline-images t
- org-startup-with-latex-preview t)
+ ;; org-startup-with-latex-preview t
+ )
 
 ;; I LOVE PRETTY STUFF
 (add-hook! 'org-mode-hook
@@ -50,7 +51,7 @@
   '(outline-9 :weight semi-bold))
 
 
-;; TODO add pdf -> svg preview compilation route
+;; FIXME pdf -> svg preview compilation route
 ;;(after! org
 ;;(add-to-list org-preview-latex-process-alist
 ;;'(pdf2svg

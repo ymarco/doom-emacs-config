@@ -36,6 +36,7 @@ that input method."
                #'input-method-heuristic))
   :config
   (map! :map LaTeX-mode-map
+        ;; ``'' aren't useful for Hebrew
         "\"" (lambda! (insert "\""))
         ;; Have SPC m c compile with xetex. That way, previews are generated
         ;; with the fast pdlatex and actual big compiles with XeTeX which gives

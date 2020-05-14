@@ -188,7 +188,7 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 ;; Things I wanna push upstream someday
 (map!
  (:after treemacs :map treemacs-mode-map
-   "+" #'treemacs-create-dir) ; just like in dired
+  "+" #'treemacs-create-dir) ; just like in dired
  :leader
  :desc "Rename buffer" "bR" #'rename-buffer)
 
@@ -208,7 +208,7 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
  :v   "C-/"   #'comment-or-uncomment-region
  :ni "C-M-l" #'+format/buffer
  (:after lsp :map lsp-mode-map
-   "M-RET"    #'lsp-execute-code-action)
+  "M-RET"    #'lsp-execute-code-action)
  ;; Old TAB behavior that was removed in b8a3cad295
  :n [tab] (general-predicate-dispatch nil
             (and (featurep! :editor fold)
@@ -279,6 +279,7 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 
   (remove-hook 'focus-in-hook #'solaire-mode-reset)
   (remove-hook! '(doom-load-theme-hook doom-reload-hook) #'solaire-mode-reset))
+(setq iedit-toggle-key-default nil)
 
 ;;; Load other configs
 (load! "latex-config")

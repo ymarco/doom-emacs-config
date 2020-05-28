@@ -54,6 +54,8 @@
  js2-idle-timer-delay 0.1
  ;; Fix inconsistency with tab width in JSON files
  json-reformat:indent-width 2
+ ;; Consistent font
+ doom-font (font-spec :family "monospace" :size 20)
  ;; I have issues with variable-pitch fonts that appear larger than their
  ;; mixed-pitch brothers. Setting the font size would normally work, but it
  ;; doesn't with mixed-pitch-mode which I use. Fortunately, Source Sans Pro is

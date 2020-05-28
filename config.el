@@ -198,34 +198,34 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
  :n "g SPC"   #'evil-avy-goto-word-1
  :n "ga" (λ!! #'what-cursor-position t)
  ;; $ is way too inconvenient, and I barely use marks
- :n "m" #'evil-end-of-line
+ :n "m"       #'evil-end-of-line
  ;; to replace the lost m. I never use regisetrs, and we have SPC i y anyway.
- :n "\"" #'evil-set-marker
+ :n "\""      #'evil-set-marker
  ;; More conviniant surround operators
- :n "R" (λ!! #'evil-surround-edit nil)
+ :n "R" (λ!!  #'evil-surround-edit nil)
  ;; Things I picked up from JetBrains IDEs
- :ni "C-/"   #'comment-line
+ :ni "C-/"    #'comment-line
  :v   "C-/"   #'comment-or-uncomment-region
- :ni "C-M-l" #'+format/buffer
+ :ni "C-M-l"  #'+format/buffer
  (:after lsp :map lsp-mode-map
-  "M-RET"    #'lsp-execute-code-action)
+  "M-RET"     #'lsp-execute-code-action)
  ;; Old TAB behavior that was removed in b8a3cad295
  :n [tab] (general-predicate-dispatch nil
             (and (featurep! :editor fold)
                  (save-excursion (end-of-line) (invisible-p (point))))
-            #'+fold/toggle
+              #'+fold/toggle
             (fboundp 'evil-jump-item)
-            #'evil-jump-item)
+              #'evil-jump-item)
  :v [tab] (general-predicate-dispatch nil
             (and (bound-and-true-p yas-minor-mode)
                  (or (eq evil-visual-selection 'line)
                      (not (memq (char-after) (list ?\( ?\[ ?\{ ?\} ?\] ?\))))))
-            #'yas-insert-snippet
+              #'yas-insert-snippet
             (fboundp 'evil-jump-item)
-            #'evil-jump-item)
+              #'evil-jump-item)
  ;; Smartparens Navigation
- :ni "M-u"   #'sp-up-sexp ; exit parenthesis
- :ni "M-U"   #'sp-backward-up-sexp ; exit parenthesis backward
+ :ni "M-u"    #'sp-up-sexp ; exit parenthesis
+ :ni "M-U"    #'sp-backward-up-sexp ; exit parenthesis backward
  :ni "M-n"   (λ! (sp-up-sexp) (sp-down-sexp)) ; next parentheses on same level
  :ni "M-N"   (λ! (sp-backward-up-sexp) (sp-backward-down-sexp))) ; opposite of M-n
 

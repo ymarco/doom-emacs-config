@@ -51,7 +51,7 @@
  lsp-idle-delay 0.5
  lsp-ui-sideline-delay 0.5
  ;; js2 you too
- js2-idle-timer-delay 0.1
+ js2-idle-timer-delay 0.5
  ;; Fix inconsistency with tab width in JSON files
  json-reformat:indent-width 2
  ;; Consistent font
@@ -67,7 +67,10 @@
  projectile-project-search-path '("~/projects")
  abbrev-file-name (concat doom-private-dir "abbrevs.el")
  org-roam-directory "~/org/roam/"
- )
+ ;; So helpful can show me the C source code
+ find-function-C-source-directory (if EMACS28+
+                                      "~/programs/emacs28/src"
+                                    "~/programs/emacs27/src"))
 
 
 ;; Don't blink the cursor, it's too distracting.

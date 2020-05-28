@@ -65,6 +65,7 @@
 
 (defun prvt/ensure-native-comp-list ()
   (interactive)
+  (require 'straight)
   (cl-loop for req in prvt/packages-to-native-compile
            do (native-compile-async
                (concat straight-base-dir "straight/build/" (symbol-name req) "/")

@@ -36,13 +36,17 @@
     ;; centaur-tabs
     company-box
     company
-    dired-fl
+    diredfl
     evil                                ; Remember to remove evil-commands.eln
     evil-mc
     flycheck
     flycheck-popup-tip
+    flyspell-lazy
     helpful
     ivy
+    swiper
+    counsel
+    swiper
     ivy-prescient
     ivy-rich
     js2-mode

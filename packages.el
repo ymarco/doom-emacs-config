@@ -17,19 +17,24 @@
 (package! evil-escape :disable t)
 ;; When I finally get back to bspwm
 (package! sxhkd-mode
-  :recipe (:local-repo "~/projects/sxhkd-mode"))
+  :recipe (:local-repo "~/projects/sxhkd-mode"
+           :no-byte-compile t))
 ;; Sane defaults to hebrew
 (package! hebrew-mode
-  :recipe (:local-repo "~/projects/hebrew-mode"))
+  :recipe (:local-repo "~/projects/hebrew-mode"
+           :no-byte-compile t))
 ;; WIP evil enhancements for latex buffers
 (package! evil-tex
-  :recipe (:local-repo "~/projects/evil-tex"))
+  :recipe (:local-repo "~/projects/evil-tex"
+           :no-byte-compile t))
 ;; WIP auto snippets for latex
 (package! auto-latex-snippets
-  :recipe (:local-repo "~/projects/Auto-LaTeX-Snippets"))
+  :recipe (:local-repo "~/projects/Auto-LaTeX-Snippets"
+           :no-byte-compile t))
 ;; Highlight areas for screenshots
 (package! pick-and-highlight
-  :recipe (:local-repo "~/projects/emacs-pick-and-highlight"))
+  :recipe (:local-repo "~/projects/emacs-pick-and-highlight"
+           :no-byte-compile t))
 ;; WIP org export figures written in latex in both latex and html backend
 ;; (package! org-tex-fig
 ;;   :recipe (:local-repo "~/projects/org-tex-fig"))

@@ -120,11 +120,10 @@ with parameter N, insert up to N newlines.
 Used mostly so I can type a snippet key on the same line and have
 it start a new line of its own."
   (interactive)
-  (doom-snippets-without-trigger
-   (let* ((n (or n 1))
-          (max-point (- (point) n))
-          (nl-count-minus (save-excursion (skip-chars-backward "\n" max-point))))
-     (make-string (+ n nl-count-minus) ?\n))))
+  (let* ((n (or n 1))
+         (max-point (- (point) n))
+         (nl-count-minus (save-excursion (skip-chars-backward "\n" max-point))))
+    (make-string (+ n nl-count-minus) ?\n)))
 
 ;; some function complains about this being void, idk how but this fixes it.
 (defun org-latex-link-override (&rest _))
@@ -250,6 +249,7 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
                                       prvt/omitted-extensions)))
 
 (setq counsel-find-file-ignore-regexp (concat "\\(?:^[#.]\\|?:[#~]$\\|?:^Icon?\\)"
+                                              "\\|"
                                               (regexp-opt prvt/omitted-extensions)))
 
 ;; Let me see syntax highlighting under #ifndef which amount to false
@@ -288,6 +288,7 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 (load! "dvorak-config")
 (load! "org-config")
 (load! "imenu-list-config")
+(load! "guix-config")
 (when EMACS28+
   (load! "native-comp.el"))
 (load! "splash")

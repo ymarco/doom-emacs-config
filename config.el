@@ -81,8 +81,6 @@
 ;; I hate these vertical scrolls
 (setq truncate-lines nil)
 (setq-default truncate-lines nil)
-;; Show tags in org-brain
-(add-hook 'org-brain-vis-current-title-append-functions #'org-brain-entry-tags-string)
 ;; Colorify colors in X config mode
 (add-hook! 'conf-xdefaults-mode-hook (rainbow-mode 1))
 ;; When more witty things to say about mixed-pitch, this comment would be

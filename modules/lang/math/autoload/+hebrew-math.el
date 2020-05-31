@@ -33,23 +33,23 @@
   "Enter inline math in a Hebrew paragraph in latex.
 If already in math mode, exit it and go back to Hebrew."
   (interactive)
-  (hebrew-set-regular-input-method)
   (if (funcall +math-mathp-fn)
       (+hebrew-math-forward-exit-math-regular)
+    (hebrew-set-regular-input-method)
     (doom-snippets-expand :name "hebrew-math")))
 
 (defun +hebrew-math-display-math-mode ()
   "Enters display math mode in latex. add newlines beforehand if needed."
   (interactive)
-  (hebrew-set-regular-input-method)
   (insert (prvt/snippets-newline-if-needed 2))
+  (hebrew-set-regular-input-method)
   (doom-snippets-expand :name "hebrew-display-math"))
 
 (defun +hebrew-math-align-math-mode ()
   "Enters display math mode in latex."
   (interactive)
-  (hebrew-set-regular-input-method)
   (insert (prvt/snippets-newline-if-needed 2))
+  (hebrew-set-regular-input-method)
   (doom-snippets-expand :name "hebrew-align-math"))
 
 (defvar +hebrew-math-mode-map

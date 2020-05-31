@@ -44,4 +44,5 @@ that input method."
         :localleader
         :desc "compile with xetex" "c"
         (lambda! () (let ((TeX-engine 'xetex))
+                      (basic-save-buffer)
                       (TeX-command "LatexMk" 'TeX-master-file)))))

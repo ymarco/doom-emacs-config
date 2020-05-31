@@ -5,8 +5,9 @@
 
 ;;; Misc package options
 (setq
- gc-cons-threshold 67108864 ; 64mb
+ gc-cons-threshold 67108864             ; 64mb
  gc-cons-percentage 0.2
+ scroll-margin 7
  ;; User config, used for templates mostly
  user-full-name "Yoav Marco"
  user-mail-address "yoavm448@gmail.com"
@@ -23,7 +24,7 @@
  dired-dwim-target                    t
  ;; I don't need it to tell me its UTF-8
  doom-modeline-buffer-encoding nil
- +modeline-encoding nil ; same for (modeline +light)
+ +modeline-encoding nil                 ; same for (modeline +light)
  ;; No line numbers. The ones on the modeline are enough for me.
  display-line-numbers-type nil
  ;; The unsaved icon made me notice and save the buffer on every stop
@@ -84,7 +85,7 @@
 (add-hook 'org-brain-vis-current-title-append-functions #'org-brain-entry-tags-string)
 ;; Colorify colors in X config mode
 (add-hook! 'conf-xdefaults-mode-hook (rainbow-mode 1))
-;; When I have something witty to say about mixed-pitch, this comment would be
+;; When more witty things to say about mixed-pitch, this comment would be
 ;; replaced
 (add-hook! 'markdown-mode-hook #'mixed-pitch-mode)
 
@@ -235,12 +236,13 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
  :ni "M-N"   (λ! (sp-backward-up-sexp) (sp-backward-down-sexp))) ; opposite of M-n
 
 ;; Company, don't block my snippet expansion
+;; FIXME doesn't work
 (define-key! company-active-map
   "TAB" nil
   [tab] nil)
 
 (defvar prvt/omitted-extensions '(".aux" ".bbl" ".blg" ".brf" ".dpth" ".auxlock"
-                                  ".log" ".out" ".synctex.gz" "dvi" "md5")
+                                  ".log" ".out" ".synctex.gz" ".dvi" ".md5")
   "Extensions that I never wanna see.")
 ;; Don't show latex junk files in dired
 (after! dired-x

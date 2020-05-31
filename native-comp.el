@@ -66,10 +66,10 @@
 (defun prvt/ensure-native-comp-list ()
   (interactive)
   (require 'straight)
-  (cl-loop for req in prvt/packages-to-native-compile
-           do (native-compile-async
-               (concat straight-base-dir "straight/build/" (symbol-name req) "/")
-               t t)))
+  (dolist (req prvt/packages-to-native-compile)
+    (native-compile-async
+     (concat straight-base-dir "straight/build/" (symbol-name req) "/")
+     t t)))
 
 ;; FIXME set compilation-mode for native-compilation buffers
 (after! comp

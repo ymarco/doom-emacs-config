@@ -175,7 +175,15 @@
   :hook (LaTeX-mode . evil-tex-mode)
   :init
   (setq evil-tex-toggle-override-m nil)
-  (setq evil-tex-toggle-override-t t))
+  (setq evil-tex-toggle-override-t t)
+  :config
+  (map! :map evil-tex-toggle-map
+        "p" (lambda!
+             (insert "(")
+             (forward-char)
+             (insert ")")
+             (backward-char)
+             (evil-insert 0))))
 
 ;;; Keybinds
 

@@ -216,7 +216,8 @@
 
  ;; normal stuff here
  :localleader
- :desc "View" "v" #'TeX-view)
+ :desc "View" "v" #'TeX-view
+ :desc "Unpreview" "P" #'preview-clearout-at-point)
 
 (setq
  cdlatex-math-symbol-prefix ?\;

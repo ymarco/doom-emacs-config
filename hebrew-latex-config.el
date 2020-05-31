@@ -4,7 +4,7 @@
 
 ;; yas doesnt know how to indent in Hebrew LaTex,
 ;; disable it
-(setq yas-indent-line nil)
+(setq yas-indent-line 'fixed)
 (setq hebrew-use-hebrew-spell-checking t)
 
 (defun input-method-heuristic ()

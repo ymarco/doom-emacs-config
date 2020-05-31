@@ -42,12 +42,14 @@ If already in math mode, exit it and go back to Hebrew."
   "Enters display math mode in latex. add newlines beforehand if needed."
   (interactive)
   (hebrew-set-regular-input-method)
+  (insert (prvt/snippets-newline-if-needed 2))
   (doom-snippets-expand :name "hebrew-display-math"))
 
 (defun +hebrew-math-align-math-mode ()
   "Enters display math mode in latex."
   (interactive)
   (hebrew-set-regular-input-method)
+  (insert (prvt/snippets-newline-if-needed 2))
   (doom-snippets-expand :name "hebrew-align-math"))
 
 (defvar +hebrew-math-mode-map

@@ -3,4 +3,4 @@
 # uuid: hebrew-display-math
 # group: hebrew latex
 # --
-`(prvt/snippets-newline-if-needed 2)`‎\\[ `(doom-snippets-format "%n%s")`$0 \\]
+‎\\[ `(doom-snippets-format "%n%s")`$0 \\]

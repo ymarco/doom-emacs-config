@@ -81,11 +81,3 @@
      #'+popup-display-buffer-stacked-side-window-fn)
     :ttl nil
     :vslot -1))
-
-(add-hook! 'tex-mode (lambda () (require 'latex)))
-
-(after! latex
-  (setq latex-mode-map LaTeX-mode-map
-        tex-mode-map TeX-mode-map
-        tex-mode-hook TeX-mode-hook
-        latex-mode-hook LaTeX-mode-hook))

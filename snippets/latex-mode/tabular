@@ -2,7 +2,7 @@
 # name: tabular
 # key: tab
 # --
-\begin{table}
+\begin{table}[ht!]
   \centering
   \begin{tabular}{ $1 }
     $0

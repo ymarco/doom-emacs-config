@@ -2,5 +2,4 @@
 # name: empty-subsection
 # key: empsub
 # --
-\subsection{}
-$0
+\subsection{}$0

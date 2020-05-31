@@ -185,6 +185,29 @@
              (backward-char)
              (evil-insert 0))))
 
+;; WIP mine and @tecosaur's plugin
+(use-package auto-latex-snippets
+  :hook (LaTeX-mode . auto-latex-snippets-mode)
+  :config
+  (als-set-expanding-ligatures
+   als-prefix-map
+   :cond #'texmathp
+   "np" "^n"
+   ;; prob functions
+   "Ber"	"\\Ber"
+   "Bin"	"\\Bin"
+   "Cov"	"\\Cov"
+   "EX"	"\\EX"
+   "Geom"	"\\Geom"
+   "HyperGeom"	"\\HyperGeom"
+   "NB"	"\\NB"
+   "Poi"	"\\Poi"
+   "Rank"	"\\Rank"
+   "Uniform"	"\\Uniform"
+   "Var"	"\\Var"
+   "std"	"\\std"
+   "supp"	"\\supp"))
+
 ;;; Keybinds
 
 (map!

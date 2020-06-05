@@ -1,5 +1,10 @@
 # key: empsec
 # name: empty-section
 # --
-\section{}
-$0
+\section{}`
+(when (save-excursion
+        (next-line)
+        (goto-char (line-beginning-position))
+        (looking-at "[[:space:]]*$"))
+  "\n")
+`$0

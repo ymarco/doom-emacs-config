@@ -140,7 +140,7 @@
     ;; Fixes latex preview background color in solaire
     `(preview-reference-face :inherit solaire-default-face)
     ;; Just configured for the theme:
-    `(preview-face :background ,(doom-color 'base2))
+    `(preview-face :background ,(doom-color 'base1))
     `(font-latex-doctex-documentation-face :background ,(doom-color 'base2))
     `(TeX-fold-folded-face :inherit font-lock-builtin-face)
     `(TeX-fold-unfolded-face
@@ -189,9 +189,12 @@
 (use-package auto-latex-snippets
   :hook (LaTeX-mode . auto-latex-snippets-mode)
   :config
+  (add-hook 'als-post-snippet-expand-hook #'+latex-fold-last-macro-a)
   (als-set-expanding-ligatures
    als-prefix-map
    :cond #'texmathp
+   ;; not sure if this should be mainline
+   "abs" "\\abs"
    "np" "^n"
    ;; prob functions
    "Ber"	"\\Ber"

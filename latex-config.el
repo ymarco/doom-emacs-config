@@ -197,8 +197,6 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
            ;; enable them.
            (flycheck-mode -1))
 
-;; mixed-pitch is pretty
-(add-hook! 'TeX-mode-hook #'mixed-pitch-mode)
 
 
 ;; WIP mine and @itai33's plugin

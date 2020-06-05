@@ -265,23 +265,23 @@ When given prefix argument, replace region with the result instead."
    als-prefix-map
    :cond #'texmathp
    ;; not sure if this should be mainline
-   "abs" (cmd! (+als-expand-snippet-fn '("{" . "}")))
+   ;;"abs" (cmd! (+als-expand-snippet-fn '("{" . "}")))
    "np" "^n"
-   "Span" #'+als-expand-snippet-fn
+   ;;"Span" #'+als-expand-snippet-fn
    ;; prob functions
-   "Ber" #'+als-expand-snippet-fn
-   "Bin" #'+als-expand-snippet-fn
-   "Cov" #'+als-expand-snippet-fn
-   "EX" (cmd! (+als-expand-snippet-fn '("[" . "]")))
-   "Geom" #'+als-expand-snippet-fn
-   "HyperGeom" #'+als-expand-snippet-fn
-   "NB" #'+als-expand-snippet-fn
-   "Poi" #'+als-expand-snippet-fn
-   "Rank" #'+als-expand-snippet-fn
-   "Uniform" #'+als-expand-snippet-fn
-   "Var" #'+als-expand-snippet-fn
-   "std" #'+als-expand-snippet-fn
-   "supp" "\\supp"
+   ;;"Ber" #'+als-expand-snippet-fn
+   ;;"Bin" #'+als-expand-snippet-fn
+   ;;"Cov" #'+als-expand-snippet-fn
+   ;;"EX" (cmd! (+als-expand-snippet-fn '("[" . "]")))
+   ;;"Geom" #'+als-expand-snippet-fn
+   ;;"HyperGeom" #'+als-expand-snippet-fn
+   ;;"NB" #'+als-expand-snippet-fn
+   ;;"Poi" #'+als-expand-snippet-fn
+   ;;"Rank" #'+als-expand-snippet-fn
+   ;;"Uniform" #'+als-expand-snippet-fn
+   ;;"Var" #'+als-expand-snippet-fn
+   ;;"std" #'+als-expand-snippet-fn
+   ;;"supp" "\\supp"
    ;; complexity
    "On" "O(n)"
    "O1" "O(1)"

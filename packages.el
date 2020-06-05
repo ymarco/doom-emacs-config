@@ -5,9 +5,7 @@
 ;;(package! xelb :pin "5970017d9b")
 ;; ebook reading in emacs
 (package! nov :pin "cd1b264b3f")
-;; sideline buffer navigator powered by imenu
-(package! imenu-list :pin "46008738f8")
-;; unpin doom-snippets, living on the edge here
+;; living on the edge here
 (unpin! doom-snippets)
 ;; FIXME latex math previews using katex and webkit
 ;; (package! webkit-katex-render
@@ -21,8 +19,8 @@
            :no-byte-compile t))
 ;; Sane defaults to hebrew
 (package! hebrew-mode
-  :recipe (:local-repo "~/projects/hebrew-mode"
-           :no-byte-compile t))
+  :recipe (:host github
+           :repo "yoavm448/hebrew-mode"))
 ;; WIP evil enhancements for latex buffers
 (package! evil-tex
   :recipe (:local-repo "~/projects/evil-tex"
@@ -31,15 +29,14 @@
 (package! auto-latex-snippets
   :recipe (:local-repo "~/projects/Auto-LaTeX-Snippets"
            :no-byte-compile t))
-;; Highlight areas for screenshots
-(package! pick-and-highlight
-  :recipe (:local-repo "~/projects/emacs-pick-and-highlight"
-           :no-byte-compile t))
-(package! calibredb
-  :recipe (:host github :repo "chenyanming/calibredb.el"))
+
+(when (executable-find "calibredb")
+  (package! calibredb
+    :recipe (:host github :repo "chenyanming/calibredb.el")))
 ;; WIP org export figures written in latex in both latex and html backend
 ;; (package! org-tex-fig
 ;;   :recipe (:local-repo "~/projects/org-tex-fig"))
 ;; I don't really know what I'm doing
-(package! guix)
-(package! vimgolf :pin "f565447ed2")
+(when (executable-find "guix")
+  (package! guix))
+;; (package! vimgolf :pin "f565447ed2")

@@ -298,7 +298,6 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 (load! "hebrew-latex-config")
 (load! "dvorak-config")
 (load! "org-config")
-(load! "imenu-list-config")
 (load! "guix-config")
 (when EMACS28+
   (load! "native-comp.el"))

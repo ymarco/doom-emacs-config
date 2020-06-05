@@ -69,9 +69,7 @@
  abbrev-file-name (concat doom-private-dir "abbrevs.el")
  org-roam-directory "~/org/roam/"
  ;; So helpful can show me the C source code
- find-function-C-source-directory (if EMACS28+
-                                      "~/programs/emacs28/src"
-                                    "~/programs/emacs27/src"))
+ find-function-C-source-directory (when EMACS28+ "~/programs/emacs28/src"))
 
 
 ;; Don't blink the cursor, it's too distracting.

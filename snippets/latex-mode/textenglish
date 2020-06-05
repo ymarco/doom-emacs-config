@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: textenglish
+# key: אנ
+# --
+\textenglish{`%`$1}$0

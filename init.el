@@ -110,8 +110,6 @@
        ;;grammar  ; tasing grammar mistake every you make
 
        :lang
-       (math                   ; my own baby; math for both org and LaTeX
-        +hebrew)               ; be damned Hebrew for making me write this
        ;;agda                  ; types of types of types of types...
        ;; assembly                ; assembly for fun or debugging
        (cc +lsp)               ; C/C++/Obj-C madness

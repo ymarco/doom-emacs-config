@@ -220,6 +220,7 @@
  ;; normal stuff here
  :localleader
  :desc "View" "v" #'TeX-view
+ :desc "Preview" "p" #'preview-at-point
  :desc "Unpreview" "P" #'preview-clearout-at-point)
 
 (setq

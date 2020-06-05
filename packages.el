@@ -48,3 +48,25 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+
+
+;; ADDED BY YOAV
+;; These packages are pinned, so they won't update (but also won't break anything).
+;; Change the pin when wanting to update.
+
+;; Sane defaults to hebrew
+(package! hebrew-mode
+  :recipe (:host github
+           :repo "yoavm448/hebrew-mode")
+  :pin "b7da732674683be45fb8ccfbcdf23176156c8bbf")
+;; WIP evil enhancements for latex buffers
+(package! evil-tex
+  :recipe (:host github
+           :repo "itai33/evil-tex")
+  :pin "bd92c3d02089656fb24c46f990a08b6a77cb3603")
+;; WIP automatic snippets for latex for example, when writing "log" inside
+;; maths, it would instantly transform into "\log".
+(package! auto-latex-snippets
+  :recipe (:host github
+           :repo "tecosaur/Auto-LaTeX-Snippets")
+   :pin "9da5f3ad0b80a133c17701a6444a174ccdbb58b6")

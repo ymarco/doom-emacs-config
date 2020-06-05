@@ -132,7 +132,12 @@
        ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
-       ;;latex             ; writing papers in Emacs has never been so fun
+
+       ;; ADDED BY YOAV
+       (latex                    ; writing papers in Emacs has never been so fun
+        +fold                    ; fold latex macros to unicode
+        +latexmk)                ; runs the compiler as many times as it needs
+
        ;;lean
        ;;factor
        ;;ledger            ; an accounting system in Emacs

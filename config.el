@@ -262,6 +262,10 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 ;; Let me see syntax highlighting even under #ifndef that amount to false
 (custom-set-faces!
   '(font-lock-preprocessor-face :foreground nil))
+;; highlight matching parens more clearly
+(add-hook! 'doom-load-theme-hook
+  (custom-set-faces!
+    `(show-paren-match :weight normal :foreground nil :background ,(doom-color 'selection))))
 
 ;; See autoload/emacs-anywhere-config
 (add-hook 'ea-popup-hook 'ea-popup-handler)

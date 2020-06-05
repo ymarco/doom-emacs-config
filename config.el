@@ -163,6 +163,17 @@ it start a new line of its own."
   :init
   (setq nov-save-place-file (concat doom-etc-dir "nov-places")))
 
+(use-package calibredb
+  :commands (calibredb)
+  :config
+  (setq sql-sqlite-program (executable-find "sqlite3")
+        calibredb-root-dir "~/Desktop/books"
+        calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir)
+        calibredb-program (executable-find "calibredb"))
+  (custom-set-faces!
+    '(calibredb-search-header-highlight-face :inherit hl-line)))
+
+;; FIXME
 (setq-hook! 'emacs-lisp-mode-hook
   tab-width 8)
 

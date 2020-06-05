@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: roam tags
-# key: ta
-# condition: (doom-snippets-bolp)
-# type: command
-# --
-(insert "- tags :: ")
-(goto-char (line-end-position))
-(call-interactively #'org-roam-insert)

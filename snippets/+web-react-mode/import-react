@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: import React
-# key: imre
-# --
-import React from 'react';
-$0

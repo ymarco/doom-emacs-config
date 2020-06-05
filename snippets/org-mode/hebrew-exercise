@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: hebrew-exercise
-# key: תרג
-# group: hebrew latex
-# condition: (doom-snippets-bolp)
-# --
-#+BEGIN_exercise
-`%`$0
-#+END_exercise

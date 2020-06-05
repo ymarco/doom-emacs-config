@@ -108,19 +108,6 @@
   (doom-project-find-file (or (getenv "XDG_CONFIG_HOME")
                               "~/.config")))
 
-;;;###autoload
-(defun prvt/snippets-newline-if-needed (&optional n)
-  "return a newline if point not preceded by a newline.
-with parameter N, insert up to N newlines.
-
-Used mostly so I can type a snippet key on the same line and have
-it start a new line of its own."
-  (interactive)
-  (let* ((n (or n 1))
-         (max-point (- (point) n))
-         (nl-count-minus (save-excursion (skip-chars-backward "\n" max-point))))
-    (make-string (+ n nl-count-minus) ?\n)))
-
 ;; some function complains about this being void, idk how but this fixes it.
 (defun org-latex-link-override (&rest _))
 

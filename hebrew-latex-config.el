@@ -59,17 +59,31 @@ If already in math mode, exit it and go back to Hebrew."
     (hebrew-set-regular-input-method)
     (doom-snippets-expand :name "hebrew-math")))
 
+
+(defun +heberw--snippets-newline-if-needed (&optional n)
+  "return a newline if point not preceded by a newline.
+with parameter N, insert up to N newlines.
+
+Used mostly so I can type a snippet key on the same line and have
+it start a new line of its own."
+  (interactive)
+  (let* ((n (or n 1))
+         (max-point (- (point) n))
+         (nl-count-minus (save-excursion (skip-chars-backward "\n" max-point))))
+    (make-string (+ n nl-count-minus) ?\n)))
+
+
 (defun +hebrew-math-display-math-mode ()
   "Enters display math mode in latex. add newlines beforehand if needed."
   (interactive)
-  (insert (prvt/snippets-newline-if-needed 2))
+  (insert (+heberw--snippets-newline-if-needed 2))
   (hebrew-set-regular-input-method)
   (doom-snippets-expand :name "hebrew-display-math"))
 
 (defun +hebrew-math-align-math-mode ()
   "Enters display math mode in latex."
   (interactive)
-  (insert (prvt/snippets-newline-if-needed 2))
+  (insert (+heberw--snippets-newline-if-needed 2))
   (hebrew-set-regular-input-method)
   (doom-snippets-expand :name "align*"))
 

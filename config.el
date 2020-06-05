@@ -225,16 +225,16 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
  :n [tab] (general-predicate-dispatch nil
             (and (featurep! :editor fold)
                  (save-excursion (end-of-line) (invisible-p (point))))
-              #'+fold/toggle
+            #'+fold/toggle
             (fboundp 'evil-jump-item)
-              #'evil-jump-item)
+            #'evil-jump-item)
  :v [tab] (general-predicate-dispatch nil
             (and (bound-and-true-p yas-minor-mode)
                  (or (eq evil-visual-selection 'line)
                      (not (memq (char-after) (list ?\( ?\[ ?\{ ?\} ?\] ?\))))))
-              #'yas-insert-snippet
+            #'yas-insert-snippet
             (fboundp 'evil-jump-item)
-              #'evil-jump-item)
+            #'evil-jump-item)
  ;; Smartparens Navigation
  :ni "M-u"    #'sp-up-sexp ; exit parenthesis
  :ni "M-U"    #'sp-backward-up-sexp ; exit parenthesis backward
@@ -259,7 +259,7 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
                                               "\\|"
                                               (regexp-opt prvt/omitted-extensions)))
 
-;; Let me see syntax highlighting under #ifndef which amount to false
+;; Let me see syntax highlighting even under #ifndef that amount to false
 (custom-set-faces!
   '(font-lock-preprocessor-face :foreground nil))
 

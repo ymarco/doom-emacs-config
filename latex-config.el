@@ -224,15 +224,16 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
 
 The result is another string containing LaTeX code."
   (calc-set-language 'latex)
-  (string-join (->> s
-                    ;; calc thinks \cdot is a variable instead of just
-                    ;; multiplying
-                    (replace-regexp-in-string "\\\\cdot\\>" "*")
-                    (math-read-exprs)
-                    ;; (-map #'math-evaluate-expr)
-                    ;; (-map #'math-format-value)
-                    (calc-eval)) ; does it do the same?
-               ", "))
+  ;; TODO this is also a way
+  ;; (->> s
+  ;; (math-read-exprs)
+  ;; (-map #'math-evaluate-expr)
+  ;; (-map #'math-format-value))
+  (calc-eval
+   ;; calc thinks \cdot is a variable instead of just
+   ;; multiplying
+   (replace-regexp-in-string "\\\\cdot\\>" "*" s)
+   ", "))
 
 (evil-define-operator prvt/latex-eval-with-calc (beg end arg)
   "Evaluate latex region as math and insert the result into the kill ring.

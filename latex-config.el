@@ -63,6 +63,7 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
    ("⟋{1}" ("cancel"))
    ;; private macros
    ("ℝ" ("RR"))
+   ("𝔼" ("EX"))
    ("ℕ" ("NN"))
    ("Nₑ" ("NE"))
    ("Nₒ" ("NO"))

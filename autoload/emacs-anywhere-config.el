@@ -11,12 +11,12 @@
   :init-value nil
   :keymap (list
            ;; Finish edit, but be smart in org mode
-           (cons (kbd "C-c C-c") (lambda! (if (and (eq major-mode 'org-mode)
+           (cons (kbd "C-c C-c") (cmd! (if (and (eq major-mode 'org-mode)
                                                    (org-in-src-block-p))
                                               (org-ctrl-c-ctrl-c)
                                             (delete-frame))))
            ;; Abort edit. emacs-anywhere saves the current edit for next time.
-           (cons (kbd "C-c C-k") (lambda! (setq ea-on nil)
+           (cons (kbd "C-c C-k") (cmd! (setq ea-on nil)
                                           (delete-frame))))
   (when emacs-anywhere-mode
     ;; disable tabs
@@ -58,8 +58,8 @@
     (flyspell-buffer))
 
   (set-transient-map (let ((keymap (make-sparse-keymap)))
-                       (define-key keymap (kbd "DEL")   (lambda! (delete-region (point-min) (point-max))))
-                       (define-key keymap (kbd "C-SPC") (lambda! (delete-region (point-min) (point-max))))
+                       (define-key keymap (kbd "DEL")   (cmd! (delete-region (point-min) (point-max))))
+                       (define-key keymap (kbd "C-SPC") (cmd! (delete-region (point-min) (point-max))))
                        keymap))
   (message "Press DEL to clear")
 

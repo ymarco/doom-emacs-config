@@ -177,7 +177,7 @@
   (setq evil-tex-toggle-override-t t)
   :config
   (map! :map evil-tex-toggle-map
-        "p" (lambda!
+        "p" (cmd!
              (insert "(")
              (forward-char)
              (insert ")")

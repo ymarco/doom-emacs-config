@@ -105,7 +105,7 @@ it start a new line of its own."
         :iv "C-_" (λ! (doom-snippets-expand :name "subscript-braces"))
         :iv "C-^" (λ! (doom-snippets-expand :name "superscript-braces"))
         ;; ``'' aren't useful for Hebrew
-        "\"" (lambda! (insert "\""))
+        "\"" (cmd! (insert "\""))
         ;; commands to switch from Hebrew to English to Hebrew in math mode
         :envi "M-m" #'+hebrew-math-enter-math
         :envi "M-M" #'+hebrew-math-backwards-till-math-regular
@@ -116,6 +116,6 @@ it start a new line of its own."
         ;; better output (it can have hyperref and stuff).
         :localleader
         :desc "compile with xetex" "c"
-        (lambda! () (let ((TeX-engine 'xetex))
-                      (basic-save-buffer)
-                      (TeX-command "LatexMk" 'TeX-master-file)))))
+        (cmd! (let ((TeX-engine 'xetex))
+                (basic-save-buffer)
+                (TeX-command "LatexMk" 'TeX-master-file)))))

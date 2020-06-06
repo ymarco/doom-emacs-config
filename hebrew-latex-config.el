@@ -82,6 +82,7 @@ it start a new line of its own."
   "Enters display math mode in latex."
   (interactive)
   (insert (+heberw--snippets-newline-if-needed 2))
+  (insert "‎")                           ; always align to left
   (hebrew-set-regular-input-method)
   (doom-snippets-expand :name "align*"))
 

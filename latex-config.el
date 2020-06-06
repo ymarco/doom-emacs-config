@@ -12,6 +12,40 @@
  ;; Don't raise/lower super/subscripts
  font-latex-fontify-script nil)
 
+(defadvice! prvt/dont-fold-brackets (start)
+  :override #'TeX-find-macro-end-helper
+  "Dont consider brackets proceeding a macro as its arguments. Described here:
+URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-brackets-in-math-mode'"
+  ;; Here I just copied over the definition of `TeX-find-macro-end-helper' and
+  ;; deleted the bracket branch of the cond.
+  (save-excursion
+    (save-match-data
+      (catch 'found
+        (goto-char (1+ start))
+        (if (zerop (skip-chars-forward "A-Za-z@"))
+            (forward-char)
+          (skip-chars-forward "*"))
+        (while (not (eobp))
+          (cond
+           ;; DONT Skip over pairs of square brackets
+           ;; Skip over pairs of curly braces
+           ((or (looking-at "[ \t]*\n?{") ; Be conservative: Consider
+                                        ; only consecutive lines.
+                (and (looking-at (concat "[ \t]*" TeX-comment-start-regexp))
+                     (save-excursion
+                       (forward-line 1)
+                       (looking-at "[ \t]*{"))))
+            (goto-char (match-end 0))
+            (goto-char (or (TeX-find-closing-brace)
+                           ;; If we cannot find a regular end, use the
+                           ;; next whitespace.
+                           (save-excursion (skip-chars-forward "^ \t\n")
+                                           (point)))))
+           (t
+            (throw 'found (point)))))
+        ;; Make sure that this function does not return nil, even
+        ;; when the above `while' loop is totally skipped. (bug#35638)
+        (throw 'found (point))))))
 
 ;;; Aesthetics
 (setq

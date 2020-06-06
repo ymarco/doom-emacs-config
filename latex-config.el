@@ -184,6 +184,36 @@
              (backward-char)
              (evil-insert 0))))
 
+(defun prvt/eval-latex-with-calc (s)
+  "Evaluate string S containing LaTeX code with `calc'.
+
+The result is another string containing LaTeX code."
+  (calc-set-language 'latex)
+  (string-join (->> s
+                    ;; calc thinks \cdot is a variable instead of just
+                    ;; multiplying
+                    (replace-regexp-in-string "\\\\cdot\\>" "*")
+                    (math-read-exprs)
+                    ;; (-map #'math-evaluate-expr)
+                    ;; (-map #'math-format-value)
+                    (calc-eval)) ; does it do the same?
+               ", "))
+
+(evil-define-operator prvt/latex-eval-with-calc (beg end arg)
+  "Evaluate latex region as math and insert the result into the kill ring.
+
+When given prefix argument, replace region with the result instead."
+  :move-point nil
+  (interactive "<r>P")
+  (let ((res (prvt/eval-latex-with-calc
+              (buffer-substring-no-properties beg end))))
+    (if arg
+        (progn
+          (kill-region beg end)
+          (insert res))
+      (message "=> %s" res)
+      (kill-new res))))
+
 ;; WIP mine and @tecosaur's plugin
 (use-package auto-latex-snippets
   :hook (LaTeX-mode . auto-latex-snippets-mode)
@@ -215,6 +245,8 @@
 (map!
  :after tex :map LaTeX-mode-map
  :ei [C-return] #'LaTeX-insert-item
+ :n "g r" #'prvt/latex-eval-with-calc
+ :v "g r" #'prvt/latex-eval-with-calc
 
  ;; normal stuff here
  :localleader

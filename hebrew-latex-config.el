@@ -120,3 +120,11 @@ it start a new line of its own."
         (cmd! (let ((TeX-engine 'xetex))
                 (basic-save-buffer)
                 (TeX-command "LatexMk" 'TeX-master-file)))))
+
+
+(after! auto-latex-snippets
+  (als-set-expanding-ligatures
+   als-prefix-map
+   :cond (lambda () (and (bolp) (not (texmathp))))
+   "שחד" (lambda () (interactive) (doom-snippets-expand :uuid "empty-section"))
+   "סחד" (lambda () (interactive) (doom-snippets-expand :uuid "empty-subsection"))))

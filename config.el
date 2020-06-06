@@ -148,7 +148,7 @@
   :init
   (setq nov-save-place-file (concat doom-etc-dir "nov-places")))
 
-(use-package calibredb
+(use-package! calibredb
   :commands (calibredb)
   :config
   (setq sql-sqlite-program (executable-find "sqlite3")

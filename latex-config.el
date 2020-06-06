@@ -215,7 +215,7 @@ When given prefix argument, replace region with the result instead."
       (kill-new res))))
 
 ;; WIP mine and @tecosaur's plugin
-(use-package auto-latex-snippets
+(use-package! auto-latex-snippets
   :hook (LaTeX-mode . auto-latex-snippets-mode)
   :config
   (add-hook 'als-post-snippet-expand-hook #'+latex-fold-last-macro-a)

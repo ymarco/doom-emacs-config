@@ -1,10 +1,9 @@
 ;;; ~/.config/doom/latex-config.el -*- lexical-binding: t; -*-
-;; Notice that this contains no math config, that's on modules/lang/math
 
 ;;; Misc config
 
 (setq
- ;; Dont auto-insert braces on _^
+ ;; Dont auto-insert braces on _^, I have keybinds for that
  TeX-electric-sub-and-superscript nil
  ;; Just save, dont ask me
  TeX-save-query nil

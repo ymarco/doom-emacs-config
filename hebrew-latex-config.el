@@ -1,6 +1,4 @@
 ;;; ~/.config/doom/hebrew-latex-config.el -*- lexical-binding: t; -*-
-;; Notice that this contains no math config, that's on
-;; modules/lang/math/autoload/+hebrew
 
 ;; yas doesnt know how to advanced indentation in Hebrew LaTex
 (setq yas-indent-line 'fixed)

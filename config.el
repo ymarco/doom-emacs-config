@@ -223,11 +223,7 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
             (fboundp 'evil-jump-item)
             #'evil-jump-item)
  ;; Smartparens Navigation
- :ni "M-u"    #'sp-up-sexp ; exit parenthesis
- :ni "M-U"    #'sp-backward-up-sexp ; exit parenthesis backward
- :ni "M-n"   (λ! (sp-up-sexp) (sp-down-sexp)) ; next parentheses on same level
- :ni "M-N"   (λ! (sp-backward-up-sexp) (sp-backward-down-sexp))) ; opposite of M-n
-
+ :ni "M-u"    #'sp-up-sexp) ; exit parenthesis
 ;; Company, don't block my snippet expansion
 ;; FIXME doesn't work
 (define-key! company-active-map

@@ -268,12 +268,6 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 
 ;; (set-fontset-font t 'unicode (font-spec :family "Font Awesome"))
 
-(defadvice! prvt/dont-confirm-kill-on-restart-a (orig-fn &rest args)
-  "An advice to make emacs not ask for killing confirmration when using SPC q r."
-  :around #'doom/restart-and-restore
-  (let ((confirm-kill-emacs nil))
-    (apply orig-fn args)))
-
 ;; No window borders (doesn't work in daemon)
 (setq initial-frame-alist '((undecorated . t)))
 

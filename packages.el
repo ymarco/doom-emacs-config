@@ -33,6 +33,12 @@
 (when (executable-find "calibredb")
   (package! calibredb
     :recipe (:host github :repo "chenyanming/calibredb.el")))
+;; fixes an issue with compiled pdf-tools
+(when EMACS28+
+  (package! pdf-tools
+    :recipe (:branch "fix-macros"
+             :host github
+             :repo "flatwhatson/pdf-tools")))
 ;; WIP org export figures written in latex in both latex and html backend
 ;; (package! org-tex-fig
 ;;   :recipe (:local-repo "~/projects/org-tex-fig"))

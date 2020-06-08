@@ -25,3 +25,4 @@
         (apply function url args)
       (error "No suitable browser for URL %s" url))))
 
+(add-hook 'latex-mode-hook #'TeX-latex-mode)

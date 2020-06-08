@@ -29,7 +29,7 @@
 (package! auto-latex-snippets
   :recipe (:local-repo "~/projects/Auto-LaTeX-Snippets"
            :no-byte-compile t))
-
+;; calibre client from emacs, needs more configuration
 (when (executable-find "calibredb")
   (package! calibredb
     :recipe (:host github :repo "chenyanming/calibredb.el")))

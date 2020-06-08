@@ -262,8 +262,6 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
              (evil-initialize-state 'insert) ; start in insert
              (doom-snippets-expand :uuid "__")))
 
-;; (set-fontset-font t 'unicode (font-spec :family "Font Awesome"))
-
 ;; No window borders (doesn't work in daemon)
 (setq initial-frame-alist '((undecorated . t)))
 

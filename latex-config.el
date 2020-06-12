@@ -255,25 +255,32 @@ When given prefix argument, replace region with the result instead."
   :hook (LaTeX-mode . auto-latex-snippets-mode)
   :config
   (add-hook 'als-post-snippet-expand-hook #'+latex-fold-last-macro-a)
-  (als-set-expanding-ligatures
+  (defun +als-expand-snippet-fn (&optional parens)
+    (interactive)
+    (yas-expand-snippet (format "\\%s%s$1%s$0"
+                                als-transient-snippet-key
+                                (or (car-safe parens) "(")
+                                (or (cdr-safe parens) ")")))
+    (als--shut-up-smartparens))
+  (als-set-snippets
    als-prefix-map
    :cond #'texmathp
    ;; not sure if this should be mainline
    "abs" "\\abs"
    "np" "^n"
    ;; prob functions
-   "Ber"	"\\Ber"
-   "Bin"	"\\Bin"
-   "Cov"	"\\Cov"
-   "EX"	"\\EX"
-   "Geom"	"\\Geom"
-   "HyperGeom"	"\\HyperGeom"
-   "NB"	"\\NB"
-   "Poi"	"\\Poi"
-   "Rank"	"\\Rank"
-   "Uniform"	"\\Uniform"
-   "Var"	"\\Var"
-   "std"	"\\std"
+   "Ber"	#'+als-expand-snippet-fn
+   "Bin"	#'+als-expand-snippet-fn
+   "Cov"	#'+als-expand-snippet-fn
+   "EX"	(cmd! (+als-expand-snippet-fn '("[" . "]")))
+   "Geom"	#'+als-expand-snippet-fn
+   "HyperGeom"	#'+als-expand-snippet-fn
+   "NB"	#'+als-expand-snippet-fn
+   "Poi"	#'+als-expand-snippet-fn
+   "Rank"	#'+als-expand-snippet-fn
+   "Uniform"	#'+als-expand-snippet-fn
+   "Var"	#'+als-expand-snippet-fn
+   "std"	#'+als-expand-snippet-fn
    "supp"	"\\supp"))
 
 ;;; Keybinds

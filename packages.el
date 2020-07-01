@@ -63,10 +63,10 @@
 (package! evil-tex
   :recipe (:host github
            :repo "itai33/evil-tex")
-  :pin "bd92c3d02089656fb24c46f990a08b6a77cb3603")
+  :pin "ef363c12c87f4db2ef359707738561b3f9388817")
 ;; WIP automatic snippets for latex for example, when writing "log" inside
 ;; maths, it would instantly transform into "\log".
 (package! auto-latex-snippets
   :recipe (:host github
            :repo "tecosaur/Auto-LaTeX-Snippets")
-   :pin "9da5f3ad0b80a133c17701a6444a174ccdbb58b6")
+   :pin "3e78dc57435af311091dc4f9d3026c46b23a6f56")

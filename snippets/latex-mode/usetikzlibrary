@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: usetikzlibrary
+# key: tzl
+# --
+\usetikzlibrary{$1}

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: hebrew-emph
+# key: א
+# condition: (not (save-restriction (widen) (texmathp)))
+# --
+\emph{${1:`%`}}$0

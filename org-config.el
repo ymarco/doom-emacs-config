@@ -21,7 +21,7 @@
  ;; moon theme is ugly imo
  org-reveal-theme "black"
  ;; show images no matter what
- org-startup-with-inline-images t
+ org-startup-with-inline-images nil
  ;; org-startup-with-latex-preview t
  )
 

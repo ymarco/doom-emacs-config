@@ -12,7 +12,8 @@
  user-full-name "Yoav Marco"
  user-mail-address "yoavm448@gmail.com"
  user-login-name "yoavm448"
-
+ ;; TODO do I want this?
+ +ivy-buffer-preview t
  ;; prettiness
  doom-theme 'doom-spacegrey
  ;; take new window space from all other windows (not just current)
@@ -83,7 +84,8 @@
 (add-hook! 'conf-xdefaults-mode-hook (rainbow-mode 1))
 ;; When more witty things to say about mixed-pitch, this comment would be
 ;; replaced
-(add-hook! 'markdown-mode-hook #'mixed-pitch-mode)
+(add-hook! '(markdown-mode-hook elfeed-show-mode-hook) #'mixed-pitch-mode)
+(add-hook 'elfeed-search-mode #'elfeed-update)
 
 (defconst prvt/raw-git-packages-dir
   (eval-when-compile
@@ -148,6 +150,8 @@
   :init
   (setq nov-save-place-file (concat doom-etc-dir "nov-places")))
 
+(remove-hook 'evil-insert-state-entry-hook #'delete-selection-mode)
+
 (use-package! calibredb
   :commands (calibredb)
   :config
@@ -168,19 +172,30 @@
 With FILE, use that file instead. If FILE not specified and the
 buffer is org/tex and a corresponding pdf exists, drag that pdf."
   (interactive "<f>")
-  (start-process "dragon-from-emacs"
+
+  (let ((process
+         (start-process "dragon-from-emacs"
                  nil
                  "dragon"
                  (or
                   file
-                  (and (or (equal major-mode 'org-mode)
-                           (equal major-mode 'latex-mode))
-                       (file-exists-p
-                        (concat (file-name-extension (buffer-file-name)) ".pdf"))
+                  (when (and (or (eq major-mode 'org-mode)
+                                 (eq major-mode 'latex-mode))
+                             (file-exists-p
+                              (concat (file-name-extension (buffer-file-name)) ".pdf")))
                        (concat (file-name-extension (buffer-file-name)) ".pdf"))
                   (buffer-file-name))
                  "-x"))
+        (frame (selected-frame)))
+    (set-process-sentinel process (lambda (_process _change)
+                                    ;; FIXME this does nothing
+                                    (make-frame-visible frame)))
+    (suspend-frame)))
 (evil-ex-define-cmd "drag" #'+evil:drag-file)
+(evil-ex-define-cmd "lc" (lambda ()
+                           (interactive)
+                           (start-process "latex-cleanup:from-emacs" "*Messages*"
+                                          "latex-cleanup")))
 
 ;;; Keybinds
 
@@ -196,6 +211,8 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
  ;; General
  :n "g SPC"   #'evil-avy-goto-word-1
  :n "ga" (λ!! #'what-cursor-position t)
+ ;; standard emacs delete
+ :i "C-d"     #'delete-char
  ;; $ is way too inconvenient, and I barely use marks
  :n "m"       #'evil-end-of-line
  ;; to replace the lost m. I never use regisetrs, and we have SPC i y anyway.
@@ -206,7 +223,7 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
  :ni "C-/"    #'comment-line
  :v   "C-/"   #'comment-or-uncomment-region
  :ni "C-M-l"  #'+format/buffer
- (:after lsp :map lsp-mode-map
+ (:after lsp-mode :map lsp-mode-map
   "M-RET"     #'lsp-execute-code-action)
  ;; Old TAB behavior that was removed in b8a3cad295
  :n [tab] (general-predicate-dispatch nil
@@ -224,6 +241,10 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
             #'evil-jump-item)
  ;; Smartparens Navigation
  :ni "M-u"    #'sp-up-sexp) ; exit parenthesis
+
+(map! :after evil-markdown
+      :map evil-markdown-mode-map
+      :i "M-b" nil)
 ;; Company, don't block my snippet expansion
 ;; FIXME doesn't work
 (define-key! company-active-map
@@ -244,7 +265,8 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 
 ;; Let me see syntax highlighting even under #ifndef that amount to false
 (custom-set-faces!
-  '(font-lock-preprocessor-face :foreground nil))
+  `(font-lock-preprocessor-face :foreground nil :background ,(doom-color 'base2))
+  `(ccls-skipped-range-face :foreground nil :background ,(doom-color 'base2)))
 ;; highlight matching parens more clearly
 (add-hook! 'doom-load-theme-hook
   (custom-set-faces!
@@ -265,6 +287,9 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 ;; No window borders (doesn't work in daemon)
 (setq initial-frame-alist '((undecorated . t)))
 
+;; FIXME
+(custom-set-faces!
+  `(iedit-occurrence :foreground nil :inverse nil :background ,(doom-color 'base3)))
 
 (setq iedit-toggle-key-default nil)
 
@@ -279,6 +304,7 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 (load! "splash")
 
 
+(run-hooks 'doom-first-input-hook)
 ;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))
   ;; I don't wanna encase this whole file in "(let ((t0 ...)))"

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: long to
+# key: too
+# --
+\overset{${1:n}\to ${2:\infty}}{\longrightarrow} $0

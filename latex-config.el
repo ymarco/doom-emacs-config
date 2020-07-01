@@ -8,7 +8,7 @@
  ;; Just save, dont ask me
  TeX-save-query nil
  ;; Just cache, dont ask me
- preview-auto-cache-preamble nil
+ preview-auto-cache-preamble t
  ;; Don't raise/lower super/subscripts
  font-latex-fontify-script nil)
 
@@ -79,7 +79,7 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
    ("({1}]" ("pba"))
    ("[{1})" ("bpa"))
    ("[{1}]" ("bra"))
-   ("|{1}|" ("abs"))
+   ;; ("|{1}|" ("abs")) ; collides with the auto snippets and kicks me out
    ("❴{1}❵" ("bre" "set")) ; explicitly using bold unicode braces
    ("⌊{1}⌋" ("floor"))
    ("⌈{1}⌉" ("ceil"))
@@ -164,7 +164,7 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
 ;; FIXME this also fontifies tex macros in comments, hadn't found a solution yet
 (font-lock-add-keywords
  'latex-mode
- `((,"\\\\[[:word:]]+" 0 'font-lock-keyword-face prepend))
+ `((,"\\\\[A-Za-z@*]+" 0 'font-lock-keyword-face prepend))
  'end)
 
 (add-hook! 'doom-load-theme-hook
@@ -197,11 +197,8 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
            ;; enable them.
            (flycheck-mode -1))
 
-(add-hook! 'TeX-mode-hook
-           ;; mixed-pitch is pretty
-           #'mixed-pitch-mode
-           ;; WIP mine and @tecosaur's plugin
-           #'auto-latex-snippets-mode)
+;; mixed-pitch is pretty
+(add-hook! 'TeX-mode-hook #'mixed-pitch-mode)
 
 
 ;; WIP mine and @itai33's plugin
@@ -223,42 +220,46 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
   "Evaluate string S containing LaTeX code with `calc'.
 
 The result is another string containing LaTeX code."
+  (require 'calc)
   (calc-set-language 'latex)
   ;; TODO this is also a way
-  ;; (->> s
-  ;; (math-read-exprs)
-  ;; (-map #'math-evaluate-expr)
-  ;; (-map #'math-format-value))
-  (calc-eval
-   ;; calc thinks \cdot is a variable instead of just
-   ;; multiplying
-   (replace-regexp-in-string "\\\\cdot\\>" "*" s)
-   ", "))
+  (string-join (->> s
+                ;; calc thinks \cdot is a variable instead of just
+                ;; multiplying
+                (replace-regexp-in-string "\\\\cdot\\>" "*")
+                (math-read-exprs)
+                (-map #'math-evaluate-expr)
+                (-map #'math-format-value))
+               ", ")
+  ;; (calc-eval
+  )
 
-(evil-define-operator prvt/latex-eval-with-calc (beg end arg)
+(evil-define-operator prvt/latex-eval-with-calc (beg end type arg)
   "Evaluate latex region as math and insert the result into the kill ring.
 
 When given prefix argument, replace region with the result instead."
   :move-point nil
-  (interactive "<r>P")
-  (let ((res (prvt/eval-latex-with-calc
-              (buffer-substring-no-properties beg end))))
-    (if arg
-        (progn
-          (kill-region beg end)
-          (insert res))
-      (message "=> %s" res)
-      (kill-new res))))
+  (interactive "<R>P")
+  (if (eq type 'block)
+      (evil-apply-on-block #'prvt/latex-eval-with-calc beg end nil nil arg)
+    (let ((res (prvt/eval-latex-with-calc
+                (buffer-substring-no-properties beg end))))
+      (if arg
+          (save-excursion
+            (kill-region beg end)
+            (insert res))
+        (message "=> %s" res)
+        (kill-new res)))))
 
 ;; WIP mine and @tecosaur's plugin
 (use-package! auto-latex-snippets
   :hook (LaTeX-mode . auto-latex-snippets-mode)
   :config
   (add-hook 'als-post-snippet-expand-hook #'+latex-fold-last-macro-a)
-  (defun +als-expand-snippet-fn (&optional parens)
+  (defun +als-expand-snippet-fn (&optional parens func)
     (interactive)
     (yas-expand-snippet (format "\\%s%s$1%s$0"
-                                als-transient-snippet-key
+                                (or func als-transient-snippet-key)
                                 (or (car-safe parens) "(")
                                 (or (cdr-safe parens) ")")))
     (als--shut-up-smartparens))
@@ -266,22 +267,29 @@ When given prefix argument, replace region with the result instead."
    als-prefix-map
    :cond #'texmathp
    ;; not sure if this should be mainline
-   "abs" "\\abs"
+   "abs" (cmd! (+als-expand-snippet-fn '("{" . "}")))
    "np" "^n"
+   "Span" #'+als-expand-snippet-fn
    ;; prob functions
-   "Ber"	#'+als-expand-snippet-fn
-   "Bin"	#'+als-expand-snippet-fn
-   "Cov"	#'+als-expand-snippet-fn
-   "EX"	(cmd! (+als-expand-snippet-fn '("[" . "]")))
-   "Geom"	#'+als-expand-snippet-fn
-   "HyperGeom"	#'+als-expand-snippet-fn
-   "NB"	#'+als-expand-snippet-fn
-   "Poi"	#'+als-expand-snippet-fn
-   "Rank"	#'+als-expand-snippet-fn
-   "Uniform"	#'+als-expand-snippet-fn
-   "Var"	#'+als-expand-snippet-fn
-   "std"	#'+als-expand-snippet-fn
-   "supp"	"\\supp"))
+   "Ber" #'+als-expand-snippet-fn
+   "Bin" #'+als-expand-snippet-fn
+   "Cov" #'+als-expand-snippet-fn
+   "EX" (cmd! (+als-expand-snippet-fn '("[" . "]")))
+   "Geom" #'+als-expand-snippet-fn
+   "HyperGeom" #'+als-expand-snippet-fn
+   "NB" #'+als-expand-snippet-fn
+   "Poi" #'+als-expand-snippet-fn
+   "Rank" #'+als-expand-snippet-fn
+   "Uniform" #'+als-expand-snippet-fn
+   "Var" #'+als-expand-snippet-fn
+   "std" #'+als-expand-snippet-fn
+   "supp" "\\supp"
+   ;; complexity
+   "On" "O(n)"
+   "O1" "O(1)"
+   "Olog" "O(\\log n)"
+   "Olon" "O(n \\log n)"
+   ))
 
 ;;; Keybinds
 

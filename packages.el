@@ -3,6 +3,7 @@
 
 ;; TODO when I finally embed inkscape inside emacs
 ;;(package! xelb :pin "5970017d9b")
+(package! exwm  :pin "468e64ae604859d5541139c0600328e333c6e1b4")
 ;; ebook reading in emacs
 (package! nov :pin "cd1b264b3f")
 ;; living on the edge here
@@ -32,17 +33,19 @@
 ;; calibre client from emacs, needs more configuration
 (when (executable-find "calibredb")
   (package! calibredb
-    :recipe (:host github :repo "chenyanming/calibredb.el")))
+    :recipe (:host github :repo "chenyanming/calibredb.el")
+    :pin "b0030f2bdc9d1db3f0424ae2c4c9096ea52b4769"))
 ;; fixes an issue with compiled pdf-tools
 (when EMACS28+
   (package! pdf-tools
-    :recipe (:branch "fix-macros"
+    :recipe (:repo "flatwhatson/pdf-tools"
              :host github
-             :repo "flatwhatson/pdf-tools")))
+             :branch "fix-macros")
+    :pin "4a10c35e626ab6d7970dfd7335f4f883b1b879ef"))
 ;; WIP org export figures written in latex in both latex and html backend
 ;; (package! org-tex-fig
 ;;   :recipe (:local-repo "~/projects/org-tex-fig"))
 ;; I don't really know what I'm doing
 (when (executable-find "guix")
-  (package! guix))
+  (package! guix :pin "5b65938f778907c672bfb2f47d4971cf515341d3"))
 ;; (package! vimgolf :pin "f565447ed2")

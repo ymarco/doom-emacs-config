@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: pmatrix
+# key: pmat
+# --
+\begin{pmatrix}
+  $1
+\\end{pmatrix}

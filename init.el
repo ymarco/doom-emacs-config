@@ -136,7 +136,7 @@
        ;;kotlin                ; a better, slicker Java(Script)
        (latex +fold +latexmk)  ; writing papers in Emacs has never been so fun
        ;;ledger                ; an accounting system in Emacs
-       ;;lua                   ; one-based indices? one-based indices
+       lua                   ; one-based indices? one-based indices
        markdown                ; writing docs for people to ignore
        ;;nim                   ; python + lisp at the speed of c
        nix                   ; I hereby declare "nix geht mehr!"
@@ -177,7 +177,7 @@
        :app
        ;;calendar
        ;;irc          ; how neckbeards socialize
-       ;;(rss +org)   ; emacs as an RSS reader
+       (rss +org)   ; emacs as an RSS reader
        ;;twitter      ; twitter client https://twitter.com/vnought
        ;;(write       ; emacs as a word processor (latex + org + markdown)
        ;; +wordnut    ; wordnet (wn) search

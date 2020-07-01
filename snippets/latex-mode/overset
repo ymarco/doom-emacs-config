@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: overset
+# uuid: overset
+# key: os
+# --
+\overset{`%`$1}^{$2} $0

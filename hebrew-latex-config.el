@@ -95,8 +95,9 @@ it start a new line of its own."
   (setq preview-default-option-list '("displaymath" "floats" "graphics"
                                       "textmath" "footnotes"))
   (add-hook! 'TeX-mode-hook
-    (add-hook! 'evil-insert-state-entry-hook :local
-               #'+hebrew-input-method-heuristic))
+    (add-hook 'evil-insert-state-entry-hook
+              (function +hebrew-input-method-heuristic)
+              nil t))
   (add-hook 'TeX-mode-hook #'hebrew-mode)
   :config
   (map! :map LaTeX-mode-map
@@ -123,8 +124,43 @@ it start a new line of its own."
 
 
 (after! auto-latex-snippets
-  (als-set-expanding-ligatures
+  (als-set-snippets
    als-prefix-map
    :cond (lambda () (and (bolp) (not (texmathp))))
-   "שחד" (lambda () (interactive) (doom-snippets-expand :uuid "empty-section"))
-   "סחד" (lambda () (interactive) (doom-snippets-expand :uuid "empty-subsection"))))
+   "שחד" (cmd! (doom-snippets-expand :uuid "empty-section"))
+   "סחד" (cmd! (doom-snippets-expand :uuid "empty-subsection"))))
+
+(defun prvt/process-lyx-tex ()
+  (interactive)
+  (with-temp-buffer
+    ;; TODO https://unix.stackexchange.com/a/26289/333391
+    (insert-file-contents "hw07.tex")
+    ;; delete preamble
+    (search-forward "\\begin{document}")
+    (goto-char (match-beginning 0))
+    (delete-region (point-min) (point))
+    (goto-char (point-min))
+    (insert "\
+\\documentclass{article}
+\\usepackage{xargs}
+\\usepackage{preamble}
+\\usepackage{cancel}
+\\usepackage{wasysym}
+")
+
+    (write-region (point-min) (point-max) "hw07-processed.tex")))
+
+(defun prvt/lyx-tex-remove-Ls ()
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward "\\L{" nil t)
+    (let ((start (make-overlay (match-beginning 0) (match-end 0)))
+          end)
+      (goto-char (1- (match-end 0))) ;on {
+      (forward-sexp)
+      (setq end (make-overlay (1- (point)) (point)))
+
+      (delete-region (overlay-start start) (overlay-end start))
+      (delete-region (overlay-start end) (overlay-end end))
+      (delete-overlay start)
+      (delete-overlay end))))

@@ -49,11 +49,11 @@
  ;; searching-then-repeating-search-until-done faster then
  ;; searching-then-typing-the-displayed-letter-pair
  evil-snipe-scope 'visible
- ;; Wait for a bit longer before prompting me, lsp
- lsp-idle-delay 0.5
- lsp-ui-sideline-delay 0.5
- ;; js2 you too
- js2-idle-timer-delay 0.5
+ ;; Wait for a bit shorter - I've got native comp - before prompting me
+ lsp-idle-delay 0.2
+ lsp-ui-sideline-delay 0.2
+ js2-idle-timer-delay 0.2
+ eldoc-idle-delay 0.2
  ;; Fix inconsistency with tab width in JSON files
  json-reformat:indent-width 2
  ;; Consistent font

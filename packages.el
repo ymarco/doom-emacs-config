@@ -48,4 +48,12 @@
 ;; I don't really know what I'm doing
 (when (executable-find "guix")
   (package! guix :pin "5b65938f778907c672bfb2f47d4971cf515341d3"))
+
+;; (package! xenops ; not ready yet!
+;;   ;; until its on melpa
+;;   :recipe (:repo "dandavison/xenops"
+;;            :host github
+;;            ;; until it compiles correctly
+;;            :no-byte-compile t)
+;;   :pin "bc06c4d3ae0a45f9b92cd3d4632dd183c35e2275")
 ;; (package! vimgolf :pin "f565447ed2")

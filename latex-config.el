@@ -291,6 +291,14 @@ When given prefix argument, replace region with the result instead."
    "Olon" "O(n \\log n)"
    ))
 
+(use-package xenops
+  :hook (LaTeX-mode . xenops-mode)
+  :config
+  (map! :map xenops-mode-map
+        :n "RET" #'xenops-dwim)
+  (setq xenops-math-image-scale-factor 1.7
+        xenops-cache-directory (concat doom-cache-dir "xenops/")))
+
 ;;; Keybinds
 
 (map!

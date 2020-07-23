@@ -192,10 +192,21 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
                                     (make-frame-visible frame)))
     (suspend-frame)))
 (evil-ex-define-cmd "drag" #'+evil:drag-file)
-(evil-ex-define-cmd "lc" (lambda ()
+(evil-ex-define-cmd "lc" (defun +evil:run-latex-cleanup ()
                            (interactive)
                            (start-process "latex-cleanup:from-emacs" "*Messages*"
                                           "latex-cleanup")))
+(evil-ex-define-cmd "pdff[rame]"
+                    (defun +evil:export-frame-to-pdf-and-drag ()
+                      (interactive)
+                      ;; no need to create seperate temp files for each
+                      ;; export,they shouldn't be colliding.
+                      (let ((filename "/tmp/frames.pdf"))
+                        ;; for some reason using write-region doesn't work in
+                        ;; this case
+                        (with-temp-file filename
+                          (insert (x-export-frames)))
+                        (+evil:drag-file filename))))
 
 ;;; Keybinds
 

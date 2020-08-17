@@ -75,7 +75,7 @@
        undo        ; persistent, smarter undo for your inevitable mistakes
 
        :term
-       ;; eshell   ; a consistent, cross-platform shell (WIP)
+       eshell   ; a consistent, cross-platform shell (WIP)
        ;; term     ; terminals in Emacs
        vterm       ; another terminals in Emacs
 
@@ -110,6 +110,7 @@
        ;;grammar  ; tasing grammar mistake every you make
 
        :lang
+       json
        ;;agda                  ; types of types of types of types...
        ;; assembly                ; assembly for fun or debugging
        (cc +lsp)               ; C/C++/Obj-C madness

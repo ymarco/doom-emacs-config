@@ -177,17 +177,18 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 
   (let ((process
          (start-process "dragon-from-emacs"
-                 nil
-                 "dragon"
-                 (or
-                  file
-                  (when (and (or (eq major-mode 'org-mode)
-                                 (eq major-mode 'latex-mode))
-                             (file-exists-p
-                              (concat (file-name-extension (buffer-file-name)) ".pdf")))
-                       (concat (file-name-extension (buffer-file-name)) ".pdf"))
-                  (buffer-file-name))
-                 "-x"))
+                        nil
+                        "dragon"
+                        (or file
+                            (and (eq major-mode 'dired-mode)
+                                 (dired-get-filename))
+                            (let ((file (file-name-extension (buffer-file-name))))
+                              (and (or (eq major-mode 'org-mode)
+                                       (eq major-mode 'latex-mode))
+                                   (file-exists-p file)
+                                   file))
+                            (buffer-file-name))
+                        "-x"))
         (frame (selected-frame)))
     (set-process-sentinel process (lambda (_process _change)
                                     ;; FIXME this does nothing

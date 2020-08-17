@@ -389,7 +389,6 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
        (time-less-p (snapshot-date s1) (snapshot-date s2)))))
   (setq snapshot-timemachine-snapshot-finder #'get-snapshot-tables))
 
-(run-hooks 'doom-first-input-hook)
 ;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))
   ;; I don't wanna encase this whole file in "(let ((t0 ...)))"

@@ -225,6 +225,8 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
  ;; General
  :n "g SPC"   #'evil-avy-goto-word-1
  :n "ga" (λ!! #'what-cursor-position t)
+ ;;  the normal ! operator is in practice totally useless
+ :n "!" (cmd! (evil-ex "!"))
  ;; standard emacs delete
  :i "C-d"     #'delete-char
  ;; $ is way too inconvenient, and I barely use marks
@@ -237,6 +239,8 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
  :ni "C-/"    #'comment-line
  :v   "C-/"   #'comment-or-uncomment-region
  :ni "C-M-l"  #'+format/buffer
+ ;; force myself to use M-q (fill-column) through normal-mode, so I can undo it
+ :i "M-q" nil
  (:after lsp-mode :map lsp-mode-map
   "M-RET"     #'lsp-execute-code-action)
  ;; Old TAB behavior that was removed in b8a3cad295

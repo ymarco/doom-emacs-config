@@ -214,7 +214,9 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
              (forward-char)
              (insert ")")
              (backward-char)
-             (evil-insert 0))))
+             (evil-insert 0))
+        :map evil-tex-mode-map
+        :i "M-u" #'evil-tex-brace-movement))
 
 (defun prvt/eval-latex-with-calc (s)
   "Evaluate string S containing LaTeX code with `calc'.

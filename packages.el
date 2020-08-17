@@ -3,9 +3,9 @@
 
 ;; TODO when I finally embed inkscape inside emacs
 ;;(package! xelb :pin "5970017d9b")
-(package! exwm  :pin "468e64ae604859d5541139c0600328e333c6e1b4")
+(package! exwm  :pin "45ac28cc9cffe910c3b70979bc321a1a60e002ea")
 ;; ebook reading in emacs
-(package! nov :pin "cd1b264b3f")
+(package! nov :pin "3d32aac0f895c8605e254c8b7f246537816744f5")
 ;; living on the edge here
 (unpin! doom-snippets)
 ;; FIXME latex math previews using katex and webkit
@@ -22,10 +22,9 @@
 (package! hebrew-mode
   :recipe (:host github
            :repo "yoavm448/hebrew-mode"))
-;; WIP evil enhancements for latex buffers
+;; evil enhancements for latex buffers, my and iyefrat's baby
 (package! evil-tex
-  :recipe (:local-repo "~/projects/evil-tex"
-           :no-byte-compile t))
+  :recipe (:no-byte-compile t))
 ;; WIP auto snippets for latex
 (package! auto-latex-snippets
   :recipe (:local-repo "~/projects/Auto-LaTeX-Snippets"
@@ -34,14 +33,9 @@
 (when (executable-find "calibredb")
   (package! calibredb
     :recipe (:host github :repo "chenyanming/calibredb.el")
-    :pin "b0030f2bdc9d1db3f0424ae2c4c9096ea52b4769"))
+    :pin "a27b71b727ebf726ed0742d968717e0e89db9786"))
 ;; fixes an issue with compiled pdf-tools
-(when EMACS28+
-  (package! pdf-tools
-    :recipe (:repo "flatwhatson/pdf-tools"
-             :host github
-             :branch "fix-macros")
-    :pin "4a10c35e626ab6d7970dfd7335f4f883b1b879ef"))
+(package! pdf-tools :built-in t)
 
 (package! snapshot-timemachine :pin "99efcebab309b11ed512a8dc62555d3834df5efb")
 ;; WIP org export figures written in latex in both latex and html backend

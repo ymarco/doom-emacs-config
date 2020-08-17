@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: hebrew-empty-section
+# key: אסק
+# group: hebrew latex
+# type: command
+# --
+(doom-snippets-expand :uuid "empty-section")

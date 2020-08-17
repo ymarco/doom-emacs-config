@@ -56,6 +56,8 @@
  eldoc-idle-delay 0.2
  ;; Fix inconsistency with tab width in JSON files
  json-reformat:indent-width 2
+ ;; zfs compresses for me already
+ undo-fu-session-compression nil
  ;; Consistent font
  doom-font (font-spec :family "monospace" :size 20)
  ;; I have issues with variable-pitch fonts that appear larger than their
@@ -65,7 +67,7 @@
  ;; EDIT: you can do that by setting 'height property, I've read the code. But
  ;; source sans pro is so pretty!
  doom-variable-pitch-font (font-spec :family "Source Sans Pro")
- doom-serif-font (font-spec :family "Bitstream Charter")
+ doom-serif-font (font-spec :family "XCharter")
  projectile-project-search-path '("~/projects")
  abbrev-file-name (concat doom-private-dir "abbrevs.el")
  org-roam-directory "~/org/roam/"
@@ -295,9 +297,6 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
              (evil-initialize-state 'insert) ; start in insert
              (doom-snippets-expand :uuid "__")))
 
-;; No window borders (doesn't work in daemon)
-(setq initial-frame-alist '((undecorated . t)))
-
 ;; FIXME
 (custom-set-faces!
   `(iedit-occurrence :foreground nil :inverse nil :background ,(doom-color 'base3)))
@@ -313,6 +312,8 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 (when EMACS28+
   (load! "native-comp.el"))
 (load! "splash")
+
+(add-hook! 'nix-mode-hook (company-mode -1))
 
 (use-package! snapshot-timemachine
   :defer t

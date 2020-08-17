@@ -30,6 +30,14 @@
            #'+org-pretty-mode
            #'mixed-pitch-mode)
 
+(after! mixed-pitch
+  (add-to-list 'mixed-pitch-fixed-pitch-faces 'org-list-dt))
+(font-lock-add-keywords
+ 'org-mode
+ '(("^ +" (0 font-lock-comment-face t))
+   ("^ *-\\( \\)" (1 font-lock-comment-face t))
+   ("^ *[0-9]+\\.\\( \\)" (1 font-lock-comment-face t))))
+
 (add-hook! 'org-mode-hook (company-mode -1))
 
 (setq org-ellipsis " ▾")

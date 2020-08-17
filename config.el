@@ -314,6 +314,75 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
   (load! "native-comp.el"))
 (load! "splash")
 
+(use-package! snapshot-timemachine
+  :defer t
+  :config
+  ;; lispy C-j C-k bindings shadow the ones on snapshot-timemachine
+  (when (featurep! :editor lispy)
+    (add-hook! 'snapshot-timemachine-mode-hook (lispy-mode -1)))
+  (map! :map snapshot-timemachine-mode-map
+        :n "C-k" #'snapshot-timemachine-show-prev-interesting-snapshot
+        :n "C-j" #'snapshot-timemachine-show-next-interesting-snapshot
+        :n "q"   #'snapshot-timemachine-quit
+        :map snapshot-timeline-mode-map
+        :n "RET" #'snapshot-timeline-show-diff
+        :n "<S-return>" #'snapshot-timeline-view-snapshot
+        :n "a"   #'snapshot-timeline-mark-as-A
+        :n "b"   #'snapshot-timeline-mark-as-B
+        :n "d"   #'snapshot-timeline-show-diff-A-B
+        :n "q"   #'snapshot-timemachine-quit
+        :n "j"   #'snapshot-timeline-goto-next-snapshot
+        :n "k"   #'snapshot-timeline-goto-prev-snapshot
+        :n "J"   #'snapshot-timeline-goto-next-interesting-snapshot
+        :n "K"   #'snapshot-timeline-goto-prev-interesting-snapshot
+        :n "u"   #'snapshot-timeline-unmark
+        :n "U"   #'snapshot-timeline-unmark-all
+        :n "m"   #'snapshot-timeline-emerge-A-B
+        :n "d"   #'snapshot-timeline-ediff-A-B
+        :n "<"   #'tabulated-list-narrow-current-column
+        :n ">"   #'tabulated-list-widen-current-column)
+  (defun get-zfs-snapshot-parent-dir ()
+    "Return a directory parent to `default-directory' which contains a .zfs directory"
+    (let ((dir default-directory)
+          res)
+      (while (null res)
+        (when (file-directory-p (concat dir ".zfs"))
+          (setq res dir))
+        (when (file-exists-p (concat dir "../"))
+          (setq dir (file-truename (concat dir "../"))))
+        (when (and (null res) (equal dir "/"))
+          (user-error "No zfs snapshot dir found")))
+      res))
+  (defun get-snapshots (file)
+    "Return a list of paths for existing snapshotted copies of FILE."
+    (let ((snapshot-dir (get-zfs-snapshot-parent-dir)))
+      (file-expand-wildcards
+       (concat snapshot-dir ".zfs/snapshot/*/"
+               (string-trim-left file (regexp-quote snapshot-dir))))))
+  (defun get-snapshot-tables (filename)
+    (sort
+     (cl-loop for file being the elements of (get-snapshots filename)
+              using (index i)
+              for date-odd-string = (progn (string-match ".*/\\.zfs/snapshot/zfs-auto-snap_[a-z]+-\\([^/]+\\)/" file)
+                                           (match-string 1 file))
+              for date = (progn
+                           (string-match
+                            "\\([0-9]+\\)-\\([0-9]+\\)-\\([0-9]+\\)-\\([0-9]+\\)h\\([0-9]+\\)U"
+                            date-odd-string)
+                           (cl-destructuring-bind (year month day hour minute)
+                               (mapcar (lambda (i) (string-to-number (match-string i date-odd-string)))
+                                       (number-sequence 1 5))
+                             (encode-time
+                              ;; decoded-time format
+                              (list 0 minute hour day month year nil nil t))))
+              collect (make-snapshot
+                       :id i
+                       :name (current-time-string date)
+                       :file file
+                       :date date))
+     (lambda (s1 s2)
+       (time-less-p (snapshot-date s1) (snapshot-date s2)))))
+  (setq snapshot-timemachine-snapshot-finder #'get-snapshot-tables))
 
 (run-hooks 'doom-first-input-hook)
 ;;; Config performance measure

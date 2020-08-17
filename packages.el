@@ -42,6 +42,8 @@
              :host github
              :branch "fix-macros")
     :pin "4a10c35e626ab6d7970dfd7335f4f883b1b879ef"))
+
+(package! snapshot-timemachine :pin "99efcebab309b11ed512a8dc62555d3834df5efb")
 ;; WIP org export figures written in latex in both latex and html backend
 ;; (package! org-tex-fig
 ;;   :recipe (:local-repo "~/projects/org-tex-fig"))

@@ -321,6 +321,10 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 
 (use-package! snapshot-timemachine
   :defer t
+  :init
+  ;; virtual files in .zfs/ somehow bug out the ivy stuff with recentf
+  (after! recentf
+    (add-to-list 'recentf-exclude "/\\.zfs/"))
   :config
   ;; lispy C-j C-k bindings shadow the ones on snapshot-timemachine
   (when (featurep! :editor lispy)
@@ -346,6 +350,25 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
         :n "d"   #'snapshot-timeline-ediff-A-B
         :n "<"   #'tabulated-list-narrow-current-column
         :n ">"   #'tabulated-list-widen-current-column)
+  (defadvice! +snapshot-timemachine-close-diff-as-well ()
+    "Close the opened diff when quitting `snapshot-timeline'."
+    :before #'snapshot-timemachine-quit
+    (when-let ((diff-buffer (get-buffer
+                             (format "diff:%s" (file-name-nondirectory
+                                                snapshot-timemachine--file)))))
+      (mapc #'delete-window (get-buffer-window-list diff-buffer))
+      (kill-buffer diff-buffer)))
+  (defadvice! +snapshot-timemachine-header ()
+    "Display snapshot info in the header. Minibuffer tends to get hidden."
+    :after #'snapshot-timemachine-show-focused-snapshot
+    (let ((snapshot (snapshot-timemachine--zipper-focus
+                     snapshot-timemachine--snapshots)))
+      (setq header-line-format
+            (format "Snapshot %s from %s"
+                    (propertize  (snapshot-name snapshot) 'face 'font-lock-variable-name-face)
+                    (propertize (format-time-string snapshot-timemachine-time-format
+                                                    (snapshot-date snapshot))
+                                'face 'font-lock-builtin-face)))))
   (defun get-zfs-snapshot-parent-dir ()
     "Return a directory parent to `default-directory' which contains a .zfs directory"
     (let ((dir default-directory)
@@ -368,7 +391,9 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
     (sort
      (cl-loop for file being the elements of (get-snapshots filename)
               using (index i)
-              for date-odd-string = (progn (string-match ".*/\\.zfs/snapshot/zfs-auto-snap_[a-z]+-\\([^/]+\\)/" file)
+              for name = (progn (string-match ".*/\\.zfs/snapshot/\\(zfs-auto-snap_[a-z]+-[^/]+\\)/" file)
+                                (match-string 1 file))
+              for date-odd-string = (progn (string-match "zfs-auto-snap_[a-z]+-\\([^/]+\\)/" file)
                                            (match-string 1 file))
               for date = (progn
                            (string-match
@@ -382,7 +407,7 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
                               (list 0 minute hour day month year nil nil t))))
               collect (make-snapshot
                        :id i
-                       :name (current-time-string date)
+                       :name name
                        :file file
                        :date date))
      (lambda (s1 s2)

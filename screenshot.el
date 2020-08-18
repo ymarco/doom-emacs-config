@@ -21,8 +21,7 @@ If specified, used FRAME instead of the selected one."
     (let* ((frame
             (make-frame '((name . "* Emacs Screenshot")
                           (minibuffer . nil)
-                          (cursor nil)))
-            )
+                          (cursor nil))))
            ;; (doom-font (font-spec :family "Source Code Pro"))
            (scroll-margin 0)
            (mode-line-format nil)
@@ -48,5 +47,4 @@ If specified, used FRAME instead of the selected one."
         ;;  "-target" "image/png")
         )
       (sleep-for 1)
-      (delete-frame frame)
-      )))
+      (delete-frame frame))))

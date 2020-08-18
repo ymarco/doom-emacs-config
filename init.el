@@ -198,7 +198,4 @@
        ;; config. Use it as a reference for your own modules.
        (default +bindings +smartparens))
 
-(when noninteractive
-  (after! undo-tree
-    (global-undo-tree-mode -1)))
 (setq comp-async-env-modifier-form "")

@@ -70,10 +70,7 @@
  doom-serif-font (font-spec :family "XCharter")
  projectile-project-search-path '("~/projects")
  abbrev-file-name (concat doom-private-dir "abbrevs.el")
- org-roam-directory "~/org/roam/"
- ;; So helpful can show me the C source code
- find-function-C-source-directory (when EMACS28+ "~/programs/emacs28/src"))
-
+ org-roam-directory "~/org/roam/")
 
 ;; Don't blink the cursor, it's too distracting.
 (blink-cursor-mode -1)

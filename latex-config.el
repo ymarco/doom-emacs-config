@@ -340,3 +340,19 @@ When given prefix argument, replace region with the result instead."
 
 (set-popup-rule! "^\\*TeX \\(?:Help\\|errors\\)"
   :size 0.3 :select t :ttl nil)
+
+(after! latex
+  (TeX-add-style-hook
+   "preamble"
+   (lambda ()
+     (TeX-run-style-hooks
+      "amsmath"
+      "amssymb"
+      "amsthm"
+      "breqn"
+      "iftex"
+      "macros"
+      "mathtools"
+      "polyglossia"
+      "xcolor"))
+   LaTeX-dialect))

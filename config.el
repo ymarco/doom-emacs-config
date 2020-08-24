@@ -257,6 +257,14 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
  ;; Smartparens Navigation
  :ni "M-u"    #'sp-up-sexp) ; exit parenthesis
 
+(mapc (lambda (c)
+        (map! :n (string c)
+              (lambda () (interactive)
+                (message "Switching to English")
+                (call-process "xkblayout-state" nil nil nil "set" "+1")
+                (call-process "xkblayout-state" nil nil nil "set" "+1"))))
+      "אבגדהוזחטיכךלמםנןסעפףצץקרשת")
+
 (map! :after evil-markdown
       :map evil-markdown-mode-map
       :i "M-b" nil)

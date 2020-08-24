@@ -42,10 +42,6 @@
 
 (setq org-ellipsis " ▾")
 
-;; Native LaTeX highlighting is slower but WAY prettier
-(after! org
-  (setq org-highlight-latex-and-related '(latex script entities)))
-
 ;; Ultra-bold annoys me, and bold is annoying when theres too much of it.
 ;; Semi-bold is a lot prettier (at least when supported).
 (custom-set-faces!

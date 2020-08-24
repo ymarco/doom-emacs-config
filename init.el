@@ -198,4 +198,8 @@
        ;; config. Use it as a reference for your own modules.
        (default +bindings +smartparens))
 
-(setq comp-async-env-modifier-form "")
+(setq
+ ;; fix for nix native-comp
+ comp-async-env-modifier-form ""
+ ;; fix for pgtk restarting
+ invocation-name (file-name-nondirectory (car command-line-args)))

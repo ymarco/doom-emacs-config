@@ -48,3 +48,10 @@ If specified, used FRAME instead of the selected one."
         )
       (sleep-for 1)
       (delete-frame frame))))
+
+(cl-loop for i from 2 to 9
+         for face = (intern (format "rainbow-delimiters-depth-%s-face" i))
+         do
+         (custom-set-faces!
+           `(,face :foreground
+                   ,(doom-blend (doom-color 'bg) (face-attribute face :foreground) 0.4))))

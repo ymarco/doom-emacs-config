@@ -261,8 +261,11 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
         (map! :n (string c)
               (lambda () (interactive)
                 (message "Switching to English")
-                (call-process "xkblayout-state" nil nil nil "set" "+1")
-                (call-process "xkblayout-state" nil nil nil "set" "+1"))))
+                (call-process "gdbus" nil nil nil
+                              "call" "--session" "--dest" "org.gnome.Shell"
+                              "--object-path" "/org/gnome/Shell"
+                              "--method" "org.gnome.Shell.Eval"
+                              "imports.ui.status.keyboard.getInputSourceManager().inputSources[0].activate()"))))
       "אבגדהוזחטיכךלמםנןסעפףצץקרשת")
 
 (map! :after evil-markdown

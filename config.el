@@ -260,12 +260,26 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 (mapc (lambda (c)
         (map! :n (string c)
               (lambda () (interactive)
-                (message "Switching to English")
-                (call-process "gdbus" nil nil nil
+                ;; switch to English
+                (start-process "switch-to-hebrew" nil "gdbus"
                               "call" "--session" "--dest" "org.gnome.Shell"
                               "--object-path" "/org/gnome/Shell"
                               "--method" "org.gnome.Shell.Eval"
-                              "imports.ui.status.keyboard.getInputSourceManager().inputSources[0].activate()"))))
+                              "imports.ui.status.keyboard.getInputSourceManager().inputSources[0].activate()")
+                ;; emulate the keybind caught by this lambda
+                (setq unread-command-events
+                      (nconc (list
+                              (aref quail-keyboard-layout
+                                    (string-match (string c)
+                                                  (concat
+                                                   "                              "
+                                                   "  1!2@3#4$5%6^7&8*9(0)-_=+`~  "
+                                                   "  /Q'WקEרRאTטYוUןIםOפP[{]}    "
+                                                   "  שAדSגDכFעGיHחJלKךLף:'\"\\|  "
+                                                   "    זZסXבCהVנBמNצMת<ץ>/?      "
+                                                   "                                "))))
+                             unread-command-events))
+                (message "Switching to English"))))
       "אבגדהוזחטיכךלמםנןסעפףצץקרשת")
 
 (map! :after evil-markdown

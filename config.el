@@ -391,21 +391,9 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
                     (propertize (format-time-string snapshot-timemachine-time-format
                                                     (snapshot-date snapshot))
                                 'face 'font-lock-builtin-face)))))
-  (defun get-zfs-snapshot-parent-dir ()
-    "Return a directory parent to `default-directory' which contains a .zfs directory"
-    (let ((dir default-directory)
-          res)
-      (while (null res)
-        (when (file-directory-p (concat dir ".zfs"))
-          (setq res dir))
-        (when (file-exists-p (concat dir "../"))
-          (setq dir (file-truename (concat dir "../"))))
-        (when (and (null res) (equal dir "/"))
-          (user-error "No zfs snapshot dir found")))
-      res))
   (defun get-snapshots (file)
     "Return a list of paths for existing snapshotted copies of FILE."
-    (let ((snapshot-dir (get-zfs-snapshot-parent-dir)))
+    (let ((snapshot-dir (locate-dominating-file file ".zfs")))
       (file-expand-wildcards
        (concat snapshot-dir ".zfs/snapshot/*/"
                (string-trim-left file (regexp-quote snapshot-dir))))))

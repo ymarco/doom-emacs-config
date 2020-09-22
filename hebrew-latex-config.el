@@ -82,10 +82,12 @@ it start a new line of its own."
   "Enters display math mode in latex."
   (interactive)
   (insert (+heberw--snippets-newline-if-needed 2))
-  (insert "‎")                           ; always align to left
+  (insert "‎")                           ; LTR char: always align to left
   (hebrew-set-regular-input-method)
   (doom-snippets-expand :name "align*"))
 
+(add-hook! 'hebrew-mode-hook
+  (setq-local bidi-inhibit-bpa nil))
 
 (use-package! tex
   :defer t

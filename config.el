@@ -330,6 +330,13 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 
 (setq iedit-toggle-key-default nil)
 
+(use-package! hebrew-mode
+  :defer t
+  :config
+  (add-hook! 'doom-load-theme-hook
+    (set-fontset-font t 'hebrew (font-spec :family hebrew-hebrew-font-family))))
+
+
 ;;; Load other configs
 (load! "latex-config")
 (load! "hebrew-latex-config")

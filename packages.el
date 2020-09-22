@@ -53,3 +53,7 @@
 ;;            :no-byte-compile t)
 ;;   :pin "bc06c4d3ae0a45f9b92cd3d4632dd183c35e2275")
 ;; (package! vimgolf :pin "f565447ed2")
+;; Fancy dictionaries
+(package! lexic
+  :recipe (:host github :repo "tecosaur/lexic"
+           :no-byte-compile t))

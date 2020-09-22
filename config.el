@@ -424,6 +424,72 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
        (time-less-p (snapshot-date s1) (snapshot-date s2)))))
   (setq snapshot-timemachine-snapshot-finder #'get-snapshot-tables))
 
+(use-package! lexic
+  :commands lexic-search lexic-list-dictionary
+  :init
+  (defadvice! +lookup/dictionary-definition-lexic (identifier &optional arg)
+    "Look up the definition of the word at point (or selection) using `lexic-search'."
+    :override #'+lookup/dictionary-definition
+    (interactive
+     (list (or (doom-thing-at-point-or-region 'word)
+               (read-string "Look up in dictionary: "))
+           current-prefix-arg))
+    (lexic-search identifier nil nil t))
+  (defun +lexic-capture ()
+    (interactive)
+    (let* ((selection (x-selection))
+           (gwidth (display-pixel-width))
+           (gheight (display-pixel-height))
+           (charwidth 81)
+           (width (* charwidth (frame-char-width)))
+           (height (/ gheight 4))
+           (left (/ (- gwidth width) 4)) ; FIXME should be 2 but the `left' scale is 1080 and gwidth is 3840
+           (top (/ (- gheight height) 4))
+           (charheight (round (/ height (frame-char-width))))
+           (frame (make-frame `((name . ,(concat "* Define Word:" selection))
+                                (width . ,charwidth)
+                                (height . ,charheight)
+                                (left . ,left)
+                                (top . ,top)
+                                (auto-raise . t)
+                                (skip-taskbar . t)
+                                (alpha . 97)))))
+      (require 'lexic)
+      ;; TODO handle quit signal and close frame
+      (condition-case err
+          (lexic-search selection nil nil t)
+        (t
+         (progn
+           (message "err: %s" err)
+           (when selection (message "%s not found" selection))
+           (call-interactively #'lexic-search))))
+      (delete-other-windows)
+      (add-transient-hook! #'lexic-return-from-lexic :after
+                           (when (equal (selected-frame) frame)
+                            (delete-frame frame)))))
+  :config
+  (map! :map lexic-mode-map
+        :n "q" #'lexic-return-from-lexic
+        :nv "RET" #'lexic-search-word-at-point
+        :n "TAB" #'lexic-toggle-entry
+        :n "<tab>" #'lexic-toggle-entry
+        :n "a" #'outline-show-all
+        :n "S-TAB" (cmd! (outline-hide-sublevels 3))
+        :n "<S-tab>" (cmd! (outline-hide-sublevels 3))
+        :n "C-j" #'lexic-next-entry
+        :n "C-J" (cmd! (lexic-next-entry t))
+        :n "C-k" #'lexic-previous-entry
+        :n "C-K" (cmd! (lexic-previous-entry t))
+        :n "C-h" #'lexic-search-history-backwards
+        :n "C-l" #'lexic-search-history-forwards
+        :n "s" #'lexic-search)
+  (add-hook! 'lexic-mode-hook (evil-snipe-mode -1))
+  ;; FIXME mixed-pitch? fix indentation
+  (font-lock-add-keywords
+   'lexit-mode
+   '(("^[​ ]+" (0 font-lock-comment-face t))
+     ("^[​ ]*-\\( \\)" (1 font-lock-comment-face t))
+     ("^[​ ]*[0-9]+\\.\\( \\)" (1 font-lock-comment-face t)))))
 ;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))
   ;; I don't wanna encase this whole file in "(let ((t0 ...)))"

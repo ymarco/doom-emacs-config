@@ -27,7 +27,6 @@
 
 ;; I LOVE PRETTY STUFF
 (add-hook! 'org-mode-hook
-           #'+org-pretty-mode
            #'mixed-pitch-mode)
 
 (after! mixed-pitch
@@ -106,7 +105,7 @@
  pdfcreator={%c},
  pdflang={%L},
  colorlinks=true,
- linkcolor={cyan!35!black}
+ linkcolor={cyan}
 }"
    ;; page break after TOC
    org-latex-toc-command "\\tableofcontents\n\\pagebreak\n\n")

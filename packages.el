@@ -10,21 +10,19 @@
 (unpin! doom-snippets)
 ;; FIXME latex math previews using katex and webkit
 ;; (package! webkit-katex-render
-;;   :recipe (:local-repo "~/projects/emacs-webkit-katex-render"))
+;;   :recipe (:local-repo "packages/emacs-webkit-katex-render"))
 ;; nicer sxhkd config file editing
 ;; Trying to avoid as many post-commnad hooks as possible
 (package! evil-escape :disable t)
 ;; When I finally get back to bspwm
 (package! sxhkd-mode
-  :recipe (:local-repo "~/projects/sxhkd-mode"
-           :no-byte-compile t))
+  :recipe (:local-repo "packages/sxhkd-mode"))
 ;; Sane defaults to hebrew
 (package! hebrew-mode
   :recipe (:host github
            :repo "yoavm448/hebrew-mode"))
 ;; evil enhancements for latex buffers, my and iyefrat's baby
-(package! evil-tex
-  :recipe (:no-byte-compile t))
+(package! evil-tex)
 ;; WIP auto snippets for latex
 (package! latex-auto-activating-snippets
   :recipe (:local-repo "packages/Auto-LaTeX-Snippets"
@@ -43,18 +41,13 @@
 (package! snapshot-timemachine :pin "99efcebab309b11ed512a8dc62555d3834df5efb")
 ;; WIP org export figures written in latex in both latex and html backend
 ;; (package! org-tex-fig
-;;   :recipe (:local-repo "~/projects/org-tex-fig"))
-;; I don't really know what I'm doing
-(when (executable-find "guix")
-  (package! guix :pin "5b65938f778907c672bfb2f47d4971cf515341d3"))
+;;   :recipe (:local-repo "packages/org-tex-fig"))
 
-;; (package! xenops ; not ready yet!
-;;   ;; until its on melpa
-;;   :recipe (:repo "dandavison/xenops"
-;;            :host github
-;;            ;; until it compiles correctly
-;;            :no-byte-compile t)
-;;   :pin "bc06c4d3ae0a45f9b92cd3d4632dd183c35e2275")
+(package! inkscape
+  :recipe (:local-repo "packages/inkscape"))
+
+(package! xenops ; not ready yet!
+  :pin "78cbe16b74480ac6304865c9c3cfad36b5d49d1d")
 ;; (package! vimgolf :pin "f565447ed2")
 ;; Fancy dictionaries
 (package! lexic

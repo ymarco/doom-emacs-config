@@ -125,9 +125,9 @@ it start a new line of its own."
                 (TeX-command "LatexMk" 'TeX-master-file)))))
 
 
-(after! auto-latex-snippets
-  (als-set-snippets
-   als-prefix-map
+(after! auto-activating-snippets
+  (aas-set-snippets
+   'latex-mode
    :cond (lambda () (and (bolp) (not (texmathp))))
    "שחד" (cmd! (doom-snippets-expand :uuid "empty-section"))
    "סחד" (cmd! (doom-snippets-expand :uuid "empty-subsection"))))

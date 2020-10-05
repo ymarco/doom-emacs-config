@@ -26,8 +26,11 @@
 (package! evil-tex
   :recipe (:no-byte-compile t))
 ;; WIP auto snippets for latex
-(package! auto-latex-snippets
-  :recipe (:local-repo "~/projects/Auto-LaTeX-Snippets"
+(package! latex-auto-activating-snippets
+  :recipe (:local-repo "packages/Auto-LaTeX-Snippets"
+           :no-byte-compile t))
+(package! auto-activating-snippets
+  :recipe (:local-repo "packages/auto-activating-snippets"
            :no-byte-compile t))
 ;; calibre client from emacs, needs more configuration
 (when (executable-find "calibredb")

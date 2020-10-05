@@ -254,44 +254,57 @@ When given prefix argument, replace region with the result instead."
         (kill-new res)))))
 
 ;; WIP mine and @tecosaur's plugin
-(use-package! auto-latex-snippets
-  :hook (LaTeX-mode . auto-latex-snippets-mode)
+(use-package! auto-activating-snippets
+  :hook (LaTeX-mode . auto-activating-snippets-mode)
+  :hook (org-mode . auto-activating-snippets-mode)
   :config
-  (add-hook 'als-post-snippet-expand-hook #'+latex-fold-last-macro-a)
-  (defun +als-expand-snippet-fn (&optional parens func)
+  (aas-set-snippets
+   'text-mode
+   "o-" "ō"
+   "i-" "ī"
+   "a-" "ā"
+   "u-" "ū"
+   "e-" "ē"))
+
+(use-package! latex-auto-activating-snippets
+  :after latex
+  :config
+  (add-hook! 'LaTeX-mode-hook
+    (add-hook! 'aas-post-snippet-expand-hook :local
+               #'+latex-fold-last-macro-a))
+  (defun +aas-expand-snippet-fn (&optional parens func)
     (interactive)
     (yas-expand-snippet (format "\\%s%s$1%s$0"
-                                (or func als-transient-snippet-key)
+                                (or func aas-transient-snippet-key)
                                 (or (car-safe parens) "(")
                                 (or (cdr-safe parens) ")")))
-    (als--shut-up-smartparens))
-  (als-set-snippets
-   als-prefix-map
+    (laas--shut-up-smartparens))
+  (aas-set-snippets
+   'latex-mode
    :cond #'texmathp
    ;; not sure if this should be mainline
-   "abs" (cmd! (+als-expand-snippet-fn '("{" . "}")))
-   "np" "^n"
-   "Span" #'+als-expand-snippet-fn
+   "abs" (cmd! (+aas-expand-snippet-fn '("{" . "}")))
+   "pn" "^n"
+   "Span" #'+aas-expand-snippet-fn
    ;; prob functions
-   "Ber" #'+als-expand-snippet-fn
-   "Bin" #'+als-expand-snippet-fn
-   "Cov" #'+als-expand-snippet-fn
-   "EX" (cmd! (+als-expand-snippet-fn '("[" . "]")))
-   "Geom" #'+als-expand-snippet-fn
-   "HyperGeom" #'+als-expand-snippet-fn
-   "NB" #'+als-expand-snippet-fn
-   "Poi" #'+als-expand-snippet-fn
-   "Rank" #'+als-expand-snippet-fn
-   "Uniform" #'+als-expand-snippet-fn
-   "Var" #'+als-expand-snippet-fn
-   "std" #'+als-expand-snippet-fn
+   "Ber" #'+aas-expand-snippet-fn
+   "Bin" #'+aas-expand-snippet-fn
+   "Cov" #'+aas-expand-snippet-fn
+   "EX" (cmd! (+aas-expand-snippet-fn '("[" . "]")))
+   "Geom" #'+aas-expand-snippet-fn
+   "HyperGeom" #'+aas-expand-snippet-fn
+   "NB" #'+aas-expand-snippet-fn
+   "Poi" #'+aas-expand-snippet-fn
+   "Rank" #'+aas-expand-snippet-fn
+   "Uniform" #'+aas-expand-snippet-fn
+   "Var" #'+aas-expand-snippet-fn
+   "std" #'+aas-expand-snippet-fn
    "supp" "\\supp"
    ;; complexity
    "On" "O(n)"
    "O1" "O(1)"
    "Olog" "O(\\log n)"
-   "Olon" "O(n \\log n)"
-   ))
+   "Olon" "O(n \\log n)"))
 
 (use-package xenops
   :hook (LaTeX-mode . xenops-mode)

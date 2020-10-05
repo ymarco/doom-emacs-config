@@ -53,3 +53,4 @@
 (package! lexic
   :recipe (:host github :repo "tecosaur/lexic"
            :no-byte-compile t))
+(package! explain-pause-mode :disable t)

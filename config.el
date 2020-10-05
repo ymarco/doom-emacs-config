@@ -70,7 +70,9 @@
  doom-serif-font (font-spec :family "XCharter")
  projectile-project-search-path '("~/projects")
  abbrev-file-name (concat doom-private-dir "abbrevs.el")
- org-roam-directory "~/org/roam/")
+ deft-directory "~/org/"
+ org-roam-directory "~/org/"
+ rmh-elfeed-org-files (list "~/media/elfeed-rss.org"))
 
 ;; Don't blink the cursor, it's too distracting.
 (blink-cursor-mode -1)

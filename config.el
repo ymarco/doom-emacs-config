@@ -42,6 +42,7 @@
  treemacs-width 30
  ;; Leave my comments alone
  +evil-want-o/O-to-continue-comments  nil
+ evil-ex-substitute-global t
  ;; Don't replace the current window when splitting
  evil-split-window-below  t
  evil-vsplit-window-right t
@@ -494,6 +495,10 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
    '(("^[​ ]+" (0 font-lock-comment-face t))
      ("^[​ ]*-\\( \\)" (1 font-lock-comment-face t))
      ("^[​ ]*[0-9]+\\.\\( \\)" (1 font-lock-comment-face t)))))
+
+(setq safe-local-variable-values '((eval . (flyspell-mode t))
+                                   (org-latex-compiler . "xelatex")))
+
 ;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))
   ;; I don't wanna encase this whole file in "(let ((t0 ...)))"

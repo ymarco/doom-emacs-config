@@ -161,11 +161,6 @@
   (custom-set-faces!
     '(calibredb-search-header-highlight-face :inherit hl-line)))
 
-;; FIXME
-(setq-hook! 'emacs-lisp-mode-hook
-  tab-width 8)
-
-
 (evil-define-command +evil:drag-file (file)
   "Open a drag window with dragon for the file opened in the current buffer.
 With FILE, use that file instead. If FILE not specified and the

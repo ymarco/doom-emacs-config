@@ -27,7 +27,7 @@
         ;;+icons)
 
        :ui
-       ;;deft           ; notational velocity for Emacs
+       deft           ; notational velocity for Emacs
        doom             ; what makes DOOM look the way it does
        doom-dashboard   ; a nifty splash screen for Emacs
        ;; doom-quit     ; DOOM quit-message prompts when you quit Emacs
@@ -101,12 +101,11 @@
        ;;terraform   ; infrastructure as code
        ;;tmux        ; an API for interacting with tmux
        ;;upload      ; map local to remote projects via ssh/ftp
-       ;;wakatime
 
        :checkers
        (syntax    ; tasing you for every semicolon you forget
         +childframe)
-       spell      ; tasing you for misspelling mispelling
+       (spell +flyspell)      ; tasing you for misspelling mispelling
        ;;grammar  ; tasing grammar mistake every you make
 
        :lang

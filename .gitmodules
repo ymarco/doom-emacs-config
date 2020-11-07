@@ -1,0 +1,27 @@
+[submodule "packages/nnn.el"]
+	path = packages/nnn.el
+	url = git@github.com:ymarco/nnn.el.git
+[submodule "packages/auto-activating-snippets"]
+	path = packages/auto-activating-snippets
+	url = git@github.com:ymarco/auto-activating-snippets.git
+[submodule "packages/latex-auto-activating-snippets"]
+	path = packages/latex-auto-activating-snippets
+	url = git@github.com:tecosaur/Auto-LaTeX-Snippets.git
+[submodule "packages/emacs-webkit-katex-render"]
+	path = packages/emacs-webkit-katex-render
+	url = https://github.com/fuxialexander/emacs-webkit-katex-render.git
+[submodule "packages/hebrew-mode"]
+	path = packages/hebrew-mode
+	url = https://github.com/yoavm448/hebrew-mode.git
+[submodule "packages/nnn"]
+	path = packages/nnn.el
+	url = git@github.com:ymarco/nnn.el.git
+[submodule "packages/sxhkd-mode"]
+	path = packages/sxhkd-mode
+	url = git@github.com:ymarco/sxhkd-mode.git
+[submodule "packages/Auto-LaTeX-Snippets"]
+	path = packages/Auto-LaTeX-Snippets
+	url = git@github.com:tecosaur/Auto-LaTeX-Snippets.git
+[submodule "packages/inkscape.el"]
+	path = packages/inkscape.el
+	url = git@github.com:ymarco/inkscape.el.git

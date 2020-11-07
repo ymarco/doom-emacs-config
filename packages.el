@@ -9,8 +9,9 @@
 ;; living on the edge here
 (unpin! doom-snippets)
 ;; FIXME latex math previews using katex and webkit
-;; (package! webkit-katex-render
-;;   :recipe (:local-repo "packages/emacs-webkit-katex-render"))
+(package! webkit-katex-render
+  :recipe (:local-repo "packages/emacs-webkit-katex-render"
+           :files ("*.el" "*.html")))
 ;; nicer sxhkd config file editing
 ;; Trying to avoid as many post-commnad hooks as possible
 (package! evil-escape :disable t)
@@ -25,7 +26,7 @@
 (package! evil-tex)
 ;; WIP auto snippets for latex
 (package! latex-auto-activating-snippets
-  :recipe (:local-repo "packages/Auto-LaTeX-Snippets"
+  :recipe (:local-repo "packages/latex-auto-activating-snippets"
            :no-byte-compile t))
 (package! auto-activating-snippets
   :recipe (:local-repo "packages/auto-activating-snippets"
@@ -36,7 +37,9 @@
     :recipe (:host github :repo "chenyanming/calibredb.el")
     :pin "a27b71b727ebf726ed0742d968717e0e89db9786"))
 ;; fixes an issue with compiled pdf-tools
-(package! pdf-tools :built-in t)
+(package! pdf-tools
+  :recipe (:host github :repo "flatwhatson/pdf-tools"
+           :branch "fix-macros"))
 
 (package! snapshot-timemachine :pin "99efcebab309b11ed512a8dc62555d3834df5efb")
 ;; WIP org export figures written in latex in both latex and html backend
@@ -44,13 +47,24 @@
 ;;   :recipe (:local-repo "packages/org-tex-fig"))
 
 (package! inkscape
-  :recipe (:local-repo "packages/inkscape"))
+  :recipe (:local-repo "packages/inkscape.el"
+           :files ("*.el" "*.svg")))
 
 (package! xenops ; not ready yet!
-  :pin "78cbe16b74480ac6304865c9c3cfad36b5d49d1d")
+  :pin "2a72cf519bda25ee8852672e14b6c265388bc74b")
 ;; (package! vimgolf :pin "f565447ed2")
 ;; Fancy dictionaries
 (package! lexic
   :recipe (:host github :repo "tecosaur/lexic"
            :no-byte-compile t))
 (package! explain-pause-mode :disable t)
+
+(when (executable-find "guix")
+  (package! guix :pin "d246b2c443bbb9d49575b63bb78c14699c4448cf"))
+
+(package! crdt
+  :recipe (:repo "https://code.librehq.com/qhong/crdt.el"))
+;; packages
+(package! tree-sitter)
+(package! tree-sitter-langs)
+(package! info-colors)

@@ -502,6 +502,30 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 (setq safe-local-variable-values '((eval . (flyspell-mode t))
                                    (org-latex-compiler . "xelatex")))
 
+(after! all-the-icons
+  (push
+    '("drv" all-the-icons-octicon "package" :v-adjust 0.0 :face all-the-icons-dsilver)
+   all-the-icons-extension-icon-alist))
+
+(defvar +dired-hidden-subdir-p-prev-result nil
+  "Previous argument and result of `dired-subdir-hidden-p', held
+in a cons cell of (dir . hidden?).")
+
+(defadvice! +dired-cache-subdir-hidden-p-a (orig-fn dir)
+  "Cache the previous result of `dired-subdir-hidden-p' using
+`+dired-hidden-subdir-p-prev-result'"
+  :around #'dired-subdir-hidden-p
+  (unless (equal dir (car +dired-hidden-subdir-p-prev-result))
+    (setq +dired-hidden-subdir-p-prev-result
+          (cons dir (funcall orig-fn dir)))
+    (cdr +dired-hidden-subdir-p-prev-result)))
+
+(defadvice! +vc-backend-is-always-git-a (file &optional no-error)
+  :override #'vc-responsible-backend
+  (if (locate-dominating-file file ".git")
+      'Git
+    (unless no-error
+      (error "No VC backend is responsible for %s" file))))
 ;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))
   ;; I don't wanna encase this whole file in "(let ((t0 ...)))"

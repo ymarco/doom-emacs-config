@@ -442,7 +442,10 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
     (lexic-search identifier nil nil t))
   (defun +lexic-capture ()
     (interactive)
-    (let* ((selection (x-selection))
+    (let* ((selection (if (and (boundp 'pgtk-backend-display-class)
+                               (equal (pgtk-backend-display-class) "GdkWaylandDisplay"))
+                          nil
+                       (x-selection)))
            (gwidth (display-pixel-width))
            (gheight (display-pixel-height))
            (charwidth 81)
@@ -471,7 +474,7 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
       (delete-other-windows)
       (add-transient-hook! #'lexic-return-from-lexic :after
                            (when (equal (selected-frame) frame)
-                            (delete-frame frame)))))
+                             (delete-frame frame)))))
   :config
   (map! :map lexic-mode-map
         :n "q" #'lexic-return-from-lexic

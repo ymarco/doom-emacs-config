@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: sqrt[]{}
-# key: root
+# key: ro
 # --
 \sqrt[$1]{`%`$0}

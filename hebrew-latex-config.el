@@ -74,14 +74,14 @@ it start a new line of its own."
 (defun +hebrew-math-display-math-mode ()
   "Enters display math mode in latex. add newlines beforehand if needed."
   (interactive)
-  (insert (+heberw--snippets-newline-if-needed 2))
+  (insert (+heberw--snippets-newline-if-needed 1))
   (hebrew-set-regular-input-method)
   (doom-snippets-expand :name "hebrew-display-math"))
 
 (defun +hebrew-math-align-math-mode ()
   "Enters display math mode in latex."
   (interactive)
-  (insert (+heberw--snippets-newline-if-needed 2))
+  (insert (+heberw--snippets-newline-if-needed 1))
   (insert "‎")                           ; LTR char: always align to left
   (hebrew-set-regular-input-method)
   (doom-snippets-expand :name "align*"))
@@ -98,7 +98,7 @@ it start a new line of its own."
                                       "textmath" "footnotes"))
   (add-hook! 'TeX-mode-hook
     (add-hook 'evil-insert-state-entry-hook
-              (function +hebrew-input-method-heuristic)
+              #'+hebrew-input-method-heuristic
               nil t))
   (add-hook 'TeX-mode-hook #'hebrew-mode)
   :config

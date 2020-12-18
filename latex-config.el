@@ -283,12 +283,14 @@ When given prefix argument, replace region with the result instead."
    ;; not sure if this should be mainline
    "abs" (cmd! (+aas-expand-snippet-fn '("{" . "}")))
    "pn" "^n"
-   "Span" #'+aas-expand-snippet-fn
+   "ivs" "^{-1}"
+   "Span" (cmd! (+aas-expand-snippet-fn '("\\left( " . " \\right)")))
    ;; prob functions
    "Ber" #'+aas-expand-snippet-fn
    "Bin" #'+aas-expand-snippet-fn
    "Cov" #'+aas-expand-snippet-fn
    "EX" (cmd! (+aas-expand-snippet-fn '("[" . "]")))
+   "exx" "e^x"
    "Geom" #'+aas-expand-snippet-fn
    "HyperGeom" #'+aas-expand-snippet-fn
    "NB" #'+aas-expand-snippet-fn
@@ -302,7 +304,8 @@ When given prefix argument, replace region with the result instead."
    "On" "O(n)"
    "O1" "O(1)"
    "Olog" "O(\\log n)"
-   "Olon" "O(n \\log n)"))
+   "Olon" "O(n \\log n)"
+   "emx" "e^{-x}"))
 
 (use-package xenops
   :hook (LaTeX-mode . xenops-mode)

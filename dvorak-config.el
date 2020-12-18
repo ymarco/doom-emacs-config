@@ -17,5 +17,7 @@
                                      "                              ")))
   (quail-set-keyboard-layout "dvorak"))
 ;; Convert things that default to querty home row to dvorak
-(setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))
-(setq aw-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))
+(let ((dvorak-homerow '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)))
+  (setq avy-keys dvorak-homerow
+        aw-keys dvorak-homerow
+        webkit-ace-chars (apply #'string dvorak-homerow)))

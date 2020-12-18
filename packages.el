@@ -65,6 +65,10 @@
 (package! crdt
   :recipe (:repo "https://code.librehq.com/qhong/crdt.el"))
 ;; packages
+;; (package! webkit
+;;   :recipe (:host github :repo "akirakyle/emacs-webkit"
+;;            :files ("*.el" "*.so" "*.js" "*.css")
+;;            :build ("make")))
 (package! tree-sitter)
 (package! tree-sitter-langs)
 (package! info-colors)

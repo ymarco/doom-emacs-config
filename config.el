@@ -526,6 +526,33 @@ in a cons cell of (dir . hidden?).")
       'Git
     (unless no-error
       (error "No VC backend is responsible for %s" file))))
+(use-package! webkit-ace
+  :commands (webkit-ace))
+(use-package! webkit
+  :commands (webkit webkit-browse-url)
+  :init
+  (add-load-path! (concat doom-private-dir "packages/emacs-webkit"))
+  (setq browse-url-browser-function #'webkit-browse-url)
+  (defun +webkit-toggle-current-file ()
+    (interactive)
+    (require 'webkit)
+    (pcase major-mode
+      ('webkit-mode
+       (require 'ffap)
+       (find-file (ffap-fixup-url (webkit--get-uri webkit--id))))
+      (_
+       (webkit-browse-url (xdg-thumb-uri buffer-file-name)))))
+  (map! :after web-mode
+        :map web-mode-map
+        :localleader
+        "w" #'+webkit-toggle-current-file)
+  :config
+  (map! :map webkit-mode-map
+        :n "F" #'+webkit-toggle-current-file)
+  (setq webkit-history-file (concat doom-etc-dir "webkit-history"))
+  (setq webkit-dark-mode t)
+  (require 'evil-collection-webkit)
+  (evil-collection-xwidget-setup))
 ;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))
   ;; I don't wanna encase this whole file in "(let ((t0 ...)))"

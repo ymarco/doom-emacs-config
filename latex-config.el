@@ -210,13 +210,19 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
   :config
   (map! :map evil-tex-toggle-map
         "p" (cmd!
-             (insert "(")
-             (forward-char)
-             (insert ")")
-             (backward-char)
-             (evil-insert 0))
+             (cl-destructuring-bind (l . r)
+                 (if (memq (char-before) '(?^ ?_))
+                     '("{" . "}")
+                   '("(" . ")"))
+               (insert l)
+               (forward-char)
+               (insert r)
+               (backward-char)
+               (evil-insert 0)))
         :map evil-tex-mode-map
-        :i "M-u" #'evil-tex-brace-movement))
+        :i "M-u" (cmd! (funcall-interactively #'sp-up-sexp)))
+  (evil-tex-bind-to-env-map '(("s" . "english")
+                              ("h" . "hebrew"))))
 
 (defun prvt/eval-latex-with-calc (s)
   "Evaluate string S containing LaTeX code with `calc'.

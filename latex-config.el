@@ -262,15 +262,7 @@ When given prefix argument, replace region with the result instead."
 ;; WIP mine and @tecosaur's plugin
 (use-package! auto-activating-snippets
   :hook (LaTeX-mode . auto-activating-snippets-mode)
-  :hook (org-mode . auto-activating-snippets-mode)
-  :config
-  (aas-set-snippets
-   'text-mode
-   "o-" "ō"
-   "i-" "ī"
-   "a-" "ā"
-   "u-" "ū"
-   "e-" "ē"))
+  :hook (org-mode . auto-activating-snippets-mode))
 
 (use-package! latex-auto-activating-snippets
   :after latex

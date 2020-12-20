@@ -553,6 +553,14 @@ in a cons cell of (dir . hidden?).")
   (setq webkit-dark-mode t)
   (require 'evil-collection-webkit)
   (evil-collection-xwidget-setup))
+
+(use-package screenshot
+  :defer t
+  :init
+  (map! :leader
+        :prefix "c"
+        "s" #'screenshot))
+
 ;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))
   ;; I don't wanna encase this whole file in "(let ((t0 ...)))"

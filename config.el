@@ -3,6 +3,15 @@
 ;; measure time! see end of file for explanation
 (setq t0 (current-time))
 
+(defun get-preferred-theme ()
+  (let ((hour (string-to-number
+               (substring (current-time-string) 11 13))))
+    (if (<= 6 hour 17)
+        'doom-one-light
+      'doom-spacegrey)))
+(setq doom-theme (get-preferred-theme))
+(run-with-timer (* 60 60) (* 60 60)
+                (lambda () (load-theme (get-preferred-theme) t)))
 ;;; Misc package options
 (setq
  gc-cons-threshold 67108864             ; 64mb
@@ -15,7 +24,6 @@
  ;; TODO do I want this?
  +ivy-buffer-preview t
  ;; prettiness
- doom-theme 'doom-spacegrey
  ;; take new window space from all other windows (not just current)
  window-combination-resize t
 

@@ -497,7 +497,7 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
         :n "C-h" #'lexic-search-history-backwards
         :n "C-l" #'lexic-search-history-forwards
         :n "s" #'lexic-search)
-  (add-hook! 'lexic-mode-hook (evil-snipe-mode -1))
+  (add-hook 'lexic-mode-hook #'turn-off-evil-snipe-mode)
   ;; FIXME mixed-pitch? fix indentation
   (font-lock-add-keywords
    'lexit-mode

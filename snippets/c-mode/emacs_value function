@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: emacs_value function
+# key: evf
+# --
+emacs_value F$1(emacs_env *env, ptrdiff_t nargs,
+${1:$(make-string (+ 14 (length yas-text)) ?\ )}emacs_value args[], void *data) {
+  $0
+}

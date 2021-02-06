@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: define-public-latex-package
+# key: dplp
+# --
+(define-public texlive-latex-${1:package}
+  (package
+    (name "texlive-latex-$1")
+    (version (number->string %texlive-revision))
+    (source (origin
+              (method svn-fetch)
+              (uri (texlive-ref "latex" "$1"))
+              (file-name (string-append name "-" version "-checkout"))
+              (sha256
+               (base32
+                "TODO"))))
+    (build-system texlive-build-system)
+    (arguments '(#:tex-directory "latex/$1"))
+    (home-page "https://www.ctan.org/pkg/$1")
+    (synopsis "TODO")
+    (description
+     "TODO")
+    (license license:lppl1.3c+)))

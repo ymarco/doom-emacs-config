@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: build-input
+# key: bi
+# --
+("$1" ,${1:$(substring yas-text 0 (or (cl-search ":" yas-text)
+                                      (length yas-text))
+)}${1:$(when-let ((colon-index (cl-search ":" yas-text)))
+  (concat " "
+          (string ?\")
+          (substring yas-text (1+ colon-index))
+          (string ?\"))
+)})

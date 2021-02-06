@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: define-module
+# key: dm
+# --
+(define-module ($1)
+  #:use-module ((guix licenses) #:prefix license:)
+  #:use-module ($2))

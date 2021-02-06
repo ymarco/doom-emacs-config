@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: BIND
+# key: BIND
+# --
+BIND(F$1, "${1:$(replace-regexp-in-string "_" "-" yas-text)}", ${2:args_min}, ${3:arg_max},
+     "${4:Docs}");

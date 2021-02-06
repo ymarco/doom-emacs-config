@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: fprintpf stderr
+# key: fpe
+# --
+fprintf(stderr, "$1\n"${2:, `%`$3});

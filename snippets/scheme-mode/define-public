@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: define-public
+# key: dp
+# --
+(define-public ${1:name} $2)

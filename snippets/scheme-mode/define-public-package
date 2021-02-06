@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: define-public-package
+# key: dpp
+# --
+(define-public ${1:package-name}
+  (package
+    (name "$1")
+    (version "${2:version}")
+    (source (origin
+              (method TODO)
+              (uri (string-append "TODO" version ".tar.gz"))
+              (sha256
+               (base32
+                "TODO"))))
+    (build-system ${4:TODO})
+    (arguments '(#:TODO))
+    (home-page "TODO")
+    (synopsis "TODO")
+    (description
+     "TODO")
+    (license license:TODO)))

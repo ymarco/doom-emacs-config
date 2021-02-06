@@ -11,7 +11,10 @@
       'doom-spacegrey)))
 (setq doom-theme (get-preferred-theme))
 (run-with-timer (* 60 60) (* 60 60)
-                (lambda () (load-theme (get-preferred-theme) t)))
+                (defun update-theme ()
+                  (let ((preferred (get-preferred-theme)))
+                    (unless (eq preferred doom-theme)
+                      (load-theme preferred t)))))
 ;;; Misc package options
 (setq
  gc-cons-threshold 67108864             ; 64mb
@@ -20,9 +23,7 @@
  ;; User config, used for templates mostly
  user-full-name "Yoav Marco"
  user-mail-address "yoavm448@gmail.com"
- user-login-name "yoavm448"
- ;; TODO do I want this?
- +ivy-buffer-preview t
+ user-login-name "ymarco"
  ;; prettiness
  ;; take new window space from all other windows (not just current)
  window-combination-resize t
@@ -61,6 +62,7 @@
  ;; Wait for a bit shorter - I've got native comp - before prompting me
  lsp-idle-delay 0.2
  lsp-ui-sideline-delay 0.2
+ lsp-enable-symbol-highlighting nil
  js2-idle-timer-delay 0.2
  eldoc-idle-delay 0.2
  ;; Fix inconsistency with tab width in JSON files
@@ -81,7 +83,8 @@
  abbrev-file-name (concat doom-private-dir "abbrevs.el")
  deft-directory "~/org/"
  org-roam-directory "~/org/"
- rmh-elfeed-org-files (list "~/media/elfeed-rss.org"))
+ rmh-elfeed-org-files (list "~/media/elfeed-rss.org")
+ source-directory "~/programs/emacs-pgtk-nativecomp-source")
 
 ;; Don't blink the cursor, it's too distracting.
 (blink-cursor-mode -1)
@@ -91,7 +94,7 @@
 (setq truncate-lines nil)
 (setq-default truncate-lines nil)
 ;; Colorify colors in X config mode
-(add-hook! 'conf-xdefaults-mode-hook (rainbow-mode 1))
+(add-hook 'conf-xdefaults-mode-hook #'rainbow-mode)
 ;; When more witty things to say about mixed-pitch, this comment would be
 ;; replaced
 (add-hook! '(markdown-mode-hook elfeed-show-mode-hook) #'mixed-pitch-mode)
@@ -229,8 +232,6 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
  :n "m"       #'evil-end-of-line
  ;; to replace the lost m. I never use regisetrs, and we have SPC i y anyway.
  :n "\""      #'evil-set-marker
- ;; More conviniant surround operators
- :n "R" (λ!!  #'evil-surround-edit nil)
  ;; Things I picked up from JetBrains IDEs
  :ni "C-/"    #'comment-line
  :v   "C-/"   #'comment-or-uncomment-region
@@ -309,7 +310,11 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
 ;; highlight matching parens more clearly
 (add-hook! 'doom-load-theme-hook
   (custom-set-faces!
-    `(show-paren-match :weight normal :foreground nil :background ,(doom-color 'selection))))
+    `(show-paren-match :weight normal :foreground nil :background ,(doom-color 'selection))
+    `(font-lock-comment-face
+      :foreground
+      ,(doom-blend (doom-color 'fg)
+                   (face-attribute 'font-lock-comment-face :foreground) 0.2))))
 
 ;; See autoload/emacs-anywhere-config
 (add-hook 'ea-popup-hook 'ea-popup-handler)

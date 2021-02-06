@@ -68,4 +68,4 @@
 ;;            :build ("make")))
 (package! tree-sitter)
 (package! tree-sitter-langs)
-(package! info-colors)
+(package! info-colors)                  ; FIXME

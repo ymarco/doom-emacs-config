@@ -183,8 +183,8 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
 
 ;; Bigger compiled math cause it's pretty
 (after! preview
-  (setq-default preview-scale 1.8)
-  (setq preview-scale 1.8))
+  (setq-default preview-scale 1.65)
+  (setq preview-scale 1.65))
 
 (add-hook! 'TeX-mode-hook
            ;;(hl-todo-mode) ; TODO
@@ -232,12 +232,12 @@ The result is another string containing LaTeX code."
   (calc-set-language 'latex)
   ;; TODO this is also a way
   (string-join (->> s
-                ;; calc thinks \cdot is a variable instead of just
-                ;; multiplying
-                (replace-regexp-in-string "\\\\cdot\\>" "*")
-                (math-read-exprs)
-                (-map #'math-evaluate-expr)
-                (-map #'math-format-value))
+                    ;; calc thinks \cdot is a variable instead of just
+                    ;; multiplying
+                    (replace-regexp-in-string "\\\\cdot\\>" "*")
+                    (math-read-exprs)
+                    (-map #'math-evaluate-expr)
+                    (-map #'math-format-value))
                ", ")
   ;; (calc-eval
   )
@@ -326,6 +326,9 @@ When given prefix argument, replace region with the result instead."
 (map!
  :after tex :map LaTeX-mode-map
  :ei [C-return] #'LaTeX-insert-item
+ :n [C-return] (cmd! (end-of-line)
+                     (LaTeX-insert-item)
+                     (evil-insert-state))
  :n "g r" #'prvt/latex-eval-with-calc
  :v "g r" #'prvt/latex-eval-with-calc
 
@@ -376,6 +379,8 @@ When given prefix argument, replace region with the result instead."
       "polyglossia"
       "xcolor"))
    LaTeX-dialect))
+(setq +latex-viewers '(pdf-tools))
+
 ;; Dont prompt me for space when I do C-RET
 (add-hook! 'LaTeX-mode-hook
   (dolist (sublist TeX-symbol-list)

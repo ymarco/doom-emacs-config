@@ -532,6 +532,19 @@ in a cons cell of (dir . hidden?).")
       'Git
     (unless no-error
       (error "No VC backend is responsible for %s" file))))
+
+(use-package! crdt
+  :commands (crdt-share-buffer crdt-connect)
+  :config
+  (map! :map crdt-buffer-menu-mode-map
+        :n "RET" #'crdt--buffer-menu-goto
+        :n "d"   #'crdt--buffer-menu-kill
+        :map crdt-user-menu-mode-map
+        :n "RET" #'crdt--user-menu-goto
+        :map crdt-session-menu-mode-map
+        :n "RET" #'crdt--session-menu-goto
+        :n "d"   #'crdt--session-menu-kill))
+
 (use-package! webkit-ace
   :commands (webkit-ace))
 (use-package! webkit

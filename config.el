@@ -560,6 +560,9 @@ in a cons cell of (dir . hidden?).")
   (require 'evil-collection-webkit)
   (evil-collection-xwidget-setup))
 
+(use-package! meson-mode
+  :mode ("meson\\.build\\'" . meson-mode))
+
 (use-package screenshot
   :defer t
   :init

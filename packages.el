@@ -69,3 +69,4 @@
 (package! tree-sitter)
 (package! tree-sitter-langs)
 (package! info-colors)                  ; FIXME
+(package! meson-mode)

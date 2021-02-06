@@ -18,13 +18,17 @@
       (erase-buffer)
       (insert s)
       (indent-rigidly (point-min) (point-max)
-                      (- (indent-rigidly--current-indentation
-                          (point-min) (point-max)))))))
+                      (- (or (indent-rigidly--current-indentation
+                              (point-min) (point-max)
+                              0)))))))
 
 ;;;###autoload
 (defun screenshot (beg end)
   "Copy a screenshot of the selected region."
   (interactive "r")
+  (when (not beg)
+    (setq beg (point-min)
+          end (point-max)))
   (screenshot--format-buffer beg end)
   (let* ((frame (posframe-show
                  screenshot--buffer

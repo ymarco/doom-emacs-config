@@ -177,26 +177,19 @@
 With FILE, use that file instead. If FILE not specified and the
 buffer is org/tex and a corresponding pdf exists, drag that pdf."
   (interactive "<f>")
-
-  (let ((process
-         (start-process "dragon-from-emacs"
-                        nil
-                        "dragon"
-                        (or file
-                            (and (eq major-mode 'dired-mode)
-                                 (dired-get-filename))
-                            (let ((file (file-name-extension (buffer-file-name))))
-                              (and (or (eq major-mode 'org-mode)
-                                       (eq major-mode 'latex-mode))
-                                   (file-exists-p file)
-                                   file))
-                            (buffer-file-name))
-                        "-x"))
-        (frame (selected-frame)))
-    (set-process-sentinel process (lambda (_process _change)
-                                    ;; FIXME this does nothing
-                                    (make-frame-visible frame)))
-    (suspend-frame)))
+  (start-process "dragon-from-emacs"
+                 nil
+                 "dragon"
+                 (or file
+                     (when (eq major-mode 'dired-mode)
+                       (dired-get-filename))
+                     (when-let* ((file (file-name-extension (buffer-file-name)))
+                                 (_ (or (eq major-mode 'org-mode)
+                                        (eq major-mode 'latex-mode)))
+                                 (_ (file-exists-p file)))
+                       file)
+                     (buffer-file-name))
+                 "-x"))
 (evil-ex-define-cmd "drag" #'+evil:drag-file)
 (evil-ex-define-cmd "lc" (defun +evil:run-latex-cleanup ()
                            (interactive)
@@ -269,10 +262,10 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
                 (require 'quail)
                 ;; switch to English
                 (start-process "switch-to-hebrew" nil "gdbus"
-                              "call" "--session" "--dest" "org.gnome.Shell"
-                              "--object-path" "/org/gnome/Shell"
-                              "--method" "org.gnome.Shell.Eval"
-                              "imports.ui.status.keyboard.getInputSourceManager().inputSources[0].activate()")
+                               "call" "--session" "--dest" "org.gnome.Shell"
+                               "--object-path" "/org/gnome/Shell"
+                               "--method" "org.gnome.Shell.Eval"
+                               "imports.ui.status.keyboard.getInputSourceManager().inputSources[0].activate()")
                 ;; emulate the keybind caught by this lambda
                 (cl-callf2 nconc
                     (list

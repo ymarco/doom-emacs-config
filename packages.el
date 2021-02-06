@@ -26,11 +26,9 @@
 (package! evil-tex)
 ;; WIP auto snippets for latex
 (package! latex-auto-activating-snippets
-  :recipe (:local-repo "packages/latex-auto-activating-snippets"
-           :no-byte-compile t))
+  :recipe (:local-repo "packages/latex-auto-activating-snippets"))
 (package! auto-activating-snippets
-  :recipe (:local-repo "packages/auto-activating-snippets"
-           :no-byte-compile t))
+  :recipe (:local-repo "packages/auto-activating-snippets"))
 ;; calibre client from emacs, needs more configuration
 (when (executable-find "calibredb")
   (package! calibredb
@@ -55,8 +53,7 @@
 ;; (package! vimgolf :pin "f565447ed2")
 ;; Fancy dictionaries
 (package! lexic
-  :recipe (:host github :repo "tecosaur/lexic"
-           :no-byte-compile t))
+  :recipe (:host github :repo "tecosaur/lexic"))
 (package! explain-pause-mode :disable t)
 
 (when (executable-find "guix")

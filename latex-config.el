@@ -164,7 +164,7 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
 ;; FIXME this also fontifies tex macros in comments, hadn't found a solution yet
 (font-lock-add-keywords
  'latex-mode
- `((,"\\\\[A-Za-z@*]+" 0 'font-lock-keyword-face prepend))
+ `(("\\\\[A-Za-z@*]+" 0 'font-lock-keyword-face prepend))
  'end)
 
 (add-hook! 'doom-load-theme-hook
@@ -267,6 +267,8 @@ When given prefix argument, replace region with the result instead."
 (use-package! latex-auto-activating-snippets
   :after latex
   :config
+  ;; no space after expansions
+  (advice-add #'laas-add-space-after-expand-h :override #'ignore)
   (add-hook! 'LaTeX-mode-hook
     (add-hook! 'aas-post-snippet-expand-hook :local
                #'+latex-fold-last-macro-a))
@@ -305,7 +307,10 @@ When given prefix argument, replace region with the result instead."
    "O1" "O(1)"
    "Olog" "O(\\log n)"
    "Olon" "O(n \\log n)"
-   "emx" "e^{-x}"))
+   "emx" "e^{-x}"
+   ;; use my private overbar macro instead of overline
+   :cond #'laas-object-on-left-condition
+   "bar" (cmd! (laas-wrap-previous-object "overbar"))))
 
 (use-package! xenops
   ;; :hook (LaTeX-mode . xenops-mode)
@@ -371,3 +376,8 @@ When given prefix argument, replace region with the result instead."
       "polyglossia"
       "xcolor"))
    LaTeX-dialect))
+;; Dont prompt me for space when I do C-RET
+(add-hook! 'LaTeX-mode-hook
+  (dolist (sublist TeX-symbol-list)
+    (assoc-delete-all "\\" sublist)
+    (assoc-delete-all "\\*" sublist)))

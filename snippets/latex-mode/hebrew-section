@@ -3,5 +3,5 @@
 # key: סק
 # group: hebrew latex
 # --
-‏\section{${1:`%`}}
+\section{${1:`%`}}
 $0

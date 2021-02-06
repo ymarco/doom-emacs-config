@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: hebrew-subsubsection
+# key: ססב
+# group: hebrew latex
+# --
+\subsubsection{`%`${1:סאבסאבסקשן}}
+$0

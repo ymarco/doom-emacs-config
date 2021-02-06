@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: anb
+# key: anb
+# --
+\anb{`%`$1}$0

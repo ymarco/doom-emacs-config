@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: hebrew-textbf
-# key: בו
+# key: ב
 # type: command
 # --
 (doom-snippets-expand :name "textbf")

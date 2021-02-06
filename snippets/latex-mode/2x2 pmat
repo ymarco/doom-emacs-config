@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: 2x2 pmat
+# key: pma2
+# --
+\begin{pmatrix}
+  $1 & $2 \\\\
+  $3 & $4 \\\\
+\end{pmatrix}

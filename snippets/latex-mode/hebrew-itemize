@@ -4,6 +4,6 @@
 # expand-env: ((yas-after-exit-snippet-hook #'prvt/TeX-fold-current-line))
 # group: hebrew latex            
 # --
-‏\begin{itemize}
-\item `%`$0
-‏\end{itemize}
+\begin{itemize}
+  \item `%`$0
+\end{itemize}

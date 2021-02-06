@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: left< right>
+# key: <
+# --
+\left\langle `%`$0 \right\rangle

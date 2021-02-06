@@ -303,18 +303,20 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
                                               "\\|"
                                               (regexp-opt prvt/omitted-extensions)))
 
-;; Let me see syntax highlighting even under #ifndef that amount to false
-(custom-set-faces!
-  `(font-lock-preprocessor-face :foreground nil :background ,(doom-color 'base2))
-  `(ccls-skipped-range-face :foreground nil :background ,(doom-color 'base2)))
-;; highlight matching parens more clearly
 (add-hook! 'doom-load-theme-hook
   (custom-set-faces!
+    ;; Let me see syntax highlighting even under #ifndef that amount to false
+    `(font-lock-preprocessor-face :foreground nil :background ,(doom-color 'base2))
+    `(ccls-skipped-range-face :foreground nil :background ,(doom-color 'base2))
+    ;; highlight matching parens more clearly
     `(show-paren-match :weight normal :foreground nil :background ,(doom-color 'selection))
+    ;; comments are too dark in spacegrey
     `(font-lock-comment-face
       :foreground
       ,(doom-blend (doom-color 'fg)
-                   (face-attribute 'font-lock-comment-face :foreground) 0.2))))
+                   (face-attribute 'font-lock-comment-face :foreground) 0.2))
+    ;; remove ugly underline
+    `(mu4e-header-highlight-face :background ,(doom-color 'bg))))
 
 ;; See autoload/emacs-anywhere-config
 (add-hook 'ea-popup-hook 'ea-popup-handler)
@@ -327,10 +329,6 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
   :trigger (lambda ()
              (evil-initialize-state 'insert) ; start in insert
              (doom-snippets-expand :uuid "__")))
-
-;; FIXME
-(custom-set-faces!
-  `(iedit-occurrence :foreground nil :inverse nil :background ,(doom-color 'base3)))
 
 (setq iedit-toggle-key-default nil)
 

@@ -25,9 +25,9 @@
 ;; evil enhancements for latex buffers, my and iyefrat's baby
 (package! evil-tex)
 ;; WIP auto snippets for latex
-(package! latex-auto-activating-snippets
+(package! laas
   :recipe (:local-repo "packages/latex-auto-activating-snippets"))
-(package! auto-activating-snippets
+(package! aas
   :recipe (:local-repo "packages/auto-activating-snippets"))
 ;; calibre client from emacs, needs more configuration
 (when (executable-find "calibredb")

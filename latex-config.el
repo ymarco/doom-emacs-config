@@ -260,11 +260,11 @@ When given prefix argument, replace region with the result instead."
         (kill-new res)))))
 
 ;; WIP mine and @tecosaur's plugin
-(use-package! auto-activating-snippets
-  :hook (LaTeX-mode . auto-activating-snippets-mode)
-  :hook (org-mode . auto-activating-snippets-mode))
+(use-package! aas
+  :hook (LaTeX-mode . aas-mode)
+  :hook (org-mode . aas-mode))
 
-(use-package! latex-auto-activating-snippets
+(use-package! laas
   :after latex
   :config
   ;; no space after expansions

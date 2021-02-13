@@ -125,7 +125,7 @@ it start a new line of its own."
                 (TeX-command "LatexMk" 'TeX-master-file)))))
 
 
-(after! auto-activating-snippets
+(after! aas
   (aas-set-snippets
    'latex-mode
    :cond (lambda () (and (bolp) (not (texmathp))))

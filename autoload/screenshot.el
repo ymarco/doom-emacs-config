@@ -19,8 +19,8 @@
       (insert s)
       (indent-rigidly (point-min) (point-max)
                       (- (or (indent-rigidly--current-indentation
-                              (point-min) (point-max)
-                              0)))))))
+                              (point-min) (point-max))
+                             0))))))
 
 ;;;###autoload
 (defun screenshot (beg end)

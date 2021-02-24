@@ -255,7 +255,23 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
             (fboundp 'evil-jump-item)
             #'evil-jump-item)
  ;; Smartparens Navigation
- :ni "M-u"    #'sp-up-sexp) ; exit parenthesis
+ :ni "M-u"    #'sp-up-sexp              ; exit parenthesis
+ :n "$" (lambda (cmd file)
+          "Execute a command asyncly on current file."
+          (interactive (list (read-from-minibuffer "cmd: " nil minibuffer-local-ns-map)
+                             buffer-file-name))
+          (make-process
+           :name "user-terminal"
+           :noquery t
+           :buffer nil
+           :command (list "setsid" cmd file)))
+ :leader
+ :prefix "o"
+ "s" (cmd! (make-process
+            :name "user-terminal"
+            :noquery t
+            :buffer nil
+            :command (list "setsid" (or (getenv "TERMINAL") "st")))))
 
 (mapc (lambda (c)
         (map! :n (string c)

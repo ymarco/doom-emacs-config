@@ -271,19 +271,23 @@ When given prefix argument, replace region with the result instead."
   (setq laas-enable-auto-space nil)
   (add-hook! 'laas-mode-hook
     (add-hook! 'aas-post-snippet-expand-hook :local
-               #'+latex-fold-last-macro-a))
+      (unless (= (char-after) ?})
+        (+latex-fold-last-macro-a))))
   (defun +aas-expand-snippet-fn (&optional parens func)
     (interactive)
     (yas-expand-snippet (format "\\%s%s$1%s$0"
                                 (or func aas-transient-snippet-key)
-                                (or (car-safe parens) "(")
-                                (or (cdr-safe parens) ")")))
+                                (or (car parens) "(")
+                                (or (cdr parens) ")")))
     (laas--shut-up-smartparens))
+  (defun +aas-expand-snippet-latex-fn ()
+    (interactive)
+    (+aas-expand-snippet-fn '("{" . "}")))
   (aas-set-snippets
    'laas-mode
    :cond #'texmathp
    ;; not sure if this should be mainline
-   "abs" (cmd! (+aas-expand-snippet-fn '("{" . "}")))
+   "abs" #'+aas-expand-snippet-latex-fn
    "pn" "^n"
    "ivs" "^{-1}"
    "Span" (cmd! (+aas-expand-snippet-fn '("\\left( " . " \\right)")))
@@ -308,9 +312,19 @@ When given prefix argument, replace region with the result instead."
    "Olog" "O(\\log n)"
    "Olon" "O(n \\log n)"
    "emx" "e^{-x}"
+   ;; algorithms
+   "Oe" "O(|E|)"
+   "Ove" "O(|V|+|E|)"
+   ;; topology
+   "norm" #'+aas-expand-snippet-latex-fn
+   "TT" "\\TT"
    ;; use my private overbar macro instead of overline
    :cond #'laas-object-on-left-condition
-   "bar" (cmd! (laas-wrap-previous-object "overbar"))))
+   "bar" (cmd! (laas-wrap-previous-object "overbar"))
+   ;; I usually have auto space off but it's conveniant in \in
+   "inn" (cmd! (when (/= (char-before) ?\ )
+                 (insert " "))
+               (insert "\\in "))))
 
 (use-package! xenops
   ;; :hook (LaTeX-mode . xenops-mode)

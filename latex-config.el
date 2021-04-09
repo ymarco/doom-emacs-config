@@ -261,15 +261,15 @@ When given prefix argument, replace region with the result instead."
 
 ;; WIP mine and @tecosaur's plugin
 (use-package! aas
-  :hook (LaTeX-mode . aas-mode)
-  :hook (org-mode . aas-mode))
+  :hook (LaTeX-mode . ass-activate-for-major-mode)
+  :hook (org-mode . ass-activate-for-major-mode))
 
 (use-package! laas
-  :after latex
+  :hook (LaTeX-mode . laas-mode)
   :config
   ;; no space after expansions
-  (advice-add #'laas-add-space-after-expand-h :override #'ignore)
-  (add-hook! 'LaTeX-mode-hook
+  (setq laas-enable-auto-space nil)
+  (add-hook! 'laas-mode-hook
     (add-hook! 'aas-post-snippet-expand-hook :local
                #'+latex-fold-last-macro-a))
   (defun +aas-expand-snippet-fn (&optional parens func)
@@ -280,7 +280,7 @@ When given prefix argument, replace region with the result instead."
                                 (or (cdr-safe parens) ")")))
     (laas--shut-up-smartparens))
   (aas-set-snippets
-   'latex-mode
+   'laas-mode
    :cond #'texmathp
    ;; not sure if this should be mainline
    "abs" (cmd! (+aas-expand-snippet-fn '("{" . "}")))

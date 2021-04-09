@@ -72,6 +72,7 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
    ("ℤ" ("ZZ"))
    ("ℂ" ("CC"))
    ("𝔽" ("FF"))
+   ("𝓣" ("TT"))
    ("ℝ→ℝ" ("rtr"))
    ("I→ℝ" ("itr"))
    ("½" ("halff"))
@@ -152,7 +153,7 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
 (defface unimportant-latex-face
   '((t
      :inherit font-lock-comment-face))
-  "Face used to make \\(\\), \\[\\] less visible."
+  "Face used to make \\(\\), \\=\\[\\] less visible."
   :group 'LaTeX-math)
 
 (font-lock-add-keywords
@@ -205,8 +206,8 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
 (use-package! evil-tex
   :hook (LaTeX-mode . evil-tex-mode)
   :init
-  (setq evil-tex-toggle-override-m nil)
-  (setq evil-tex-toggle-override-t t)
+  (setq evil-tex-toggle-override-m nil
+        evil-tex-toggle-override-t t)
   :config
   (map! :map evil-tex-toggle-map
         "p" (cmd!
@@ -351,29 +352,6 @@ When given prefix argument, replace region with the result instead."
  :desc "View" "v" #'TeX-view
  :desc "Preview" "p" #'preview-at-point
  :desc "Unpreview" "P" #'preview-clearout-at-point)
-
-(setq
- cdlatex-math-symbol-prefix ?\;
- cdlatex-math-symbol-alist
- '( ;; adding missing functions to 3rd level symbols
-   ;;key   1st            2nd           3rd
-   (?_    ("\\downarrow"  ""           "\\inf"))
-   (?^    ("\\uparrow"    ""           "\\sup"))
-   (?k    ("\\kappa"      ""           "\\ker"))
-   (?m    ("\\mu"         ""           "\\lim"))
-   (?d    ("\\delta"      "\\partial"  "\\dim"))
-   (?D    ("\\Delta"      "\\nabla"    "\\deg"))
-   ;; no idea why \Phi isnt on 'F' in first place, \phi is on 'f'.
-   (?F    ("\\Phi"))
-   ;; now just conveniance
-   (?.    ("\\cdot" "\\dots"))
-   (?:    ("\\vdots" "\\ddots"))
-   (?*    ("\\times" "\\star" "\\ast")))
- cdlatex-math-modify-alist
- '( ;; my own stuff
-   ;;key  mathcmd   textcmd  type  rmdot(?)  it(?)
-   (?/    "\\oner"  nil      t     nil       nil)
-   (?h    "\\half"  nil      t     nil       nil)))
 
 (set-popup-rule! "^\\*TeX \\(?:Help\\|errors\\)"
   :size 0.3 :select t :ttl nil)

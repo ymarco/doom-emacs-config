@@ -177,8 +177,7 @@
 
 (evil-define-command +evil:drag-file (file)
   "Open a drag window with dragon for the file opened in the current buffer.
-With FILE, use that file instead. If FILE not specified and the
-buffer is org/tex and a corresponding pdf exists, drag that pdf."
+With FILE, use that file instead. Also works in Dired buffers."
   (interactive "<f>")
   (start-process "dragon-from-emacs"
                  nil
@@ -259,12 +258,14 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
  :n "$" (lambda (cmd file)
           "Execute a command asyncly on current file."
           (interactive (list (read-from-minibuffer "cmd: " nil minibuffer-local-ns-map)
-                             buffer-file-name))
+                             (pcase major-mode
+                               ('dired-mode (dired-get-filename))
+                               (_ (buffer-file-name)))))
           (make-process
-           :name "user-terminal"
+           :name (concat "user-started:" cmd)
            :noquery t
            :buffer nil
-           :command (list "setsid" cmd file)))
+           :command (list cmd file)))
  :leader
  :prefix "o"
  "s" (cmd! (make-process
@@ -462,10 +463,9 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
     (lexic-search identifier nil nil t))
   (defun +lexic-capture ()
     (interactive)
-    (let* ((selection (if (and (boundp 'pgtk-backend-display-class)
-                               (equal (pgtk-backend-display-class) "GdkWaylandDisplay"))
-                          nil
-                       (x-selection)))
+    (let* ((selection (unless (and (fboundp 'pgtk-backend-display-class)
+                                   (equal (pgtk-backend-display-class) "GdkWaylandDisplay"))
+                        (x-selection)))
            (gwidth (display-pixel-width))
            (gheight (display-pixel-height))
            (charwidth 81)
@@ -523,9 +523,10 @@ buffer is org/tex and a corresponding pdf exists, drag that pdf."
                                    (org-latex-compiler . "xelatex")))
 
 (after! all-the-icons
-  (push
-    '("drv" all-the-icons-octicon "package" :v-adjust 0.0 :face all-the-icons-dsilver)
-   all-the-icons-extension-icon-alist))
+  (when (boundp 'all-the-icons-extension-icon-alist)
+    (push
+     '("drv" all-the-icons-octicon "package" :v-adjust 0.0 :face all-the-icons-dsilver)
+     all-the-icons-extension-icon-alist)))
 
 (defvar +dired-hidden-subdir-p-prev-result nil
   "Previous argument and result of `dired-subdir-hidden-p', held

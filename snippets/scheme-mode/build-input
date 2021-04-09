@@ -1,6 +1,8 @@
 # -*- mode: snippet -*-
 # name: build-input
 # key: bi
+# ("gcc" ,gcc)
+# ("gcc:doc" ,gcc "doc")
 # --
 ("$1" ,${1:$(substring yas-text 0 (or (cl-search ":" yas-text)
                                       (length yas-text))

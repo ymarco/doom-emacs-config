@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: hebrew-textbf
 # key: ב
-# type: command
+# condition: (not (save-restriction (widen) (texmathp)))
 # --
-(doom-snippets-expand :name "textbf")
+‏\textbf{`%`$1}$0

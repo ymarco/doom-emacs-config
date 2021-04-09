@@ -14,6 +14,8 @@
                 "TODO"))))
     (build-system ${4:TODO})
     (arguments '(#:TODO))
+    (inputs `())
+    (native-inputs `())
     (home-page "TODO")
     (synopsis "TODO")
     (description

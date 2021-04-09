@@ -84,7 +84,9 @@
  deft-directory "~/org/"
  org-roam-directory "~/org/"
  rmh-elfeed-org-files (list "~/media/elfeed-rss.org")
- source-directory "~/programs/emacs-pgtk-nativecomp-source")
+ source-directory "~/programs/emacs-pgtk-nativecomp-source"
+ ;; shorten modeline by decreasing icons size
+ all-the-icons-scale-factor 1.0)
 
 ;; Don't blink the cursor, it's too distracting.
 (blink-cursor-mode -1)

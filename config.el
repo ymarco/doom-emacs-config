@@ -27,7 +27,8 @@
  ;; prettiness
  ;; take new window space from all other windows (not just current)
  window-combination-resize t
-
+ ;; don't ask me every time
+ geiser-active-implementations '(guile)
  ;; Even more cololful pars
  rainbow-delimiters-max-face-count    4
  ;; Dired auto-detects multiple windows

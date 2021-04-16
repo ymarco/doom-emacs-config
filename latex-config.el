@@ -5,9 +5,7 @@
 (setq
  ;; Dont auto-insert braces on _^, I have keybinds for that
  TeX-electric-sub-and-superscript nil
- ;; Just save, dont ask me
- TeX-save-query nil
- ;; Just cache, dont ask me
+ ;; Do cache: I have relatively long compilation times
  preview-auto-cache-preamble t
  ;; Don't raise/lower super/subscripts
  font-latex-fontify-script nil)
@@ -345,16 +343,7 @@ When given prefix argument, replace region with the result instead."
                      (LaTeX-insert-item)
                      (evil-insert-state))
  :n "g r" #'prvt/latex-eval-with-calc
- :v "g r" #'prvt/latex-eval-with-calc
-
- ;; normal stuff here
- :localleader
- :desc "View" "v" #'TeX-view
- :desc "Preview" "p" #'preview-at-point
- :desc "Unpreview" "P" #'preview-clearout-at-point)
-
-(set-popup-rule! "^\\*TeX \\(?:Help\\|errors\\)"
-  :size 0.3 :select t :ttl nil)
+ :v "g r" #'prvt/latex-eval-with-calc)
 
 (after! latex
   (TeX-add-style-hook

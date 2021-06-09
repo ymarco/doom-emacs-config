@@ -270,7 +270,7 @@ When given prefix argument, replace region with the result instead."
   (setq laas-enable-auto-space nil)
   (add-hook! 'laas-mode-hook
     (add-hook! 'aas-post-snippet-expand-hook :local
-      (unless (= (char-after) ?})
+      (unless (eq (char-after) ?})
         (+latex-fold-last-macro-a))))
   (defun +aas-expand-snippet-fn (&optional parens func)
     (interactive)

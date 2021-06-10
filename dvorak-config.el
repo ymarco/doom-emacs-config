@@ -20,4 +20,5 @@
 (let ((dvorak-homerow '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)))
   (setq avy-keys dvorak-homerow
         aw-keys dvorak-homerow
-        webkit-ace-chars (apply #'string dvorak-homerow)))
+        webkit-ace-chars (apply #'string dvorak-homerow)
+        selectrum-quick-keys dvorak-homerow))

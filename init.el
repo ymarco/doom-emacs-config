@@ -21,10 +21,11 @@
        ;; +icons
        ;; +fuzzy)           ; enable fuzzy search backend for helm
        ;;ido               ; the other *other* search engine...
-       ivy               ; a search engine for love and life
+       ;;ivy               ; a search engine for love and life
         ;;+childframe       ;display in a floating child frame, above Emacs.
         ;;+fuzzy           ; enable fuzzy search backend for ivy
         ;;+icons)
+       selectrum
 
        :ui
        deft           ; notational velocity for Emacs

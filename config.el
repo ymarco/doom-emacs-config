@@ -598,6 +598,51 @@ in a cons cell of (dir . hidden?).")
         :prefix "c"
         "s" #'screenshot))
 
+
+(defun consult-better-jumper ()
+  (interactive)
+  (let* ((ctx (better-jumper--get-current-context))
+         (marker-table (better-jumper--get-marker-table ctx))
+         (ring (better-jumper--get-jump-list ctx))
+         (idx (better-jumper-jump-list-struct-idx (better-jumper--get-struct ctx)))
+         (cands (cl-loop for i from 0 to (ring-length ring)
+                         for jump = (ring-ref ring i)
+                         for file-name = (nth 0 jump)
+                         for pos* = (nth 1 jump)
+                         for marker-key* = (nth 2 jump)
+                         for marker* = (gethash marker-key* marker-table)
+                         for marker = (if (and marker* (marker-position marker*))
+                                          marker*
+                                        (set-marker (make-marker) pos* (get-buffer file-name)))
+                         collect (consult--location-candidate
+                                  (with-current-buffer (marker-buffer marker)
+                                    (goto-char marker)
+                                    (buffer-substring (line-beginning-position) (line-end-position)))
+                                  marker
+                                  ;; i instead of real line number
+                                  i
+                                  ;; add shortened file name in text property to use as title
+                                  'consult--title
+                                  (abbreviate-file-name file-name))))
+         (default (when (>= idx 0) (nth idx cands))))
+    (message "idx: %s, def: %s" idx default)
+    (consult--read
+     cands
+     :prompt "Jump to: "
+     :annotate (consult--line-prefix)
+     :sort nil
+     :require-match t
+     :lookup #'consult--line-match
+     :state (consult--jump-state)
+     :title (lambda (cand transform)
+              (if transform
+                  cand
+                (get-text-property 0 'consult--title cand)))
+     :default default
+     :sort nil)))
+
+(advice-add #'+selectrum--embark-target-package! :override #'ignore)
+
 ;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))
   ;; I don't wanna encase this whole file in "(let ((t0 ...)))"

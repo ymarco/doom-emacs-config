@@ -562,6 +562,11 @@ in a cons cell of (dir . hidden?).")
         :n "RET" #'crdt--session-menu-goto
         :n "d"   #'crdt--session-menu-kill))
 
+(map! :after vterm
+      :map vterm-mode-map
+      :ing "C-c" nil
+      :ing "C-c" #'vterm-send-C-c)
+
 (use-package! webkit-ace
   :commands (webkit-ace))
 (use-package! webkit

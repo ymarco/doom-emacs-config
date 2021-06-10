@@ -56,6 +56,7 @@
   :recipe (:host github :repo "tecosaur/lexic"))
 (package! explain-pause-mode :disable t)
 (package! mu4e-msg :disable t)
+(package! org-msg :disable t)
 (package! mu4e-alert :disable t)
 
 (when (executable-find "guix")

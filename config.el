@@ -362,6 +362,7 @@ With FILE, use that file instead. Also works in Dired buffers."
 (load! "hebrew-latex-config")
 (load! "dvorak-config")
 (load! "org-config")
+(load! "mu4e-config")
 (when EMACS28+
   (load! "native-comp.el"))
 (load! "splash")

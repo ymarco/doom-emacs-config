@@ -185,12 +185,12 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
   (setq-default preview-scale 1.65)
   (setq preview-scale 1.65))
 
+;; Completion is 100% annoying me here, adds tons of lag and gives
+;; terrible suggestions
+(after! company
+  (cl-callf nconc company-global-modes (list 'latex-mode)))
 (add-hook! 'TeX-mode-hook
            ;;(hl-todo-mode) ; TODO
-           ;; Completion is 100% annoying me here, adds tons of lag and gives
-           ;; terrible suggestions
-           ;; TODO Debug those company backends, maybe fix completion with texlab
-           (company-mode -1)
            ;; Flycheck with both chktex and lacheck both just bother me with
            ;; worthless advice all the time. when my HW doesn't compile I'll re-
            ;; enable them.

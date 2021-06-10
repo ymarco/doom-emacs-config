@@ -41,9 +41,8 @@
       (insert (x-export-frames frame 'png))
       (call-process-region
        (point-min) (point-max)
-       "xclip"
+       "wl-copy"
        nil nil nil
-       "-selection" "clipboard"
-       "-target" "image/png")
+       "--type" "image/png")
       (message "Copied!"))
     (posframe-hide screenshot--buffer)))

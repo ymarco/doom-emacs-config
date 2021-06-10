@@ -282,11 +282,8 @@ With FILE, use that file instead. Also works in Dired buffers."
               (lambda () (interactive)
                 (require 'quail)
                 ;; switch to English
-                (start-process "switch-to-hebrew" nil "gdbus"
-                               "call" "--session" "--dest" "org.gnome.Shell"
-                               "--object-path" "/org/gnome/Shell"
-                               "--method" "org.gnome.Shell.Eval"
-                               "imports.ui.status.keyboard.getInputSourceManager().inputSources[0].activate()")
+                (start-process "switch-to-hebrew" nil
+                               "swaymsg" "input * xkb_switch_layout next")
                 ;; emulate the keybind caught by this lambda
                 (cl-callf2 nconc
                     (list

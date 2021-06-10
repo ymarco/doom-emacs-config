@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
 # name: hebrew-itemize
 # key: איי
-# expand-env: ((yas-after-exit-snippet-hook #'prvt/TeX-fold-current-line))
-# group: hebrew latex            
+# expand-env: ((yas-after-exit-snippet-hook #'+latex-fold-last-macro-a))
+# group: hebrew latex
 # --
 \begin{itemize}
   \item `%`$0

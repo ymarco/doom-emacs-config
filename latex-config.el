@@ -59,6 +59,7 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
    ("¡{1}" ("mathclap"))
    ("👻{1}" ("phantom"))
    ("⟋{1}" ("cancel"))
+   ("␣" ("textvisiblespace"))
    ;; private macros
    ("ℝ" ("RR"))
    ("𝔼" ("EX"))
@@ -282,18 +283,31 @@ When given prefix argument, replace region with the result instead."
   (defun +aas-expand-snippet-latex-fn ()
     (interactive)
     (+aas-expand-snippet-fn '("{" . "}")))
+  (defun +aas-with-spacing (x)
+    (when (/= (char-before) ?\ )
+     (insert " "))
+    (insert x)
+    (insert " "))
   (aas-set-snippets
    'laas-mode
+   ;; easy question number insertion using sections
+   :cond (lambda () (and (bolp) (not (texmathp))))
+   "aho" (cmd! (doom-snippets-expand :uuid "empty-section"))
+   "qho" (cmd! (doom-snippets-expand :uuid "empty-subsection"))
+   ;; usual math stuff
+   :cond #'laas-object-on-left-condition
+   "pn" "^n"
    :cond #'texmathp
    ;; not sure if this should be mainline
    "abs" #'+aas-expand-snippet-latex-fn
-   "pn" "^n"
    "ivs" "^{-1}"
+   ;; used for applying inveresed function f^{-1}()
+   "ivh" (cmd! (yas-expand-snippet "^{-1}($1)$0") (laas--shut-up-smartparens))
    "Span" (cmd! (+aas-expand-snippet-fn '("\\left( " . " \\right)")))
    ;; prob functions
-   "Ber" #'+aas-expand-snippet-fn
-   "Bin" #'+aas-expand-snippet-fn
-   "Cov" #'+aas-expand-snippet-fn
+   ;;"Ber" #'+aas-expand-snippet-fn
+   ;;"Bin" #'+aas-expand-snippet-fn
+   ;;"Cov" #'+aas-expand-snippet-fn
    "EX" (cmd! (+aas-expand-snippet-fn '("[" . "]")))
    "exx" "e^x"
    "Geom" #'+aas-expand-snippet-fn
@@ -317,13 +331,21 @@ When given prefix argument, replace region with the result instead."
    ;; topology
    "norm" #'+aas-expand-snippet-latex-fn
    "TT" "\\TT"
+   "BB" "\\mathcal{B}"
+   "CC" "\\mathcal{C}"
+   ;; propositional calculus
+   "VBA" "\\overbar{v}(A)"
+   "VBB" "\\overbar{v}(B)"
+   "UBB" "\\overbar{u}(B)"
+   "UBB" "\\overbar{u}(B)"
+   ;; I usually have auto space off but it's conveniant in these
+   "inn" (cmd! (+aas-with-spacing "\\in"))
+   "subs" (cmd! (+aas-with-spacing "\\subseteq"))
+   "->" (cmd! (+aas-with-spacing "\\to"))
+   "_>" (cmd! (+aas-with-spacing "\\to")) ; alias
    ;; use my private overbar macro instead of overline
    :cond #'laas-object-on-left-condition
-   "bar" (cmd! (laas-wrap-previous-object "overbar"))
-   ;; I usually have auto space off but it's conveniant in \in
-   "inn" (cmd! (when (/= (char-before) ?\ )
-                 (insert " "))
-               (insert "\\in "))))
+   "bar" (cmd! (laas-wrap-previous-object "overbar"))))
 
 (use-package! xenops
   ;; :hook (LaTeX-mode . xenops-mode)

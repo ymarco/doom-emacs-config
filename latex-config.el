@@ -171,8 +171,6 @@ URL `https://tex.stackexchange.com/questions/188287/auctex-folding-and-square-br
   (custom-set-faces!
     ;; On default, 1-depth braces don't stand out in LaTeX math
     `(rainbow-delimiters-depth-1-face :foreground nil :inherit rainbow-delimiters-depth-6-face)
-    ;; Fixes latex preview background color in solaire
-    `(preview-reference-face :inherit solaire-default-face)
     ;; Just configured for the theme:
     `(preview-face :background ,(doom-color 'base1))
     `(font-latex-doctex-documentation-face :background ,(doom-color 'base2))

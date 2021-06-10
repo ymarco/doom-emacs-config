@@ -23,7 +23,8 @@
   :recipe (:host github
            :repo "yoavm448/hebrew-mode"))
 ;; evil enhancements for latex buffers, my and iyefrat's baby
-(package! evil-tex)
+(package! evil-tex
+  :recipe (:local-repo "packages/evil-tex"))
 ;; WIP auto snippets for latex
 (package! laas
   :recipe (:local-repo "packages/latex-auto-activating-snippets"))
@@ -53,7 +54,7 @@
 ;; (package! vimgolf :pin "f565447ed2")
 ;; Fancy dictionaries
 (package! lexic
-  :recipe (:host github :repo "tecosaur/lexic"))
+  :recipe (:local-repo "packages/lexic"))
 (package! explain-pause-mode :disable t)
 (package! mu4e-msg :disable t)
 (package! org-msg :disable t)
@@ -73,3 +74,5 @@
 (package! tree-sitter-langs)
 (package! info-colors)                  ; FIXME
 (package! meson-mode)
+(package! all-the-icons
+  :recipe (:local-repo "packages/all-the-icons"))

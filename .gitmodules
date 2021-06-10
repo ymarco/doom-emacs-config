@@ -25,3 +25,12 @@
 [submodule "packages/inkscape.el"]
 	path = packages/inkscape.el
 	url = git@github.com:ymarco/inkscape.el.git
+[submodule "packages/lexic"]
+	path = packages/lexic
+	url = git@github.com:ymarco/lexic.git
+[submodule "packages/evil-tex"]
+	path = packages/evil-tex
+	url = git@github.com:iyefrat/evil-tex
+[submodule "packages/all-the-icons"]
+	path = packages/all-the-icons
+	url = https://github.com/domtronn/all-the-icons.el

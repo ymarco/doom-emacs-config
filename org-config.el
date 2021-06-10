@@ -29,13 +29,20 @@
 (add-hook! 'org-mode-hook
            #'mixed-pitch-mode)
 
+(defface +mixed-pitch-fixed-pitch-face nil
+  "A face for mixed-pitch to not make variable-pitch.")
+(defvar +mixed-pitch-fixed-pitch-face '+mixed-pitch-fixed-pitch-face)
 (after! mixed-pitch
-  (add-to-list 'mixed-pitch-fixed-pitch-faces 'org-list-dt))
+  (push 'org-list-dt mixed-pitch-fixed-pitch-faces)
+  (push '+mixed-pitch-fixed-pitch-face mixed-pitch-fixed-pitch-faces))
+
 (font-lock-add-keywords
  'org-mode
- '(("^ +" (0 font-lock-comment-face t))
-   ("^ *-\\( \\)" (1 font-lock-comment-face t))
-   ("^ *[0-9]+\\.\\( \\)" (1 font-lock-comment-face t))))
+ '(("^ +" (0 +mixed-pitch-fixed-pitch-face t))                 ; + bullet lists
+   ("^ *-\\( \\)" (1 +mixed-pitch-fixed-pitch-face t))         ; - bullet lists
+   ("^ *[0-9]+\\.\\( \\)" (1 +mixed-pitch-fixed-pitch-face t)) ; numbered lists
+   ("\\**\\* " (0 +mixed-pitch-fixed-pitch-face t))            ; headings asterisks
+   ))
 
 (add-hook! 'org-mode-hook (company-mode -1))
 

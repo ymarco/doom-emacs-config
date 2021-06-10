@@ -70,16 +70,6 @@
  json-reformat:indent-width 2
  ;; zfs compresses for me already
  undo-fu-session-compression nil
- ;; Consistent font
- doom-font (font-spec :family "monospace" :size 20)
- ;; I have issues with variable-pitch fonts that appear larger than their
- ;; mixed-pitch brothers. Setting the font size would normally work, but it
- ;; doesn't with mixed-pitch-mode which I use. Fortunately, Source Sans Pro is
- ;; just in the perfect size for ubuntu-mono!
- ;; EDIT: you can do that by setting 'height property, I've read the code. But
- ;; source sans pro is so pretty!
- doom-variable-pitch-font (font-spec :family "Source Sans Pro")
- doom-serif-font (font-spec :family "XCharter")
  projectile-project-search-path '("~/projects")
  abbrev-file-name (concat doom-private-dir "abbrevs.el")
  deft-directory "~/org/"
@@ -323,7 +313,7 @@ With FILE, use that file instead. Also works in Dired buffers."
 (add-hook! 'doom-load-theme-hook
   (custom-set-faces!
     ;; Let me see syntax highlighting even under #ifndef that amount to false
-    `(font-lock-preprocessor-face :foreground nil :background ,(doom-color 'base2))
+    ;; `(font-lock-preprocessor-face :foreground nil :background ,(doom-color 'base2))
     `(ccls-skipped-range-face :foreground nil :background ,(doom-color 'base2))
     ;; highlight matching parens more clearly
     `(show-paren-match :weight normal :foreground nil :background ,(doom-color 'selection))
@@ -349,11 +339,22 @@ With FILE, use that file instead. Also works in Dired buffers."
 
 (setq iedit-toggle-key-default nil)
 
-(use-package! hebrew-mode
-  :defer t
-  :config
-  (add-hook! 'doom-load-theme-hook
-    (set-fontset-font t 'hebrew (font-spec :family hebrew-hebrew-font-family))))
+;; fonts
+(setq
+ doom-unicode-font (font-spec :family "Symbola" :size 20)
+ doom-font (font-spec :family "monospace" :size 20)
+ ;; I have issues with variable-pitch fonts that appear larger than their
+ ;; mixed-pitch brothers. Setting the font size would normally work, but it
+ ;; doesn't with mixed-pitch-mode which I use. Fortunately, Source Sans Pro is
+ ;; just in the perfect size for ubuntu-mono!
+ ;; EDIT: you can do that by setting 'height property, I've read the code. But
+ ;; source sans pro is so pretty!
+ doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 20)
+ doom-serif-font (font-spec :family "XCharter"))
+(add-hook! 'after-setting-font-hook
+  (set-fontset-font t 'greek doom-font)
+  (set-fontset-font t 'hebrew (font-spec :family "DejaVu Sans")))
+
 
 
 ;;; Load other configs

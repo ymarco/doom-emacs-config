@@ -353,7 +353,9 @@ With FILE, use that file instead. Also works in Dired buffers."
  doom-serif-font (font-spec :family "XCharter"))
 (add-hook! 'after-setting-font-hook
   (set-fontset-font t 'greek doom-font)
-  (set-fontset-font t 'hebrew (font-spec :family "DejaVu Sans")))
+  (set-fontset-font t 'hebrew (font-spec :family "DejaVu Sans"))
+  (set-fontset-font t 'kana (font-spec :family "Noto Sans CJK SC"))
+  (set-fontset-font t 'cjk-misc (font-spec :family "Noto Sans CJK SC")))
 
 
 

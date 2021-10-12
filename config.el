@@ -569,6 +569,11 @@ in a cons cell of (dir . hidden?).")
       :ing "C-c" nil
       :ing "C-c" #'vterm-send-C-c)
 
+(map! :after dired
+      :map dired-mode-map
+      :n "l" #'dired-find-file
+      :n "h" #'dired-up-directory)
+
 (use-package! webkit-ace
   :commands (webkit-ace))
 (use-package! webkit

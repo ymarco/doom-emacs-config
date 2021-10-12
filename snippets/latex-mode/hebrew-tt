@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
 # name: textenglish
-# key: אנ
+# key: טט
 # type: command
 # --
 (hebrew-set-regular-input-method)
-(yas-expand-snippet "\\textenglish{`%`$1}$0")
+(yas-expand-snippet "\\texttt{`%`$1}$0")
 (add-hook 'yas-after-exit-snippet-hook #'hebrew-set-hebrew-input-method)

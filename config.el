@@ -273,7 +273,7 @@ With FILE, use that file instead. Also works in Dired buffers."
                 (require 'quail)
                 ;; switch to English
                 (start-process "switch-to-hebrew" nil
-                               "swaymsg" "input * xkb_switch_layout next")
+                               "swaymsg" "input * xkb_switch_layout 0")
                 ;; emulate the keybind caught by this lambda
                 (cl-callf2 nconc
                     (list

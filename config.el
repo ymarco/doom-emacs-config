@@ -68,14 +68,12 @@
  eldoc-idle-delay 0.2
  ;; Fix inconsistency with tab width in JSON files
  json-reformat:indent-width 2
- ;; zfs compresses for me already
- undo-fu-session-compression nil
  projectile-project-search-path '("~/projects")
  abbrev-file-name (concat doom-private-dir "abbrevs.el")
  deft-directory "~/org/"
  org-roam-directory "~/org/"
  rmh-elfeed-org-files (list "~/media/elfeed-rss.org")
- source-directory "~/programs/emacs-pgtk-nativecomp-source"
+ source-directory "~/programs/emacs"
  ;; shorten modeline by decreasing icons size
  all-the-icons-scale-factor 1.0)
 
@@ -587,7 +585,7 @@ in a cons cell of (dir . hidden?).")
   :commands (webkit webkit-browse-url)
   :init
   (add-load-path! (concat doom-private-dir "packages/emacs-webkit"))
-  (setq browse-url-browser-function #'webkit-browse-url)
+  ;; (setq browse-url-browser-function #'webkit-browse-url)
   (defun +webkit-toggle-current-file ()
     (interactive)
     (require 'webkit)
@@ -661,8 +659,6 @@ in a cons cell of (dir . hidden?).")
                 (get-text-property 0 'consult--title cand)))
      :default default
      :sort nil)))
-
-(advice-add #'+selectrum--embark-target-package! :override #'ignore)
 
 ;;; Config performance measure
 (let ((elapsed (float-time (time-subtract (current-time) t0))))

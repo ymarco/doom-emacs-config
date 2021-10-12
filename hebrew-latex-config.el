@@ -2,7 +2,6 @@
 
 ;; yas doesnt know how to advanced indentation in Hebrew LaTex
 (setq yas-indent-line 'fixed)
-(setq hebrew-use-hebrew-spell-checking t)
 
 (defun +hebrew-input-method-heuristic ()
   "Politely try to figure out if I would probably want this or

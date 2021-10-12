@@ -2,8 +2,7 @@
 # name: hebrew-lemma
 # key: למה
 # group: hebrew latex
-# condition: (doom-snippets-bolp)
+# condition: (+hebrew-bolp?)
+# type: command
 # --
-‏\begin{lemma}${1:[${2:name}]}
-`%`$0
-‏\end{lemma}
+(+hebrew-expand-amsmath-env-snippet "lemma")

@@ -2,8 +2,8 @@
 # name: hebrew-exercise
 # key: תרג
 # group: hebrew latex
-# condition: (doom-snippets-bolp)
+# condition: (+hebrew-bolp?)
 # --
-‏\begin{exercise}
+\begin{exercise}
 `%`$0
-‏\end{exercise}
+\end{exercise}

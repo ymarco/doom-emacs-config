@@ -2,8 +2,8 @@
 # name: hebrew-proof
 # key: הוכ
 # group: hebrew latex
-# condition: (doom-snippets-bolp)
+# condition: (+hebrew-bolp?)
 # --
-‏\begin{proof}
+\begin{proof}
 `%`$0
-‏\end{proof}
+\end{proof}

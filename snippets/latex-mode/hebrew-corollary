@@ -2,8 +2,7 @@
 # name: hebrew-corollary
 # key: מסק
 # group: hebrew latex
-# condition: (doom-snippets-bolp)
+# condition: (+hebrew-bolp?)
+# type: command
 # --
-‏\begin{corollary}
-`%`$0
-‏\end{corollary}
+(+hebrew-expand-amsmath-env-snippet "corollary")

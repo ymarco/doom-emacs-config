@@ -86,6 +86,26 @@ it start a new line of its own."
   (hebrew-set-regular-input-method)
   (doom-snippets-expand :name "align*"))
 
+(defun +hebrew-bolp? ()
+  "Like `doom-snippets-bolp' but ignores RTL/LTR marks."
+  (or (bolp)
+      (save-excursion
+        (if (region-active-p)
+            (goto-char (region-beginning))
+          (unless (memq (char-before) (list ?\  ?\n))
+            (backward-word)))
+        (skip-chars-backward " \t‏‎")     ; note the rtl/ltr marks
+        (bolp))))
+
+(defvar +hebrew-amsthm-env-snippet
+  (with-temp-buffer
+    (insert-file-contents "~/.config/doom/snippets/latex-mode/hebrew-amsmath-env-template")
+    (buffer-substring (point-min) (point-max)))
+  "Template for an amsmath env snippet, ready to be used with
+`format' to substitute the env name.")
+
+(defun +hebrew-expand-amsmath-env-snippet (env)
+  (yas-expand-snippet (format +hebrew-amsthm-env-snippet env env)))
 (add-hook! 'hebrew-mode-hook
   (setq-local bidi-inhibit-bpa nil))
 

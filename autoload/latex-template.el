@@ -34,9 +34,10 @@ NOTE: uses emacs27 json features. I'm too lazy to also implement this without it
     ;; Type and number, based on filename
     (cond
      ((string-match "^hw\\([[:digit:]]+\\)$" filebname)
-      (setq type "hw"
+      (setq type "homework"
             number (match-string 1 filebname)))
-     ((string-match "^\\(?:lecture\\|class\\|lesson\\)\\([[:digit:]]+\\)$" filebname)
+     ((string-match (rx (or "lecture" "lec" "class" "lesson") (group (one-or-more digit)))
+                    filebname)
       (setq type "lecture"
             number (match-string 1 filebname)))
      (t
@@ -60,14 +61,15 @@ NOTE: uses emacs27 json features. I'm too lazy to also implement this without it
                               "[^[:word:]0-9]+"
                               )) " " )))
     ;; trying to find author/title nested by hw/lecture and language
-    (dolist (startenv (list config override-config))
-      (let ((tempenv startenv))
-        (dolist (envname (list (doom-keyword-intern language)
-                               (doom-keyword-intern type)
-                               (doom-keyword-intern language)))
-          (setq tempenv (or (plist-get tempenv envname) tempenv))
-          (setq author (or (plist-get tempenv :author) author))
-          (setq title (or (plist-get tempenv :title) title)))))
+    (let ((type-kw (doom-keyword-intern type)))
+      (dolist (startenv (list config override-config))
+        (let ((tempenv startenv))
+          (dolist (envname (list (doom-keyword-intern language)
+                                 (doom-keyword-intern type)
+                                 (doom-keyword-intern language)))
+            (setq tempenv (or (plist-get tempenv envname) tempenv))
+            (setq author (or (plist-get tempenv :author) author))
+            (setq title (or (plist-get tempenv type-kw) title))))))
     ;; course
     (setq course (plist-get override-config :course))
     ;; format templates in title

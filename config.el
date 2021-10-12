@@ -574,6 +574,13 @@ in a cons cell of (dir . hidden?).")
       :n "l" #'dired-find-file
       :n "h" #'dired-up-directory)
 
+
+(setq lsp-clients-clangd-args '("-j=5"
+                                "--background-index"
+                                "--clang-tidy"
+                                "--completion-style=detailed"
+                                "--header-insertion=never"))
+(after! lsp-clangd (set-lsp-priority! 'clangd 2))
 (use-package! webkit-ace
   :commands (webkit-ace))
 (use-package! webkit

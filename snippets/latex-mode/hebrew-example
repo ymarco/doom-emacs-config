@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: hebrew-lemma
+# key: דוג
+# group: hebrew latex
+# condition: (+hebrew-bolp?)
+# type: command
+# --
+(+hebrew-expand-amsmath-env-snippet "example")

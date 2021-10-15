@@ -3,4 +3,9 @@
 # uuid: hebrew-math
 # group: hebrew latex
 # --
-‎\\(`%`$0\\)
+`(when (and hebrew-mode
+            (eq (point) (doom-snippets-without-trigger (line-beginning-position))))
+   "‏")
+``(when hebrew-mode
+    "‎")
+`\\(`%`$0\\)

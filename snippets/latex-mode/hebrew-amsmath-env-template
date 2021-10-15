@@ -1,0 +1,5 @@
+\begin{%s}${2:$(when
+  (not (string-empty-p yas-text)) "\n[")}$2${2:$(when
+  (not (string-empty-p yas-text)) "]")}
+‏`%%`$0
+\end{%s}

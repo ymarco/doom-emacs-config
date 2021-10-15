@@ -41,6 +41,10 @@ that input method."
               (/= (point) (point-max)))
     (forward-char)))
 
+(defun +hebrew-temporarily-disable-input-method ()
+  (hebrew-set-hebrew-input-method)
+  (remove-hook 'yas-after-exit-snippet-hook #'+hebrew-temporarily-disable-input-method))
+
 (defun +hebrew-math-forward-exit-math-regular ()
   "Call `+hebrew-math-forward-exit-math', and go back to Hebrew input method."
   (interactive)

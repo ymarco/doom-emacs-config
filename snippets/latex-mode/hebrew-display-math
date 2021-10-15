@@ -3,4 +3,4 @@
 # uuid: hebrew-display-math
 # group: hebrew latex
 # --
-‎\\[ `(doom-snippets-format "%n%s")`$0 \\]
+`(when hebrew-mode "‎")`\\[ `(doom-snippets-format "%n%s")`$0 \\]

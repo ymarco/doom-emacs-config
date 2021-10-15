@@ -5,4 +5,4 @@
 # --
 (hebrew-set-regular-input-method)
 (yas-expand-snippet "\\textenglish{`%`$1}$0")
-(add-hook 'yas-after-exit-snippet-hook #'hebrew-set-hebrew-input-method)
+(add-hook 'yas-after-exit-snippet-hook #'+hebrew-temporarily-disable-input-method)

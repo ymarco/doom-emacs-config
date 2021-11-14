@@ -27,7 +27,7 @@
   ("hebrew"
    "\\usepackage{preamble}"))`
 `
-(when (equal (plist-get snippet-env :type) "hw")
+(when (equal (plist-get snippet-env :type) "homework")
   (pcase (plist-get snippet-env :language)
     ("hebrew"
      "\\ifxetex  \\renewcommand\\thesubsection{(\\alph{subsection})} \\fi

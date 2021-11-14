@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: sc
+# key: sc
+# --
+\textsc{$1}$0

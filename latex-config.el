@@ -259,8 +259,7 @@ When given prefix argument, replace region with the result instead."
 
 ;; WIP mine and @tecosaur's plugin
 (use-package! aas
-  :hook (LaTeX-mode . ass-activate-for-major-mode)
-  :hook (org-mode . ass-activate-for-major-mode))
+  :hook (LaTeX-mode . ass-activate-for-major-mode))
 
 (use-package! laas
   :hook (LaTeX-mode . laas-mode)
@@ -283,7 +282,7 @@ When given prefix argument, replace region with the result instead."
     (+aas-expand-snippet-fn '("{" . "}")))
   (defun +aas-with-spacing (x)
     (when (/= (char-before) ?\ )
-     (insert " "))
+      (insert " "))
     (insert x)
     (insert " "))
   (aas-set-snippets
@@ -299,10 +298,14 @@ When given prefix argument, replace region with the result instead."
    ;; not sure if this should be mainline
    "abs" #'+aas-expand-snippet-latex-fn
    "ivs" "^{-1}"
+   "conj" "^*"
+   "td" (cmd! (yas-expand-snippet "^{$1}$0"))
+   "opr" (cmd! (yas-expand-snippet "\\operatorname{$1}$0") (laas--shut-up-smartparens))
+   "bon" "\\{0,1\\}"
    ;; used for applying inveresed function f^{-1}()
    "ivh" (cmd! (yas-expand-snippet "^{-1}($1)$0") (laas--shut-up-smartparens))
    "Span" (cmd! (+aas-expand-snippet-fn '("\\left( " . " \\right)")))
-   ;; prob functions
+   ;; Probability
    ;;"Ber" #'+aas-expand-snippet-fn
    ;;"Bin" #'+aas-expand-snippet-fn
    ;;"Cov" #'+aas-expand-snippet-fn
@@ -315,32 +318,41 @@ When given prefix argument, replace region with the result instead."
    "Rank" #'+aas-expand-snippet-fn
    "Uniform" #'+aas-expand-snippet-fn
    "Var" #'+aas-expand-snippet-fn
+   "Cov" #'+aas-expand-snippet-fn
    "std" #'+aas-expand-snippet-fn
    "supp" "\\supp"
-   ;; complexity
+   ;; Complexity
    "On" "O(n)"
    "O1" "O(1)"
    "Olog" "O(\\log n)"
    "Olon" "O(n \\log n)"
    "emx" "e^{-x}"
-   ;; algorithms
+   ;; Algorithms
    "Oe" "O(|E|)"
    "Ove" "O(|V|+|E|)"
-   ;; topology
+   ;; Topology
    "norm" #'+aas-expand-snippet-latex-fn
    "TT" "\\TT"
    "BB" "\\mathcal{B}"
    "CC" "\\mathcal{C}"
-   ;; propositional calculus
+   ;; Logic
    "VBA" "\\overbar{v}(A)"
    "VBB" "\\overbar{v}(B)"
    "UBB" "\\overbar{u}(B)"
    "UBB" "\\overbar{u}(B)"
+   ;; Info
+   "Ane" "A_{n,\\epsilon}"
+   ;; Crypto
+   "~te" "\\approx_{T,\\epsilon}"
    ;; I usually have auto space off but it's conveniant in these
    "inn" (cmd! (+aas-with-spacing "\\in"))
    "subs" (cmd! (+aas-with-spacing "\\subseteq"))
    "->" (cmd! (+aas-with-spacing "\\to"))
+   "<-" (cmd! (+aas-with-spacing "\\leftarrow"))
    "_>" (cmd! (+aas-with-spacing "\\to")) ; alias
+   "!=" (cmd! (+aas-with-spacing "\\neq")) ; alias
+   "!+" (cmd! (+aas-with-spacing "\\neq")) ; alias
+   "||" (cmd! (+aas-with-spacing "\\mid"))
    ;; use my private overbar macro instead of overline
    :cond #'laas-object-on-left-condition
    "bar" (cmd! (laas-wrap-previous-object "overbar"))))

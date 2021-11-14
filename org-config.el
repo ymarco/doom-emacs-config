@@ -122,3 +122,31 @@
   ;;(setq org-latex-hyperref-template ""))
   (add-hook! 'org-roam-buffer-prepare-hook
     (setq display-line-numbers nil)))
+
+(defun +org-open-math ()
+  "Surround point with math parentheses, or if already in math move point to exit it."
+  (interactive)
+  (if (texmathp)
+      (+hebrew-math-forward-exit-math)
+   (insert "\\(")
+   (save-excursion (insert "\\)"))))
+
+(defun +org-open-display-math ()
+  (interactive)
+  (insert (+heberw--snippets-newline-if-needed 1)
+          "\\[ ")
+  (save-excursion
+    (insert " \\]\n")))
+(defun +org-open-align ()
+  (interactive)
+  (insert (+heberw--snippets-newline-if-needed 1)
+          "\\begin{align*}\n")
+  (save-excursion
+    (insert "\n\\end{align*}\n")))
+(map! :after org
+      :map org-mode-map
+      "M-m" #'+org-open-math
+      "M-M" #'+hebrew-math-backwards-till-math
+      "M-r" #'+org-open-display-math
+      "M-R" #'+org-open-align)
+

@@ -266,10 +266,11 @@ When given prefix argument, replace region with the result instead."
   :config
   ;; no space after expansions
   (setq laas-enable-auto-space nil)
-  (add-hook! 'laas-mode-hook
-    (add-hook! 'aas-post-snippet-expand-hook :local
-      (unless (eq (char-after) ?})
-        (+latex-fold-last-macro-a))))
+  (after! tex-fold
+    (add-hook! 'laas-mode-hook
+      (add-hook! 'aas-post-snippet-expand-hook :local
+        (unless (eq (char-after) ?})
+          (+latex-fold-last-macro-a)))))
   (defun +aas-expand-snippet-fn (&optional parens func)
     (interactive)
     (yas-expand-snippet (format "\\%s%s$1%s$0"

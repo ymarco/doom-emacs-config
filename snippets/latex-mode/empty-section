@@ -3,8 +3,7 @@
 # --
 \section{}`
 (when (save-excursion
-        (next-line)
-        (goto-char (line-beginning-position))
+        (goto-char (line-beginning-position 2))
         (looking-at "[[:space:]]*$"))
   "\n")
 `$0

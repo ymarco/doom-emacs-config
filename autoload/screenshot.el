@@ -23,9 +23,12 @@
                              0))))))
 
 ;;;###autoload
-(defun screenshot (beg end)
-  "Copy a screenshot of the selected region."
-  (interactive "r")
+(defun screenshot (beg end &optional type)
+  "Copy a screenshot of the selected region.
+With prefix argument, use svg instead of png."
+  (interactive (list (region-beginning) (region-end)
+                     (if current-prefix-arg 'svg
+                       'png)))
   (when (not beg)
     (setq beg (point-min)
           end (point-max)))
@@ -37,12 +40,14 @@
                  :poshandler #'posframe-poshandler-point-bottom-left-corner
                  :hidehandler #'posframe-hide)))
     (redraw-frame frame)
-    (with-temp-file "/tmp/frame.png"
-      (insert (x-export-frames frame 'png))
+    (with-temp-file (concat "/tmp/frame." (symbol-name type))
+      (insert (x-export-frames frame type))
       (call-process-region
        (point-min) (point-max)
        "wl-copy"
        nil nil nil
-       "--type" "image/png")
+       "--type" (pcase type
+                  ('png "image/png")
+                  ('svg "image/svg+xml")))
       (message "Copied!"))
     (posframe-hide screenshot--buffer)))

@@ -1,6 +1,4 @@
 ;;; ~/.config/doom/org-config.el -*- lexical-binding: t; -*-
-;; These are nicer defaults to LaTeX and HTML through org. It also configures minted for
-;; src code syntex highlighting in LaTex
 
 ;; TODO organize this mess
 
@@ -25,9 +23,7 @@
  ;; org-startup-with-latex-preview t
  )
 
-;; I LOVE PRETTY STUFF
-(add-hook! 'org-mode-hook
-           #'mixed-pitch-mode)
+(add-hook 'org-mode-hook #'mixed-pitch-mode)
 
 (defface +mixed-pitch-fixed-pitch-face nil
   "A face for mixed-pitch to not make variable-pitch.")

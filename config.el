@@ -35,7 +35,6 @@
  dired-dwim-target                    t
  ;; I don't need it to tell me its UTF-8
  doom-modeline-buffer-encoding nil
- +modeline-encoding nil                 ; same for (modeline +light)
  ;; No line numbers. The ones on the modeline are enough for me.
  display-line-numbers-type nil
  ;; The unsaved icon made me notice and save the buffer on every stop
@@ -62,7 +61,8 @@
  evil-snipe-scope 'visible
  ;; Wait for a bit shorter - I've got native comp - before prompting me
  lsp-idle-delay 0.2
- lsp-ui-sideline-delay 0.2
+ company-idle-delay nil                 ; no auto completion popup
+ ;;lsp-ui-sideline-delay 0.2
  lsp-enable-symbol-highlighting nil
  js2-idle-timer-delay 0.2
  eldoc-idle-delay 0.2
@@ -76,6 +76,9 @@
  source-directory "~/programs/emacs"
  ;; shorten modeline by decreasing icons size
  all-the-icons-scale-factor 1.0)
+(setq!
+ +modeline-encoding nil                 ; same for (modeline +light)
+ +modeline-height 27)
 
 ;; Don't blink the cursor, it's too distracting.
 (blink-cursor-mode -1)
@@ -163,8 +166,9 @@
         calibredb-root-dir "~/Desktop/books"
         calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir)
         calibredb-program (executable-find "calibredb"))
-  (custom-set-faces!
-    '(calibredb-search-header-highlight-face :inherit hl-line)))
+  ;; (custom-set-faces!
+  ;;   '(calibredb-search-header-highlight-face :inherit hl-line))
+  )
 
 (evil-define-command +evil:drag-file (file)
   "Open a drag window with dragon for the file opened in the current buffer.
@@ -212,10 +216,11 @@ With FILE, use that file instead. Also works in Dired buffers."
 ;; Private
 (map!
  ;; General
+ "C-h C-w" #'evil-window-left
  :n "g SPC"   #'evil-avy-goto-word-1
  :n "ga" (λ!! #'what-cursor-position t)
  ;;  the normal ! operator is in practice totally useless
- :n "!" (cmd! (evil-ex "!"))
+ ;; :n "!" (cmd! (evil-ex "!"))
  ;; standard emacs delete
  :i "C-d"     #'delete-char
  ;; $ is way too inconvenient, and I barely use marks
@@ -232,7 +237,7 @@ With FILE, use that file instead. Also works in Dired buffers."
   "M-RET"     #'lsp-execute-code-action)
  ;; Old TAB behavior that was removed in b8a3cad295
  :n [tab] (general-predicate-dispatch nil
-            (and (featurep! :editor fold)
+            (and (modulep! :editor fold)
                  (save-excursion (end-of-line) (invisible-p (point))))
             #'+fold/toggle
             (fboundp 'evil-jump-item)
@@ -258,8 +263,8 @@ With FILE, use that file instead. Also works in Dired buffers."
            :buffer nil
            :command (list cmd file)))
  :leader
- :prefix "o"
- "s" (cmd! (make-process
+ "ol" #'lexic-search
+ "os" (cmd! (make-process
             :name "user-terminal"
             :noquery t
             :buffer nil
@@ -315,6 +320,8 @@ With FILE, use that file instead. Also works in Dired buffers."
     `(ccls-skipped-range-face :foreground nil :background ,(doom-color 'base2))
     ;; highlight matching parens more clearly
     `(show-paren-match :weight normal :foreground nil :background ,(doom-color 'selection))
+    ;; font too small
+    '(Info-quoted :inherit font-lock-keyword-face)
     ;; comments are too dark in spacegrey
     `(font-lock-comment-face
       :foreground
@@ -365,7 +372,7 @@ With FILE, use that file instead. Also works in Dired buffers."
 (load! "mu4e-config")
 (when EMACS28+
   (load! "native-comp.el"))
-(load! "splash")
+;; (load! "splash") ; The splash is my desktop wallpaper now, which is enough
 
 (add-hook! 'nix-mode-hook (company-mode -1))
 

@@ -24,6 +24,14 @@
  )
 
 (add-hook 'org-mode-hook #'mixed-pitch-mode)
+(use-package! aas
+  :hook (org-mode . aas-activate-for-major-mode)
+  :config
+  (aas-set-snippets 'org-mode
+    "\\dim" "°"
+    "\\nat" "♮"))
+(add-hook 'org-mode-hook #'laas-mode)
+(add-hook 'org-mode-hook #'evil-tex-mode)
 
 (defface +mixed-pitch-fixed-pitch-face nil
   "A face for mixed-pitch to not make variable-pitch.")

@@ -25,10 +25,10 @@
         ;;+childframe       ;display in a floating child frame, above Emacs.
         ;;+fuzzy           ; enable fuzzy search backend for ivy
         ;;+icons)
-       selectrum
+       (vertico +icons)
 
        :ui
-       deft           ; notational velocity for Emacs
+       ;;deft           ; notational velocity for Emacs
        doom             ; what makes DOOM look the way it does
        doom-dashboard   ; a nifty splash screen for Emacs
        ;; doom-quit     ; DOOM quit-message prompts when you quit Emacs
@@ -44,14 +44,14 @@
         +defaults)      ; default popup rules
        ;;pretty-code    ; replace bits of code with pretty symbols
        ;;tabbar         ; FIXME an (incomplete) tab bar for Emacs
-       treemacs         ; a project drawer, like neotree but cooler
        ;; unicode       ; extended unicode support for various languages
-       vc-gutter        ; vcs diff in the fringe
-       vi-tilde-fringe  ; fringe tildes to mark beyond EOB
+       (vc-gutter +pretty)        ; vcs diff in the fringe
+       ;;vi-tilde-fringe  ; fringe tildes to mark beyond EOB
        window-select    ; visually switch windows
        workspaces       ; tab emulation, persistence & separate workspaces
+       ;;treemacs                      ; a project drawer, like neotree but cooler
        zen
-       hydra
+       ;;hydra
 
        :editor
        (evil +everywhere)  ; come to the dark side, we have cookies
@@ -76,13 +76,14 @@
        undo        ; persistent, smarter undo for your inevitable mistakes
 
        :term
-       eshell   ; a consistent, cross-platform shell (WIP)
-       ;; term     ; terminals in Emacs
+       ;;eshell   ; a consistent, cross-platform shell (WIP)
+       ;;term     ; terminals in Emacs
        vterm       ; another terminals in Emacs
 
        :tools
+       tree-sitter
        ;;ansible
-       ;; debugger   ; FIXME stepping through code, to help you add bugs
+       ;;(debugger +lsp)
        ;;direnv
        ;;docker
        editorconfig  ; let someone else argue about tabs vs spaces
@@ -104,12 +105,14 @@
        ;;upload      ; map local to remote projects via ssh/ftp
 
        :checkers
-       (syntax    ; tasing you for every semicolon you forget
-        +childframe)
-       (spell +flyspell)      ; tasing you for misspelling mispelling
+       (syntax                       ; tasing you for every semicolon you forget
+        ;; +childframe
+        )
+       ;;(spell +flyspell)      ; tasing you for misspelling mispelling
        ;;grammar  ; tasing grammar mistake every you make
 
        :lang
+       ;;yaml
        json
        ;;agda                  ; types of types of types of types...
        ;; assembly                ; assembly for fun or debugging
@@ -129,25 +132,29 @@
        ;;go                    ; the hipster dialect
        ;;(haskell +intero)     ; a language that's lazier than I am
        ;;hy                    ; readability of scheme w/ speed of python
-       scheme
+       ;;(scheme +guile)
        ;;idris             ;
-       ;;(java +lsp)           ; the poster child for carpal tunnel syndrome
-       (javascript +lsp)       ; all(hope(abandon(ye(who(enter(here))))))
-       ;;julia                 ; a better, faster MATLAB
+       (java ;; +lsp
+             )           ; the poster child for carpal tunnel syndrome
+       (javascript +lsp)
+                                        ; all(hope(abandon(ye(who(enter(here))))))
+       julia                 ; a better, faster MATLAB
        ;;kotlin                ; a better, slicker Java(Script)
        (latex +fold +latexmk)  ; writing papers in Emacs has never been so fun
        ;;ledger                ; an accounting system in Emacs
        lua                   ; one-based indices? one-based indices
        markdown                ; writing docs for people to ignore
        ;;nim                   ; python + lisp at the speed of c
-       nix                   ; I hereby declare "nix geht mehr!"
+       ;;nix                   ; I hereby declare nix geht mehr!"
        ;;ocaml                 ; an objective camel
        (org                    ; organize your plain life in plain text
         +dragndrop             ; drag & drop files/images into org buffers
         ;; +brain                 ; org-brain intergarion
-        ;; +present               ; Emacs for presentations
+        +present               ; Emacs for presentations
         ;; +journal
-        +roam)
+        +roam2
+        ;;+pretty
+        )
        ;;perl                  ; write code no one else can comprehend
        ;;php                   ; perl's insecure younger brother
        ;;plantuml              ; diagrams for confusing people more
@@ -166,6 +173,7 @@
        ;;terra                 ; Earth and Moon in alignment for performance.
        web                     ; the tubes
        ;;vala                  ; GObjective-C
+       zig
 
        :email
        (mu4e +gmail)         ; WIP
@@ -178,11 +186,12 @@
        :app
        ;;calendar
        ;;irc          ; how neckbeards socialize
-       (rss +org)   ; emacs as an RSS reader
+       ;;(rss +org)   ; emacs as an RSS reader
        ;;twitter      ; twitter client https://twitter.com/vnought
        ;;(write       ; emacs as a word processor (latex + org + markdown)
        ;; +wordnut    ; wordnet (wn) search
        ;; +langtool)  ; a proofreader (grammar/style check) for Emacs
+       ;;everywhere
 
        :collab
        ;;floobits          ; peer programming for a price

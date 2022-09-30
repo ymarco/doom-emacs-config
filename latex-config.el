@@ -269,23 +269,40 @@ When given prefix argument, replace region with the result instead."
   (after! tex-fold
     (add-hook! 'laas-mode-hook
       (add-hook! 'aas-post-snippet-expand-hook :local
-        (unless (eq (char-after) ?})
+        (when (and TeX-fold-mode (not (eq (char-after) ?})))
           (+latex-fold-last-macro-a)))))
   (defun +aas-expand-snippet-fn (&optional parens func)
     (interactive)
-    (yas-expand-snippet (format "\\%s%s$1%s$0"
-                                (or func aas-transient-snippet-key)
+    (yas-expand-snippet (format "%s%s${1:?}%s$0"
+                                (or func (concat "\\" aas-transient-snippet-key))
                                 (or (car parens) "(")
                                 (or (cdr parens) ")")))
     (laas--shut-up-smartparens))
-  (defun +aas-expand-snippet-latex-fn ()
+  (defun +aas-expand-snippet-latex-fn (&optional func)
     (interactive)
-    (+aas-expand-snippet-fn '("{" . "}")))
+    (+aas-expand-snippet-fn '("{" . "}") func))
   (defun +aas-with-spacing (x)
     (when (/= (char-before) ?\ )
       (insert " "))
     (insert x)
     (insert " "))
+
+  ;; define b( -> \left(\right) for many delimiters
+  (defun +aas-wrap-delims (l r)
+    (yas-expand-snippet (format "\\left%s $1 \\right%s" l r))
+    (laas--shut-up-smartparens))
+  (apply #'aas-set-snippets 'laas-mode
+         :cond #'texmathp
+         (cl-loop for (key l r) in
+                  '(("("  "("        ")")
+                    ("["  "["        "]")
+                    ("{"  "\\{"      "\\}")
+                    ("<"  "\\langle" "\\rangle")
+                    ("|"  "\\lvert"  "\\rvert")
+                    ("d|" "\\lVert"  "\\rVert"))
+                  collect (format "b%s" key)
+                  collect (let ((l l) (r r))
+                            (cmd! (+aas-wrap-delims l r)))))
   (aas-set-snippets
    'laas-mode
    ;; easy question number insertion using sections
@@ -300,9 +317,14 @@ When given prefix argument, replace region with the result instead."
    "abs" #'+aas-expand-snippet-latex-fn
    "ivs" "^{-1}"
    "conj" "^*"
-   "td" (cmd! (yas-expand-snippet "^{$1}$0"))
-   "opr" (cmd! (yas-expand-snippet "\\operatorname{$1}$0") (laas--shut-up-smartparens))
+   "td" (cmd! (+aas-expand-snippet-latex-fn "^"))
+   "sb" (cmd! (+aas-expand-snippet-latex-fn "_"))
+   "opr" (cmd! (+aas-expand-snippet-latex-fn "\\operatorname"))
+   "qq" (cmd! (+aas-expand-snippet-latex-fn "\\sqrt"))
    "bon" "\\{0,1\\}"
+   "conj" "^*"
+   "|^" "\\uparrow"
+   "|v" "\\downarrow"
    ;; used for applying inveresed function f^{-1}()
    "ivh" (cmd! (yas-expand-snippet "^{-1}($1)$0") (laas--shut-up-smartparens))
    "Span" (cmd! (+aas-expand-snippet-fn '("\\left( " . " \\right)")))
@@ -335,7 +357,7 @@ When given prefix argument, replace region with the result instead."
    "norm" #'+aas-expand-snippet-latex-fn
    "TT" "\\TT"
    "BB" "\\mathcal{B}"
-   "CC" "\\mathcal{C}"
+   ;;"CC" "\\mathcal{C}"
    ;; Logic
    "VBA" "\\overbar{v}(A)"
    "VBB" "\\overbar{v}(B)"
@@ -345,8 +367,12 @@ When given prefix argument, replace region with the result instead."
    "Ane" "A_{n,\\epsilon}"
    ;; Crypto
    "~te" "\\approx_{T,\\epsilon}"
+   ;; Complex Analysis
+   "par" (cmd! (yas-expand-snippet "\\frac{\\partial $1}{\\partial $2}$0")
+               (laas--shut-up-smartparens))
    ;; I usually have auto space off but it's conveniant in these
    "inn" (cmd! (+aas-with-spacing "\\in"))
+   "notin" (cmd! (+aas-with-spacing "\\not\\in"))
    "subs" (cmd! (+aas-with-spacing "\\subseteq"))
    "->" (cmd! (+aas-with-spacing "\\to"))
    "<-" (cmd! (+aas-with-spacing "\\leftarrow"))

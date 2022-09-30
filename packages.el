@@ -30,9 +30,9 @@
   :recipe (:local-repo "packages/evil-tex"))
 ;; WIP auto snippets for latex
 (package! laas
-  :recipe (:local-repo "packages/latex-auto-activating-snippets"))
+  :recipe (:local-repo "packages/laas"))
 (package! aas
-  :recipe (:local-repo "packages/auto-activating-snippets"))
+  :recipe (:local-repo "packages/aas"))
 ;; calibre client from emacs, needs more configuration
 (when (executable-find "calibredb")
   (package! calibredb

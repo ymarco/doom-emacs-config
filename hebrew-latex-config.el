@@ -150,10 +150,12 @@ it start a new line of its own."
 
 (after! aas
   (aas-set-snippets
-   'latex-mode
+   'laas-mode
    :cond (lambda () (and (bolp) (not (texmathp))))
    "שחד" (cmd! (doom-snippets-expand :uuid "empty-section"))
-   "סחד" (cmd! (doom-snippets-expand :uuid "empty-subsection"))))
+   "סחד" (cmd! (doom-snippets-expand :uuid "empty-subsection")))
+  ;; (add-hook! 'TeX-mode-hook (aas-activate-keymap 'hebrew-mode))
+  )
 
 (defun prvt/process-lyx-tex ()
   (interactive)

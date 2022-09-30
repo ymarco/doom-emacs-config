@@ -370,8 +370,6 @@ With FILE, use that file instead. Also works in Dired buffers."
 (load! "dvorak-config")
 (load! "org-config")
 (load! "mu4e-config")
-(when EMACS28+
-  (load! "native-comp.el"))
 ;; (load! "splash") ; The splash is my desktop wallpaper now, which is enough
 
 (add-hook! 'nix-mode-hook (company-mode -1))
